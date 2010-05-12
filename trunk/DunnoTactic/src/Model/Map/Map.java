@@ -7,6 +7,7 @@ package Model.Map;
 
 import java.awt.Point;
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  *
@@ -118,6 +119,25 @@ public class Map implements Serializable{
         }
 
         return false;
+    }
+
+    public void SetMapRandom()
+    {
+
+        int randterrain,randnum;
+        Random rand = new Random();
+        for (int i=0;i<height;++i)
+        {
+            for (int j=0;j<width;++j)
+            {
+
+                randnum = rand.nextInt();
+                randterrain=Math.abs(randnum)%4;
+                randterrain=randterrain+1;
+
+                Content[i][j] = randterrain;
+            }
+        }
     }
 
     @Override
