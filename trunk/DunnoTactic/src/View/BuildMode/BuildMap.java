@@ -95,6 +95,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         castle4Button = new javax.swing.JButton();
         selectAllButton = new javax.swing.JButton();
         deselectButton = new javax.swing.JButton();
+        randomButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -270,6 +271,13 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
             }
         });
 
+        randomButton.setText("Random");
+        randomButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                randomButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -282,7 +290,8 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(selectAllButton)
-                    .addComponent(deselectButton))
+                    .addComponent(deselectButton)
+                    .addComponent(randomButton))
                 .addGap(614, 614, 614))
         );
         mainPanelLayout.setVerticalGroup(
@@ -301,7 +310,9 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                         .addComponent(selectAllButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deselectButton)
-                        .addGap(94, 94, 94))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(randomButton)
+                        .addGap(65, 65, 65))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -381,6 +392,14 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         /* Clear selected */
         selected.clear();
     }//GEN-LAST:event_deselectButtonActionPerformed
+
+    private void randomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomButtonActionPerformed
+        /* Random */
+        mapLogic.SetMapRandom();
+
+        /* Repaint */
+        paintMap();
+    }//GEN-LAST:event_randomButtonActionPerformed
 
     public void mouseClicked(MouseEvent e) {}
 
@@ -506,6 +525,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton newButton;
     private javax.swing.JButton pohonButton;
+    private javax.swing.JButton randomButton;
     private javax.swing.JButton rumputButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JScrollPane scroll;
