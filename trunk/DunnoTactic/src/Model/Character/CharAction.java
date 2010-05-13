@@ -30,7 +30,7 @@ public class CharAction {
     }
 
     public void AttackTree(int targetX, int targetY){
-        Game.M.SetTerrain(Game.M.RUMPUT, targetY, targetY);
+        Game.M.SetContent(Game.M.RUMPUT, targetY, targetY);
     }
 
     public void AttackPlayer(CharAtribut AtributKarakter, CharAtribut AtributTarget){
