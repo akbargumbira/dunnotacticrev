@@ -11,7 +11,7 @@ import Model.Character.Constanta;
  *
  * @author user
  */
-abstract public class Job {
+public class Job {
     protected int AttackType;
     protected  int JobID;
     protected  int JobClass;
@@ -38,9 +38,4 @@ abstract public class Job {
     public int GetAttackType(){
         return AttackType;
     }
-    
-    abstract public void SetFactorJobAtribute();
-    abstract public void SetJobID();
-    abstract public void SetJobClass();
-    abstract public void SetAttackType();
 }

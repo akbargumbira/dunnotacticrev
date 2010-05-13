@@ -13,12 +13,6 @@ import Model.Character.Constanta;
  */
 public class BuffPoison extends BuffEfek {
     public BuffPoison(){
-        SetFactorBuff();
-        SetDurationBuff();
-        SetStatusActionBuff();
-    }
-
-    public void SetFactorBuff(){
         FactorBuff[Constanta.HP_ID]=-0.5;
         FactorBuff[Constanta.SP_ID]=0;
         FactorBuff[Constanta.ATTACK_ID]=0;
@@ -29,15 +23,11 @@ public class BuffPoison extends BuffEfek {
         FactorBuff[Constanta.EVA_ID]=0;
         FactorBuff[Constanta.RANGE_MOVE_ID]=0;
         FactorBuff[Constanta.RANGE_ATTACK_ID]=0;
-    }
 
-    public void SetStatusActionBuff(){
         StatusActionBuff[Constanta.BUFF_ACTION_DISABLE_ID]=false;
         StatusActionBuff[Constanta.BUFF_ACTION_IMMOBILIZE_ID]=false;
         StatusActionBuff[Constanta.BUFF_ACTION_SILENCE_ID]=false;
-    }
 
-    public void SetDurationBuff(){
         DurationBuff=5;
     }
 }

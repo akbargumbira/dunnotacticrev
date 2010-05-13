@@ -27,6 +27,10 @@ public class Buff {
         return BuffID;
     }
 
+    public int GetDuration(){
+        return BuffEfekChar.GetDurationBuff();
+    }
+
     public void SetBuffID(int ValBuffID){
         BuffID=ValBuffID;
     }
@@ -40,6 +44,11 @@ public class Buff {
             case Constanta.BUFF_STATUS_POISON_ID : {
                 BuffEfekChar = new BuffPoison();
                 BuffID=Constanta.BUFF_STATUS_POISON_ID;
+            }
+            break;
+            case Constanta.BUFF_STATUS_BLOOD_CLOTING_ID : {
+                BuffEfekChar = new BuffBloodCloting();
+                BuffID=Constanta.BUFF_STATUS_BLOOD_CLOTING_ID;
             }
             break;
             default : {
