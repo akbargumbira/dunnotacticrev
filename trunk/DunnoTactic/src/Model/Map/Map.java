@@ -7,6 +7,7 @@ package Model.Map;
 
 import java.awt.Point;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -123,20 +124,67 @@ public class Map implements Serializable{
 
     public void SetMapRandom()
     {
-
+        int Castle = 4;
         int randterrain,randnum;
         Random rand = new Random();
-        for (int i=0;i<height;++i)
+
+        ArrayList<Point> listpoint = new ArrayList<Point>();
+
+        for (int i=0;i<width;++i)
         {
-            for (int j=0;j<width;++j)
+            for (int j=0;j<height;++j)
             {
-
-                randnum = rand.nextInt();
-                randterrain=Math.abs(randnum)%4;
-                randterrain=randterrain+1;
-
-                Content[i][j] = randterrain;
+               listpoint.add(new Point(i, j));
             }
+        }
+
+        int n = width*height;
+        int nterrain = n/8;
+        Point p;
+
+        /* random Air */
+        for (int i=0;i<nterrain;++i)
+        {
+            randnum = Math.abs(rand.nextInt())%listpoint.size();
+            p = listpoint.get(randnum);
+            Content[p.x][p.y] = AIR;
+            listpoint.remove(randnum);
+        }
+
+        /* random pohon */
+        for (int i=0;i<nterrain;++i)
+        {
+            randnum = Math.abs(rand.nextInt())%listpoint.size();
+            p = listpoint.get(randnum);
+            Content[p.x][p.y] = POHON;
+            listpoint.remove(randnum);
+        }
+
+        /* random lumpur */
+        nterrain = n / 4;
+        for (int i=0;i<nterrain;++i)
+        {
+            randnum = Math.abs(rand.nextInt())%listpoint.size();
+            p = listpoint.get(randnum);
+            Content[p.x][p.y] = LUMPUR;
+            listpoint.remove(randnum);
+        }
+
+        /* random castle */
+        for (int i=0;i<Castle;++i)
+        {
+            randnum = Math.abs(rand.nextInt())%listpoint.size();
+            p = listpoint.get(randnum);
+            Content[p.x][p.y] = CASTLE1+i;
+            listpoint.remove(randnum);
+        }
+
+        /* sisanya taro rumput */
+        nterrain = listpoint.size();
+        for (int i=0;i<nterrain;++i)
+        {
+            p = listpoint.get(i);
+            Content[p.x][p.y] = RUMPUT;
         }
     }
 
