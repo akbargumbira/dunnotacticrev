@@ -5,6 +5,7 @@
 
 package Support;
 
+import com.sun.jmx.remote.internal.ArrayQueue;
 import java.io.File;
 import java.io.IOException;
 
@@ -17,20 +18,36 @@ public class FileSupport {
         File dir = new File (".");
         String CurDir;
         String[] listFile = null;
+        String Ext = new String(".map");
+        int i=0;
+        int j=0;
         try
         {
             CurDir = dir.getCanonicalPath();
             File folder = new File(CurDir);
             File [] listOfFiles = folder.listFiles();
             int length = listOfFiles.length;
-            listFile = new String[length];
-            for (int i = 0; i < length; i++)
-             {
-                 if (listOfFiles[i].isFile())
-                 {
-                     listFile[i] = listOfFiles[i].getName();
-                 }
-             }
+            while (j<length)
+            {
+                if (listOfFiles[j].isFile() && listOfFiles[j].getName().endsWith(Ext))
+                {
+                     ++i;
+                }
+                ++j;
+            }
+            listFile = new String[i];
+
+            i = j = 0;
+            while (j<length)
+            {
+                if (listOfFiles[j].isFile() && listOfFiles[j].getName().endsWith(Ext))
+                {
+                     listFile[i] = listOfFiles[j].getName();
+                     ++i;
+                }
+                ++j;
+            }
+
         }
         catch (IOException e)
         {
