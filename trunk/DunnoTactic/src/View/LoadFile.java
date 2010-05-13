@@ -9,19 +9,21 @@
  * Created on May 12, 2010, 7:16:23 PM
  */
 
-package View.BuildMode;
+package View;
 import Support.FileSupport;
 import Support.IOObject;
 import Model.Map.Map;
+import View.BuildMode.BuildMap;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 /**
  *
  * @author user
  */
-public class LoadMap extends javax.swing.JFrame {
+public class LoadFile extends javax.swing.JFrame {
 
     /** Creates new form LoadMap */
-    public LoadMap(BuildMap parent) {
+    public LoadFile(JFrame parent) {
         initComponents();
         this.parent = parent;
         listfile = FileSupport.GetListFile(".");
@@ -98,18 +100,19 @@ public class LoadMap extends javax.swing.JFrame {
 
     private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
         /* Set Map's name */
+        BuildMap par = (BuildMap)parent;
         String mapName = new String((String)listFile.getSelectedValue());
-        parent.SetMapName(mapName);
+        par.SetMapName(mapName);
 
         /* Load Map */
         Map mapLogic = (Map)IOObject.Load(mapName);
-        parent.SetMap(mapLogic);
+        par.SetMap(mapLogic);
 
         /* Repaint Map */
-        parent.paintMap();
+        par.paintMap();
         
         /* Close this windows & enable parent window */
-        parent.setEnabled(true);
+        par.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_selectButtonActionPerformed
 
@@ -125,13 +128,13 @@ public class LoadMap extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    protected javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList listFile;
-    private javax.swing.JButton selectButton;
+    protected javax.swing.JList listFile;
+    protected javax.swing.JButton selectButton;
     // End of variables declaration//GEN-END:variables
 
     private String[] listfile;
     private DefaultListModel listmodel;
-    private BuildMap parent;
+    private JFrame parent;
 }

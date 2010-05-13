@@ -12,7 +12,9 @@
 package View;
 
 import View.BuildMode.BuildMap;
-import View.PlayMode.Play;
+import View.PlayMode.Play2;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
 /**
  *
@@ -108,7 +110,7 @@ public class MainMenu extends javax.swing.JFrame {
         this.setVisible(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                play = new Play(me);
+                play = new Play2(me);
                 play.setVisible(true);
             }
         });
@@ -122,8 +124,9 @@ public class MainMenu extends javax.swing.JFrame {
     private void buildmapButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buildmapButtonMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        buildmap = new BuildMap(this);
-        buildmap.setVisible(true);
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice[] devices = env.getScreenDevices();
+        buildmap = new BuildMap(this,devices[0]);
     }//GEN-LAST:event_buildmapButtonMouseClicked
 
     /**
@@ -143,7 +146,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton newgameButton;
     // End of variables declaration//GEN-END:variables
-    private Play play;
+    private Play2 play;
     private BuildMap buildmap;
     private MainMenu me=this;
 }
