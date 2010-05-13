@@ -113,11 +113,6 @@ public class CharAtribut {
     }
 
     public int GetCurrent(int AtribID){
-        for(int i=0;i<3;++i){
-            if(BuffStatusDuration[i]!=0){
-                BuffChar[i].SetBuffEfek(BuffList[i]);
-            }
-        }
         int TotalBuff=0;
         for(int i=0;i<3;++i){
             TotalBuff = TotalBuff + (int)(BuffChar[i].GetFactorBuffChar(AtribID)*(double)CurrentAtribut[AtribID]);
@@ -146,12 +141,13 @@ public class CharAtribut {
         AttackType=Type;
     }
 
-    public void SetBuff(int ID, int Duration){
+    public void SetBuff(int ID){
         if(BuffCounter==3){
             BuffCounter=0;
         }
         BuffList[BuffCounter]=ID;
-        BuffStatusDuration[BuffCounter]=Duration;
+        BuffChar[BuffCounter].SetBuffEfek(BuffList[BuffCounter]);
+        BuffStatusDuration[BuffCounter]=BuffChar[BuffCounter].GetDuration();
     }
     
     public void SetPositionXY(int X, int Y){

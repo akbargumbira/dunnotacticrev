@@ -11,7 +11,7 @@ import Model.Character.Constanta;
  *
  * @author user
  */
-abstract public class Race {
+public class Race {
     protected  int RaceID;
     protected  int[] BaseAtribut = new int[Constanta.NUMBER_ATRIBUT];
 
@@ -28,7 +28,4 @@ abstract public class Race {
     public int GetRaceID(){
         return RaceID;
     }
-
-    abstract public void SetBaseAtributRace();
-    abstract public void SetRaceID();
 }

@@ -18,8 +18,8 @@ public class Driver {
         Karakter.Attack(20, 20);
         System.out.println("Current:");
         PrintAtributCurrent();
-        Karakter.Special(20, 20, 1);
-        System.out.println("Current after heal:");
+        Karakter.Special(20, 20, 4);
+        System.out.println("Current after blood:");
         PrintAtributCurrent();
         System.out.println("Position:");
         PrintPosition();

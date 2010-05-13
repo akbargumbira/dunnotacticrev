@@ -11,7 +11,7 @@ import Model.Character.Constanta;
  *
  * @author ifan
  */
-abstract public class BuffEfek {
+public class BuffEfek {
     protected double[] FactorBuff = new double[Constanta.NUMBER_ATRIBUT];
     protected boolean[] StatusActionBuff = new boolean[3];
     protected int DurationBuff;
@@ -33,8 +33,4 @@ abstract public class BuffEfek {
     public int GetDurationBuff(){
         return DurationBuff;
     }
-
-    abstract public void SetFactorBuff();
-    abstract public void SetStatusActionBuff();
-    abstract public void SetDurationBuff();
 }

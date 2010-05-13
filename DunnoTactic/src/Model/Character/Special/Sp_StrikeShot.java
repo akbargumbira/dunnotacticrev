@@ -14,24 +14,12 @@ import java.util.Random;
  */
 public class Sp_StrikeShot extends Special {
     public Sp_StrikeShot(){
-        SetSpecialName();
-        SetSpecialID();
-        SetSPCost();
-        SetRangeSpecial();
-    }
-
-    public void SetSpecialName(){
         SpecialName="Strike Shot";
-    }
-    public void SetSpecialID(){
         SpecialID=ConstantaSp.SP_ARCHER_STRIKE_SHOT_ID;
-    }
-    public void SetSPCost(){
         SPCost = 10;
-    }
-    public void SetRangeSpecial(){
         RangeSpecial = 5;
     }
+
     public void ExecuteSpecial(CharAtribut AtributKarakter, int targetX, int targetY){
         CharAtribut TargetAtribut;
         int SP = AtributKarakter.GetCurrent(Constanta.SP_ID)-SPCost;

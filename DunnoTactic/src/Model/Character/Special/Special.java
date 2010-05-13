@@ -34,11 +34,6 @@ abstract public class Special {
     public int GetRangeSpecial(){
         return RangeSpecial;
     }
-
-    abstract public void SetSpecialName();
-    abstract public void SetSpecialID();
-    abstract public void SetSPCost();
-    abstract public void SetRangeSpecial();
     
     abstract public void ExecuteSpecial(CharAtribut AtributKarakter, int targetX, int targetY);
 }

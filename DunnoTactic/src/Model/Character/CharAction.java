@@ -79,8 +79,16 @@ public class CharAction {
                 KarakterSpecial = new Sp_BloodCloting();
             }
             break;
+            case ConstantaSp.SP_WARRIOR_CRITICAL_SLASH_ID : {
+                KarakterSpecial = new Sp_CriticalSlash();
+            }
+            break;
             case ConstantaSp.SP_HEALER_HEALING_PRAY_ID : {
                 KarakterSpecial = new Sp_HealingPray();
+            }
+            break;
+            case ConstantaSp.SP_MAGE_HELL_FIRE_ID : {
+                KarakterSpecial = new Sp_HellFire();
             }
             break;
             case ConstantaSp.SP_ARCHER_STRIKE_SHOT_ID : {
