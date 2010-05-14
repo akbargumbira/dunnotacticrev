@@ -4,6 +4,7 @@
  */
 
 package Model.Character;
+import java.util.Vector;
 
 /**
  *
@@ -11,20 +12,28 @@ package Model.Character;
  */
 public class Driver {
     private static Character Karakter;
+    private static Vector<Character> Target;
     public static void main(String[] args){
-        Karakter = new Character(1,Constanta.RACE_HUMAN_ID,Constanta.JOB_ARCHER_ID);
+        Karakter = new Character(1,Constanta.RACE_HUMAN_ID);
+        Target = new Vector();
+        Target.add(Karakter);
         System.out.println("Default:");
         PrintAtributDefault();
-        Karakter.Attack(20, 20);
+        Karakter.JobChange(3);
+        System.out.println("Default:");
+        PrintAtributDefault();
+        Karakter.SpecialFunction(Karakter, Target, 5);
+        System.out.println("Default:");
+        PrintAtributDefault();
         System.out.println("Current:");
         PrintAtributCurrent();
-        Karakter.Special(20, 20, 4);
-        System.out.println("Current after blood:");
-        PrintAtributCurrent();
-        System.out.println("Position:");
-        PrintPosition();
-        Karakter.Move(20, 20);
-        PrintPosition();
+//        Karakter.SpecialFunction(Karakter, Target,6);
+//        System.out.println("Current after blood:");
+//        PrintAtributCurrent();
+//        System.out.println("Position:");
+//        PrintPosition();
+//        Karakter.Move(20, 20);
+//        PrintPosition();
     }
 
     public static void PrintAtributDefault(){

@@ -14,17 +14,13 @@ import Model.Character.Buff.Buff;
  */
 public class CharAtribut {
     private int CharID;
-    private int RaceID;
-    private int JobID;
-    private int JobClass;
-    private int AttackType;
     private int[] CurrentAtribut = new int[Constanta.NUMBER_ATRIBUT];
     private int[] DefaultAtribut = new int[Constanta.NUMBER_ATRIBUT];
+    private boolean[] GuardStatus = new boolean[2];
     private int[] StatusAction = new int[3];
     private int[] BuffList = new int[3];
     private int[] BuffStatusDuration = new int[3];
     private int BuffCounter;
-    private int[] SpecialList = new int[5];
     private int PositionX;
     private int PositionY;
     private Race RaceChar;
@@ -41,7 +37,6 @@ public class CharAtribut {
         for(int i = 0; i<3;++i){
             BuffChar[i]=new Buff();
         }
-        CharID = CId;
         switch(RId){
             case Constanta.RACE_HUMAN_ID : {
                 RaceChar = new Human();
@@ -94,18 +89,22 @@ public class CharAtribut {
             }
             break;
         }
-        RaceID=RaceChar.GetRaceID();
-        JobID=JobChar.GetJobID();
-        JobClass=JobChar.GetJobClass();
-        AttackType=JobChar.GetAttackType();
+        CharID = CId;
         ClearAllBuff();
         SetFirstDefaultAtribut();
         SetFirstCurrentAtribut();
-        
     }
 
     public int GetCharID(){
         return CharID;
+    }
+
+    public int GetRaceID(){
+        return RaceChar.GetRaceID();
+    }
+
+    public int GetJobID(){
+        return JobChar.GetJobID();
     }
     
     public int GetDefault(int AtribID){
@@ -122,7 +121,7 @@ public class CharAtribut {
     }
 
     public int GetAttackType(){
-        return AttackType;
+        return JobChar.GetAttackType();
     }
 
     public int GetPositionX(){
@@ -133,12 +132,20 @@ public class CharAtribut {
         return PositionY;
     }
 
-    public void SetCharID(int ID){
-        CharID=ID;
+    public int GetJobClass(){
+        return JobChar.GetJobClass();
     }
 
-    public void SetAttackType(int Type){
-        AttackType=Type;
+    public int GetRaceLevel(){
+        return RaceChar.GetRaceLevel();
+    }
+
+    public int GetSpecialAvail(int i){
+        return JobChar.GetSpecialAvail(i);
+    }
+
+    public void SetCharID(int ID){
+        CharID=ID;
     }
 
     public void SetBuff(int ID){
@@ -176,5 +183,9 @@ public class CharAtribut {
             BuffList[i]=0;
             BuffChar[i].SetBuffEfek(BuffList[i]);
         }
+    }
+
+    public void Upgrade(){
+        RaceChar.UpgrageRace();
     }
 }

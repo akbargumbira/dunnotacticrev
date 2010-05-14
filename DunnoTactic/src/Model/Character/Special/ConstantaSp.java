@@ -15,5 +15,6 @@ public class ConstantaSp {
     public static final int SP_HEALER_HEALING_PRAY_ID=3;
     public static final int SP_MAGE_HELL_FIRE_ID=4;
     public static final int SP_ARCHER_STRIKE_SHOT_ID=5;
+    public static final int SP_NINJA_THROW_KUNAI_ID=6;
     
 }

@@ -6,6 +6,7 @@
 package Model.Character.Job;
 
 import Model.Character.Constanta;
+import Model.Character.Special.ConstantaSp;
 
 /**
  *
@@ -27,5 +28,10 @@ public class Ninja extends Job {
         JobID=Constanta.JOB_NINJA_ID;
         JobClass=2;
         AttackType=Constanta.ATTACK_ATT_TYPE_ID;
+        SpecialAvail[0]=ConstantaSp.SP_NINJA_THROW_KUNAI_ID;
+        SpecialAvail[1]=0;
+        SpecialAvail[2]=0;
+        SpecialAvail[3]=0;
+        SpecialAvail[4]=0;
     }
 }

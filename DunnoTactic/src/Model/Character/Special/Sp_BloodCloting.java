@@ -6,6 +6,7 @@
 package Model.Character.Special;
 import Model.Character.CharAtribut;
 import Model.Character.Constanta;
+import java.util.Vector;
 
 /**
  *
@@ -16,14 +17,14 @@ public class Sp_BloodCloting extends Special {
         SpecialName="Blood Cloting";
         SpecialID=ConstantaSp.SP_KNIGHT_BLOOD_CLOTING_ID;
         SPCost = 30;
+        BaseAcc=100;
         RangeSpecial = 0;
     }
     
-    public void ExecuteSpecial(CharAtribut AtributKarakter, int targetX, int targetY){
-        CharAtribut TargetAtribut;
-        int SP = AtributKarakter.GetCurrent(Constanta.SP_ID)-SPCost;
-        AtributKarakter.SetCurrentAtribut(Constanta.SP_ID, SP);
+    public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){
+        int SP = KarakterAtribut.GetCurrent(Constanta.SP_ID)-SPCost;
+        KarakterAtribut.SetCurrentAtribut(Constanta.SP_ID, SP);
 
-        AtributKarakter.SetBuff(Constanta.BUFF_STATUS_BLOOD_CLOTING_ID);
+        KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_BLOOD_CLOTING_ID);
     }
 }

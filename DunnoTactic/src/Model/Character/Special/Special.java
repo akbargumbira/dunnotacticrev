@@ -5,6 +5,7 @@
 
 package Model.Character.Special;
 import Model.Character.CharAtribut;
+import java.util.Vector;
 
 /**
  *
@@ -14,6 +15,7 @@ abstract public class Special {
     protected String SpecialName;
     protected int SpecialID;
     protected int SPCost;
+    protected int BaseAcc;
     protected int RangeSpecial;
     public Special(){
         
@@ -35,5 +37,5 @@ abstract public class Special {
         return RangeSpecial;
     }
     
-    abstract public void ExecuteSpecial(CharAtribut AtributKarakter, int targetX, int targetY);
+    abstract public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut);
 }
