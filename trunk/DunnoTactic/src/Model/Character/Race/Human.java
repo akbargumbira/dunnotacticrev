@@ -25,5 +25,6 @@ public class Human extends Race {
         BaseAtribut[Constanta.RANGE_ATTACK_ID]=100;
 
         RaceID=Constanta.RACE_HUMAN_ID;
+        RaceLevel=1;
     }
 }

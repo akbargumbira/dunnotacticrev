@@ -6,6 +6,7 @@
 package Model.Character.Job;
 
 import Model.Character.Constanta;
+import Model.Character.Special.ConstantaSp;
 
 /**
  *
@@ -27,5 +28,10 @@ public class Mage extends Job {
         JobID=Constanta.JOB_MAGE_ID;
         JobClass=2;
         AttackType=Constanta.ATTACK_MATT_TYPE_ID;
+        SpecialAvail[0]=ConstantaSp.SP_MAGE_HELL_FIRE_ID;
+        SpecialAvail[1]=0;
+        SpecialAvail[2]=0;
+        SpecialAvail[3]=0;
+        SpecialAvail[4]=0;
     }
 }

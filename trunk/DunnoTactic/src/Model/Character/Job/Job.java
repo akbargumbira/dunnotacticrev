@@ -16,6 +16,7 @@ public class Job {
     protected  int JobID;
     protected  int JobClass;
     protected  double[] FactorJob = new double[Constanta.NUMBER_ATRIBUT];
+    protected int[] SpecialAvail = new int[5];
 
     public Job(){
         for (int i = 0;i<10;++i) {
@@ -37,5 +38,9 @@ public class Job {
 
     public int GetAttackType(){
         return AttackType;
+    }
+
+    public int GetSpecialAvail(int Indeks){
+        return SpecialAvail[Indeks];
     }
 }

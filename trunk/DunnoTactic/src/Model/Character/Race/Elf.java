@@ -25,5 +25,6 @@ public class Elf extends Race {
         BaseAtribut[Constanta.RANGE_ATTACK_ID]=100;
 
         RaceID=Constanta.RACE_ELF_ID;
+        RaceLevel=1;
     }
 }

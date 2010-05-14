@@ -27,5 +27,10 @@ public class Novice extends Job {
         JobID=Constanta.JOB_NOVICE_ID;
         JobClass=1;
         AttackType=Constanta.ATTACK_MATT_TYPE_ID;
+        SpecialAvail[0]=0;
+        SpecialAvail[1]=0;
+        SpecialAvail[2]=0;
+        SpecialAvail[3]=0;
+        SpecialAvail[4]=0;
     }
 }

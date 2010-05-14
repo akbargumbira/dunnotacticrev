@@ -13,11 +13,11 @@ import Model.Character.Constanta;
  */
 public class BuffPoison extends BuffEfek {
     public BuffPoison(){
-        FactorBuff[Constanta.HP_ID]=-0.5;
+        FactorBuff[Constanta.HP_ID]=0;
         FactorBuff[Constanta.SP_ID]=0;
-        FactorBuff[Constanta.ATTACK_ID]=0;
+        FactorBuff[Constanta.ATTACK_ID]=-0.2;
         FactorBuff[Constanta.MATTACK_ID]=0;
-        FactorBuff[Constanta.DEF_ID]=-0.15;
+        FactorBuff[Constanta.DEF_ID]=-0.3;
         FactorBuff[Constanta.MDEF_ID]=0;
         FactorBuff[Constanta.ACC_ID]=0;
         FactorBuff[Constanta.EVA_ID]=0;
