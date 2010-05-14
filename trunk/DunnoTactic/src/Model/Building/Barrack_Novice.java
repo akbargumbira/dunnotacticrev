@@ -11,11 +11,21 @@ package Model.Building;
  */
 public class Barrack_Novice extends Building
 {
+    public static final int COST =100;
     public Barrack_Novice()
     {
-        Building_BaseAtribut[Building_Constanta.BUILDING_HP_ID] = 3000;
-        Building_BaseAtribut[Building_Constanta.BUILDING_DEFENSE_ID] = 100;
-        Building_BaseAtribut[Building_Constanta.BUILDING_BUILD_TIME_ID] = 1;
-        Building_BaseAtribut[Building_Constanta.BUILDING_GOLD_PER_TURN_ID] = 30;
+        Building_BaseAtribut[BUILDING_HP_ID] = 20000;
+        Building_BaseAtribut[BUILDING_DEFENSE_ID] = 100;
+        Building_BaseAtribut[BUILDING_BUILD_TIME_ID] = 1;
+        Building_BaseAtribut[BUILDING_GOLD_PER_TURN_ID] = 0;
+        Building_BaseAtribut[BUILDING_LEVEL_ID]=1;
+    }
+
+    public void PerfectBuilding()
+    {
+        Building_BaseAtribut[BUILDING_HP_ID]=2*Building_BaseAtribut[BUILDING_HP_ID];
+        Building_BaseAtribut[BUILDING_DEFENSE_ID] = 2*Building_BaseAtribut[BUILDING_DEFENSE_ID];
+        Building_BaseAtribut[BUILDING_GOLD_PER_TURN_ID]=200;
+        Building_BaseAtribut[BUILDING_BUILD_TIME_ID] = -1;
     }
 }
