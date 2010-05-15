@@ -4,15 +4,14 @@
  */
 
 package Model.Character.Job;
-
 import Model.Character.Constanta;
 import Model.Character.Special.ConstantaSp;
 /**
  *
  * @author ifan
  */
-public class Archer extends Job {
-    public Archer(){
+public class J31_Assassin extends Job {
+    public J31_Assassin(){
         FactorJob[Constanta.HP_ID]=0;
         FactorJob[Constanta.SP_ID]=0;
         FactorJob[Constanta.ATTACK_ID]=0;
@@ -24,12 +23,12 @@ public class Archer extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_ARCHER_ID;
-        JobClass=2;
+        JobID=Constanta.JOB2_ASSASSIN_ID;
+        JobClass=3;
         AttackType=Constanta.ATTACK_ATT_TYPE_ID;
-        SpecialAvail[0]=ConstantaSp.SP_ARCHER_STRIKE_SHOT_ID;
-        SpecialAvail[1]=0;
-        SpecialAvail[2]=0;
+        SpecialAvail[0]=ConstantaSp.SP_NINJA_THROW_KUNAI_ID;
+        SpecialAvail[1]=ConstantaSp.SP_ASSASSIN_VENOM_SMOKE_ID;
+        SpecialAvail[2]=ConstantaSp.SP_ASSASSIN_SHADOW_BIND_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
     }

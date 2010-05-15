@@ -12,8 +12,8 @@ import Model.Character.Special.ConstantaSp;
  *
  * @author ifan
  */
-public class Warrior extends Job {
-    public Warrior(){
+public class J2_Mage extends Job {
+    public J2_Mage(){
         FactorJob[Constanta.HP_ID]=0;
         FactorJob[Constanta.SP_ID]=0;
         FactorJob[Constanta.ATTACK_ID]=0;
@@ -25,10 +25,10 @@ public class Warrior extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_WARRIOR_ID;
+        JobID=Constanta.JOB_MAGE_ID;
         JobClass=2;
-        AttackType=Constanta.ATTACK_ATT_TYPE_ID;
-        SpecialAvail[0]=ConstantaSp.SP_WARRIOR_CRITICAL_SLASH_ID;
+        AttackType=Constanta.ATTACK_MATT_TYPE_ID;
+        SpecialAvail[0]=ConstantaSp.SP_MAGE_HELL_FIRE_ID;
         SpecialAvail[1]=0;
         SpecialAvail[2]=0;
         SpecialAvail[3]=0;

@@ -4,15 +4,14 @@
  */
 
 package Model.Character.Job;
-
 import Model.Character.Constanta;
-
+import Model.Character.Special.ConstantaSp;
 /**
  *
  * @author ifan
  */
-public class Novice extends Job {
-    public Novice(){
+public class J31_Bishop extends Job {
+    public J31_Bishop(){
         FactorJob[Constanta.HP_ID]=0;
         FactorJob[Constanta.SP_ID]=0;
         FactorJob[Constanta.ATTACK_ID]=0;
@@ -24,12 +23,12 @@ public class Novice extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_NOVICE_ID;
-        JobClass=1;
+        JobID=Constanta.JOB2_BISHOP_ID;
+        JobClass=3;
         AttackType=Constanta.ATTACK_MATT_TYPE_ID;
-        SpecialAvail[0]=0;
-        SpecialAvail[1]=0;
-        SpecialAvail[2]=0;
+        SpecialAvail[0]=ConstantaSp.SP_HEALER_HEALING_PRAY_ID;
+        SpecialAvail[1]=ConstantaSp.SP_BISHOP_HEALING_CIRCLE_ID;
+        SpecialAvail[2]=ConstantaSp.SP_BISHOP_PHOENIX_TEAR_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
     }
