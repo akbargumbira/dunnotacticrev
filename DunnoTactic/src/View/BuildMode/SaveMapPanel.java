@@ -88,8 +88,8 @@ public class SaveMapPanel extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         IOObject.Save(parent.GetMap(), mapTextField.getText()+".map");
-        parent.getScroll().setVisible(true);
-        parent.getChangeterrainPanel().setVisible(true);
+//        parent.getScroll().setVisible(true);
+//        parent.getChangeterrainPanel().setVisible(true);
         this.setVisible(false);
 }//GEN-LAST:event_saveButtonActionPerformed
 

@@ -90,8 +90,8 @@ public class LoadMapPanel extends javax.swing.JPanel {
         par.paintMap();
 
         /* Close this windows & enable parent window */
-        parent.getScroll().setVisible(true);
-        parent.getChangeterrainPanel().setVisible(true);
+//        parent.getScroll().setVisible(true);
+//        parent.getChangeterrainPanel().setVisible(true);
         this.setVisible(false);
 }//GEN-LAST:event_selectButtonActionPerformed
 

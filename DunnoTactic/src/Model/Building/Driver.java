@@ -27,10 +27,10 @@ public class Driver
         Build = new Castle();
         System.out.println("Castle : ");
         PrintBuildingAttribute();
-        Build = new Barrack_Novice();
+        Build = new Barrack();
         System.out.println("Castle : ");
         PrintBuildingAttribute();
-        Build = new Barrack_Job();
+        //Build = new Barrack_Job();
         System.out.println("Castle : ");
         PrintBuildingAttribute();
         Build = new Blacksmith();

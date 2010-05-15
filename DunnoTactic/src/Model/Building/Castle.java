@@ -5,8 +5,6 @@
 
 package Model.Building;
 
-import java.util.logging.Level;
-
 /**
  *
  * @author user
