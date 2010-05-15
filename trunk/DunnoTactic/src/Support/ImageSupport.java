@@ -12,8 +12,8 @@ import javax.swing.ImageIcon;
  * @author user
  */
 public class ImageSupport {
-    public static final int IMAGE_WIDTH = 30;
-    public static final int IMAGE_HEIGHT = 30;
+    public static final int IMAGE_WIDTH = 60;
+    public static final int IMAGE_HEIGHT = 60;
 
     public static ImageIcon createImageIcon(String path, String description) {
         java.net.URL imgURL = ImageSupport.class.getResource("/Image/"+path);
