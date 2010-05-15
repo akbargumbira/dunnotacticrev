@@ -4,16 +4,14 @@
  */
 
 package Model.Character.Job;
-
 import Model.Character.Constanta;
 import Model.Character.Special.ConstantaSp;
-
 /**
  *
  * @author ifan
  */
-public class Mage extends Job {
-    public Mage(){
+public class J31_BladeMaster extends Job {
+    public J31_BladeMaster(){
         FactorJob[Constanta.HP_ID]=0;
         FactorJob[Constanta.SP_ID]=0;
         FactorJob[Constanta.ATTACK_ID]=0;
@@ -25,12 +23,12 @@ public class Mage extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_MAGE_ID;
-        JobClass=2;
-        AttackType=Constanta.ATTACK_MATT_TYPE_ID;
-        SpecialAvail[0]=ConstantaSp.SP_MAGE_HELL_FIRE_ID;
-        SpecialAvail[1]=0;
-        SpecialAvail[2]=0;
+        JobID=Constanta.JOB2_BLADE_MASTER_ID;
+        JobClass=3;
+        AttackType=Constanta.ATTACK_ATT_TYPE_ID;
+        SpecialAvail[0]=ConstantaSp.SP_WARRIOR_CRITICAL_SLASH_ID;
+        SpecialAvail[1]=ConstantaSp.SP_BLADEMASTER_HURRICANE_SWORD_ID;
+        SpecialAvail[2]=ConstantaSp.SP_BLADEMASTER_SWORD_MELTING_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
     }

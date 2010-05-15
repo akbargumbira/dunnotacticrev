@@ -8,6 +8,7 @@ import Model.Game.Game;
 import java.util.Random;
 import Model.Character.Special.*;
 import java.util.Vector;
+import Model.Building.Building;
 /**
  *
  * @author ifan
@@ -41,13 +42,69 @@ public class Character {
         }
     }
 
+    public void AttackBuilding(Character Attacker, Building TargetBuilding){
+        CharAtribut AtributKarakter;
+        AtributKarakter = new CharAtribut();
+        AtributKarakter = Attacker.GetAtribut();
+        Random r = new Random();
+        int randFactor = 90+r.nextInt(21);
+        int damage;
+        switch(AtributKarakter.GetAttackType()){
+            case Constanta.ATTACK_ATT_TYPE_ID : {
+                damage = (int)((double)AtributKarakter.GetCurrent(Constanta.ATTACK_ID)*(double)randFactor)/100;
+            }
+            break;
+            case Constanta.ATTACK_MATT_TYPE_ID : {
+                damage = (int)((double)AtributKarakter.GetCurrent(Constanta.MATTACK_ID)*(double)randFactor*0.75)/100;
+            }
+            break;
+            case Constanta.ATTACK_DOUBLE_TYPE_ID : {
+                damage = (int)((double)AtributKarakter.GetCurrent(Constanta.ATTACK_ID)*(double)randFactor*0.45)+(int)((double)AtributKarakter.GetCurrent(Constanta.MATTACK_ID)*(double)randFactor*0.45)/100;
+            }
+            break;
+            default : {
+                damage = 500;
+            }
+            break;
+        }
+        TargetBuilding.getDamage(damage);
+    }
+            
     public void AttackTree(int targetX, int targetY){
         Game.M.SetContent(Game.M.RUMPUT, targetY, targetY);
+        Random r = new Random();
+        int RandBuffType = r.nextInt(100);
+        int RandBuffEfek = r.nextInt(100);
+        if(RandBuffType<40){
+            // negatif buff efek
+            if(RandBuffEfek<25){
+                KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_TIME_FREEZE_ID);
+            } else if(RandBuffEfek<45){
+                KarakterAtribut.SetBuff(Constanta.BUFF_ACTION_DISABLE_ID);
+            } else if(RandBuffEfek<60){
+                KarakterAtribut.SetBuff(Constanta.BUFF_ACTION_SILENCE_ID);
+            } else if(RandBuffEfek<75){
+                KarakterAtribut.SetBuff(Constanta.BUFF_ACTION_IMMOBILIZE_ID);
+            } else if(RandBuffEfek<90){
+                KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_POISON_ID);
+            } else {
+                KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_BLIND_ID);
+            }
+        } else{
+            // positif buff efek
+            if(RandBuffEfek<15){
+                KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_FLEETING_TIME_ID);
+            } else if(RandBuffEfek<50){
+                KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_ANGEL_BLESS_ID);
+            } else {
+                KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_HOLY_GUARD_ID);
+            }
+        }
         ++EnableCounter;
         if(EnableCounter==2){
             enable=false;
         }
-    }
+    }    
 
     public void AttackPlayer(Character Attacker, Character Target){
         int Chance = 75 + (Attacker.GetAtribut().GetCurrent(Constanta.ACC_ID) - Target.GetAtribut().GetCurrent(Constanta.EVA_ID))/4;
@@ -118,44 +175,12 @@ public class Character {
     }
 
     public void WaitFunction(){
+        KarakterAtribut.ReduceBuffDuration();
         enable = false;
     }
 
     public void UpgradeCharAtribut(){
         KarakterAtribut.Upgrade();
-    }
-
-    public void SetSpecial(int Indeks,int SpecialID){
-        switch(SpecialID){
-            case ConstantaSp.SP_KNIGHT_BLOOD_CLOTING_ID : {
-                SpecialList[Indeks] = new Sp_BloodCloting();
-            }
-            break;
-            case ConstantaSp.SP_WARRIOR_CRITICAL_SLASH_ID : {
-                SpecialList[Indeks] = new Sp_CriticalSlash();
-            }
-            break;
-            case ConstantaSp.SP_HEALER_HEALING_PRAY_ID : {
-                SpecialList[Indeks] = new Sp_HealingPray();
-            }
-            break;
-            case ConstantaSp.SP_MAGE_HELL_FIRE_ID : {
-                SpecialList[Indeks] = new Sp_HellFire();
-            }
-            break;
-            case ConstantaSp.SP_ARCHER_STRIKE_SHOT_ID : {
-                SpecialList[Indeks] = new Sp_StrikeShot();
-            }
-            break;
-            case ConstantaSp.SP_NINJA_THROW_KUNAI_ID : {
-                SpecialList[Indeks] = new Sp_ThrowKunai();
-            }
-            break;
-            default : {
-                SpecialList[Indeks] = new Sp_StrikeShot();
-            }
-            break;
-        }
     }
 
     public void JobChange(int NewJobID){
@@ -166,4 +191,105 @@ public class Character {
             }
         }
     }
+
+    public void ReduceBuffDuration(){
+        KarakterAtribut.ReduceBuffDuration();
+    }
+
+    public void SetSpecial(int Indeks,int SpecialID){
+        if(SpecialID<50){
+            switch(SpecialID){
+                case ConstantaSp.SP_KNIGHT_BLOOD_CLOTING_ID : {
+                    SpecialList[Indeks] = new Sp_BloodCloting();
+                }
+                break;
+                case ConstantaSp.SP_WARRIOR_CRITICAL_SLASH_ID : {
+                    SpecialList[Indeks] = new Sp_CriticalSlash();
+                }
+                break;
+                case ConstantaSp.SP_HEALER_HEALING_PRAY_ID : {
+                    SpecialList[Indeks] = new Sp_HealingPray();
+                }
+                break;
+                case ConstantaSp.SP_MAGE_HELL_FIRE_ID : {
+                    SpecialList[Indeks] = new Sp_HellFire();
+                }
+                break;
+                case ConstantaSp.SP_ARCHER_STRIKE_SHOT_ID : {
+                    SpecialList[Indeks] = new Sp_StrikeShot();
+                }
+                break;
+                case ConstantaSp.SP_NINJA_THROW_KUNAI_ID : {
+                    SpecialList[Indeks] = new Sp_ThrowKunai();
+                }
+                break;
+                default : {
+                    SpecialList[Indeks] = new Sp_StrikeShot();
+                }
+                break;
+            }
+        } else if(SpecialID<100){
+            switch(SpecialID){
+                case ConstantaSp.SP_ARCH_KNIGHT_SWORD_FURY_ID : {
+                    SpecialList[Indeks] = new Sp2_SwordFury();
+                }
+                break;
+                case ConstantaSp.SP_ARCH_KNIGHT_SHOCKWAVE_ID : {
+                    SpecialList[Indeks] = new Sp2_Shockwave();
+                }
+                break;
+                case ConstantaSp.SP_BLADEMASTER_HURRICANE_SWORD_ID : {
+                    SpecialList[Indeks] = new Sp2_HurricaneSword();
+                }
+                break;
+                case ConstantaSp.SP_BLADEMASTER_SWORD_MELTING_ID : {
+                    SpecialList[Indeks] = new Sp2_SwordMelting();
+                }
+                break;
+                case ConstantaSp.SP_RANGER_FOCUS_SIGHT_ID : {
+                    SpecialList[Indeks] = new Sp2_FocusSight();
+                }
+                break;
+                case ConstantaSp.SP_RANGER_DOUBLE_STRIKE_ID : {
+                    SpecialList[Indeks] = new Sp2_DoubleStrike();
+                }
+                break;
+                case ConstantaSp.SP_ARCH_MAGE_HALF_LIFE_ID : {
+                    SpecialList[Indeks] = new Sp2_HalfLife();
+                }
+                break;
+                case ConstantaSp.SP_ARCH_MAGE_IFRIT_RAGE_ID : {
+                    SpecialList[Indeks] = new Sp2_IfritRage();
+                }
+                break;
+                case ConstantaSp.SP_BISHOP_HEALING_CIRCLE_ID : {
+                    SpecialList[Indeks] = new Sp2_HealingCircle();
+                }
+                break;
+                case ConstantaSp.SP_BISHOP_PHOENIX_TEAR_ID : {
+                    SpecialList[Indeks] = new Sp2_PhoenixTear();
+                }
+                break;
+                case ConstantaSp.SP_ASSASSIN_VENOM_SMOKE_ID : {
+                    SpecialList[Indeks] = new Sp2_VenomSmoke();
+                }
+                break;
+                case ConstantaSp.SP_ASSASSIN_SHADOW_BIND_ID : {
+                    SpecialList[Indeks] = new Sp2_ShadowBind();
+                }
+                break;
+                default : {
+                    SpecialList[Indeks] = new Sp_StrikeShot();
+                }
+                break;
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+
 }

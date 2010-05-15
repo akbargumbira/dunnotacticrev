@@ -4,16 +4,14 @@
  */
 
 package Model.Character.Job;
-
 import Model.Character.Constanta;
 import Model.Character.Special.ConstantaSp;
-
 /**
  *
  * @author ifan
  */
-public class Healer extends Job {
-    public Healer(){
+public class J31_Ranger extends Job {
+    public J31_Ranger(){
         FactorJob[Constanta.HP_ID]=0;
         FactorJob[Constanta.SP_ID]=0;
         FactorJob[Constanta.ATTACK_ID]=0;
@@ -25,12 +23,12 @@ public class Healer extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_HEALER_ID;
-        JobClass=2;
-        AttackType=Constanta.ATTACK_MATT_TYPE_ID;
-        SpecialAvail[0]=ConstantaSp.SP_HEALER_HEALING_PRAY_ID;
-        SpecialAvail[1]=0;
-        SpecialAvail[2]=0;
+        JobID=Constanta.JOB2_RANGER_ID;
+        JobClass=3;
+        AttackType=Constanta.ATTACK_ATT_TYPE_ID;
+        SpecialAvail[0]=ConstantaSp.SP_ARCHER_STRIKE_SHOT_ID;
+        SpecialAvail[1]=ConstantaSp.SP_RANGER_FOCUS_SIGHT_ID;
+        SpecialAvail[2]=ConstantaSp.SP_RANGER_DOUBLE_STRIKE_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
     }

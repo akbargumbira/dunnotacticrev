@@ -19,21 +19,27 @@ public class Driver {
         Target.add(Karakter);
         System.out.println("Default:");
         PrintAtributDefault();
-        Karakter.JobChange(3);
-        System.out.println("Default:");
-        PrintAtributDefault();
-        Karakter.SpecialFunction(Karakter, Target, 5);
+        Karakter.JobChange(53);
+        System.out.println("Current:");
+        PrintAtributCurrent();
+        Karakter.SpecialFunction(Karakter, Target, 56);
         System.out.println("Default:");
         PrintAtributDefault();
         System.out.println("Current:");
         PrintAtributCurrent();
-//        Karakter.SpecialFunction(Karakter, Target,6);
-//        System.out.println("Current after blood:");
+//        Karakter.ReduceBuffDuration();
+//        Karakter.ReduceBuffDuration();
+//        Karakter.ReduceBuffDuration();
+//        Karakter.ReduceBuffDuration();
+//        System.out.println("Current:");
 //        PrintAtributCurrent();
-//        System.out.println("Position:");
-//        PrintPosition();
-//        Karakter.Move(20, 20);
-//        PrintPosition();
+////        Karakter.SpecialFunction(Karakter, Target,6);
+////        System.out.println("Current after blood:");
+////        PrintAtributCurrent();
+////        System.out.println("Position:");
+////        PrintPosition();
+////        Karakter.Move(20, 20);
+////        PrintPosition();
     }
 
     public static void PrintAtributDefault(){
