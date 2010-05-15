@@ -11,12 +11,12 @@
 
 package View.BuildMode;
 
-import View.LoadFile;
 import Model.Map.Map;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -28,13 +28,14 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.Point;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseMotionListener;
 
 /**
  *
  * @author user
  */
-public class BuildMap extends javax.swing.JFrame implements MouseListener, MouseMotionListener, ActionListener{
+public class BuildMap extends javax.swing.JFrame implements MouseListener, MouseMotionListener, KeyListener, ActionListener{
 
     /** Creates new form BuildMap */
     public BuildMap(MainMenu parent, GraphicsDevice device) {
@@ -48,6 +49,10 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         paintMap(); /* Paint Map */
 
         ShowWindow();
+
+        /* Add key listener */
+        this.addKeyListener(this);
+        layerpane.addKeyListener(this);
 
         /* Add Mouse Listener */
         contentPanel.addMouseListener(this);
@@ -72,6 +77,40 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         castle2Button.setActionCommand(Map.GetString(Map.CASTLE2));
         castle3Button.setActionCommand(Map.GetString(Map.CASTLE3));
         castle4Button.setActionCommand(Map.GetString(Map.CASTLE4));
+
+        /* Init save panel */
+        save = new SaveMapPanel(this);
+        layerpane.add(save);
+        layerpane.setLayer(save, PANEL_LAYER);
+        int width = save.getPreferredSize().width;
+        int height = save.getPreferredSize().height;
+        int x = (getWidth()-width)/2;
+        int y = (getHeight()-height)/2;
+        save.setBounds(x, y, width, height);
+        save.setVisible(false);
+
+        /* Init load panel */
+        load = new LoadMapPanel(this);
+        layerpane.add(load);
+        layerpane.setLayer(load, PANEL_LAYER);
+        width = load.getPreferredSize().width;
+        height = load.getPreferredSize().height;
+        x = (getWidth()-width)/2;
+        y = (getHeight()-height)/2;
+        load.setBounds(x, y, width, height);
+        load.setVisible(false);
+
+
+        /* Init New Panel */
+        New = new NewPanel(this);
+        layerpane.add(New);
+        layerpane.setLayer(New, PANEL_LAYER);
+        width = New.getPreferredSize().width;
+        height = New.getPreferredSize().height;
+        x = (getWidth()-width)/2;
+        y = (getHeight()-height)/2;
+        New.setBounds(x, y, width, height);
+        New.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -83,14 +122,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainPanel = new javax.swing.JPanel();
-        buttonPanel = new javax.swing.JPanel();
-        saveButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
-        newButton = new javax.swing.JButton();
-        Load = new javax.swing.JButton();
-        scroll = new javax.swing.JScrollPane();
-        contentPanel = new javax.swing.JPanel();
+        layerpane = new javax.swing.JLayeredPane();
         changeterrainPanel = new javax.swing.JPanel();
         airButton = new javax.swing.JButton();
         pohonButton = new javax.swing.JButton();
@@ -103,6 +135,13 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         selectAllButton = new javax.swing.JButton();
         deselectButton = new javax.swing.JButton();
         randomButton = new javax.swing.JButton();
+        buttonPanel = new javax.swing.JPanel();
+        saveButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
+        newButton = new javax.swing.JButton();
+        Load = new javax.swing.JButton();
+        scroll = new javax.swing.JScrollPane();
+        contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Build Mode");
@@ -111,28 +150,128 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(java.awt.Color.black);
 
+        layerpane.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                layerpaneKeyPressed(evt);
+            }
+        });
+
+        changeterrainPanel.setOpaque(false);
+
+        airButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/air.png"))); // NOI18N
+        airButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        airButton.setMaximumSize(new java.awt.Dimension(60, 60));
+        airButton.setMinimumSize(new java.awt.Dimension(60, 60));
+        airButton.setOpaque(false);
+        airButton.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        pohonButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pohon.png"))); // NOI18N
+        pohonButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        pohonButton.setMaximumSize(new java.awt.Dimension(60, 60));
+        pohonButton.setMinimumSize(new java.awt.Dimension(60, 60));
+        pohonButton.setOpaque(false);
+        pohonButton.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        lumpurButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/lumpur.png"))); // NOI18N
+        lumpurButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        lumpurButton.setMaximumSize(new java.awt.Dimension(60, 60));
+        lumpurButton.setMinimumSize(new java.awt.Dimension(60, 60));
+        lumpurButton.setOpaque(false);
+        lumpurButton.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        rumputButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rumput.png"))); // NOI18N
+        rumputButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        rumputButton.setMaximumSize(new java.awt.Dimension(60, 60));
+        rumputButton.setMinimumSize(new java.awt.Dimension(60, 60));
+        rumputButton.setOpaque(false);
+        rumputButton.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        castle1Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle1.png"))); // NOI18N
+        castle1Button.setMaximumSize(new java.awt.Dimension(60, 60));
+        castle1Button.setMinimumSize(new java.awt.Dimension(60, 60));
+        castle1Button.setOpaque(false);
+        castle1Button.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        castle3Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle3.png"))); // NOI18N
+        castle3Button.setMaximumSize(new java.awt.Dimension(60, 60));
+        castle3Button.setMinimumSize(new java.awt.Dimension(60, 60));
+        castle3Button.setOpaque(false);
+        castle3Button.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        castle2Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle2.png"))); // NOI18N
+        castle2Button.setMaximumSize(new java.awt.Dimension(60, 60));
+        castle2Button.setMinimumSize(new java.awt.Dimension(60, 60));
+        castle2Button.setOpaque(false);
+        castle2Button.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        castle4Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle4.png"))); // NOI18N
+        castle4Button.setMaximumSize(new java.awt.Dimension(60, 60));
+        castle4Button.setMinimumSize(new java.awt.Dimension(60, 60));
+        castle4Button.setOpaque(false);
+        castle4Button.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        selectAllButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        selectAllButton.setText("Select All");
+        selectAllButton.setOpaque(false);
+        selectAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectAllButtonActionPerformed(evt);
+            }
+        });
+
+        deselectButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        deselectButton.setText("Deselect");
+        deselectButton.setOpaque(false);
+        deselectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deselectButtonActionPerformed(evt);
+            }
+        });
+
+        randomButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        randomButton.setText("Random");
+        randomButton.setMaximumSize(new java.awt.Dimension(72, 23));
+        randomButton.setMinimumSize(new java.awt.Dimension(72, 23));
+        randomButton.setOpaque(false);
+        randomButton.setPreferredSize(new java.awt.Dimension(72, 23));
+        randomButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                randomButtonActionPerformed(evt);
+            }
+        });
+
+        buttonPanel.setOpaque(false);
+
+        saveButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         saveButton.setText("Save");
+        saveButton.setOpaque(false);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
             }
         });
 
+        backButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         backButton.setText("Back");
+        backButton.setOpaque(false);
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 backButtonMouseClicked(evt);
             }
         });
 
+        newButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         newButton.setText("New");
+        newButton.setOpaque(false);
         newButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newButtonActionPerformed(evt);
             }
         });
 
+        Load.setFont(new java.awt.Font("Tahoma", 0, 18));
         Load.setText("Load");
+        Load.setOpaque(false);
         Load.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoadActionPerformed(evt);
@@ -143,198 +282,121 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         buttonPanel.setLayout(buttonPanelLayout);
         buttonPanelLayout.setHorizontalGroup(
             buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buttonPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Load, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(saveButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(Load, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(newButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(backButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
                 .addContainerGap())
         );
         buttonPanelLayout.setVerticalGroup(
             buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(newButton)
+                .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Load)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveButton)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(backButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        scroll.setAutoscrolls(true);
+        javax.swing.GroupLayout changeterrainPanelLayout = new javax.swing.GroupLayout(changeterrainPanel);
+        changeterrainPanel.setLayout(changeterrainPanelLayout);
+        changeterrainPanelLayout.setHorizontalGroup(
+            changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changeterrainPanelLayout.createSequentialGroup()
+                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(changeterrainPanelLayout.createSequentialGroup()
+                        .addComponent(airButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lumpurButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(castle1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(castle2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(changeterrainPanelLayout.createSequentialGroup()
+                        .addComponent(pohonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rumputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(castle3Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(castle4Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(randomButton, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                    .addComponent(selectAllButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deselectButton, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        changeterrainPanelLayout.setVerticalGroup(
+            changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(changeterrainPanelLayout.createSequentialGroup()
+                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(changeterrainPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(changeterrainPanelLayout.createSequentialGroup()
+                                .addComponent(selectAllButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deselectButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(changeterrainPanelLayout.createSequentialGroup()
+                                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(castle1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lumpurButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(castle2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(airButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(pohonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rumputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(castle3Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(castle4Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        changeterrainPanel.setBounds(0, 440, 528, 180);
+        layerpane.add(changeterrainPanel, new Integer(1));
+
+        scroll.setBackground(new java.awt.Color(0, 0, 0));
 
         contentPanel.setBackground(new java.awt.Color(0, 0, 0));
-        contentPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 962, Short.MAX_VALUE)
+            .addGap(0, 688, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 434, Short.MAX_VALUE)
+            .addGap(0, 618, Short.MAX_VALUE)
         );
 
         scroll.setViewportView(contentPanel);
 
-        airButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/air.png"))); // NOI18N
-        airButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        airButton.setMaximumSize(new java.awt.Dimension(30, 30));
-        airButton.setMinimumSize(new java.awt.Dimension(30, 30));
-        airButton.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        pohonButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pohon.png"))); // NOI18N
-        pohonButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        pohonButton.setMaximumSize(new java.awt.Dimension(30, 30));
-        pohonButton.setMinimumSize(new java.awt.Dimension(30, 30));
-        pohonButton.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        lumpurButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/lumpur.png"))); // NOI18N
-        lumpurButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        lumpurButton.setMaximumSize(new java.awt.Dimension(30, 30));
-        lumpurButton.setMinimumSize(new java.awt.Dimension(30, 30));
-        lumpurButton.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        rumputButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rumput.png"))); // NOI18N
-        rumputButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        rumputButton.setMaximumSize(new java.awt.Dimension(30, 30));
-        rumputButton.setMinimumSize(new java.awt.Dimension(30, 30));
-        rumputButton.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        castle1Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle1.png"))); // NOI18N
-        castle1Button.setMaximumSize(new java.awt.Dimension(30, 30));
-        castle1Button.setMinimumSize(new java.awt.Dimension(30, 30));
-        castle1Button.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        castle3Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle3.png"))); // NOI18N
-        castle3Button.setMaximumSize(new java.awt.Dimension(30, 30));
-        castle3Button.setMinimumSize(new java.awt.Dimension(30, 30));
-        castle3Button.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        castle2Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle2.png"))); // NOI18N
-
-        castle4Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle4.png"))); // NOI18N
-        castle4Button.setMaximumSize(new java.awt.Dimension(30, 30));
-        castle4Button.setMinimumSize(new java.awt.Dimension(30, 30));
-        castle4Button.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        javax.swing.GroupLayout changeterrainPanelLayout = new javax.swing.GroupLayout(changeterrainPanel);
-        changeterrainPanel.setLayout(changeterrainPanelLayout);
-        changeterrainPanelLayout.setHorizontalGroup(
-            changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(changeterrainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(changeterrainPanelLayout.createSequentialGroup()
-                        .addComponent(pohonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rumputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(castle3Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(castle4Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(changeterrainPanelLayout.createSequentialGroup()
-                        .addComponent(airButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lumpurButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(castle1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(castle2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        changeterrainPanelLayout.setVerticalGroup(
-            changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changeterrainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(castle1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(airButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lumpurButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(castle2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pohonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rumputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(castle3Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(castle4Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
-        );
-
-        selectAllButton.setText("Select All");
-        selectAllButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectAllButtonActionPerformed(evt);
-            }
-        });
-
-        deselectButton.setText("Deselect");
-        deselectButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deselectButtonActionPerformed(evt);
-            }
-        });
-
-        randomButton.setText("Random");
-        randomButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                randomButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(changeterrainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(selectAllButton)
-                    .addComponent(deselectButton)
-                    .addComponent(randomButton)))
-            .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(changeterrainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(selectAllButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deselectButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(randomButton)))
-                .addGap(29, 29, 29))
-        );
+        scroll.setBounds(0, 0, 680, 620);
+        layerpane.add(scroll, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(layerpane, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(layerpane, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -344,34 +406,28 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     }//GEN-LAST:event_backButtonMouseClicked
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        /* Call OpenSize Window */
-        InputSize input = new InputSize(this);
-        input.setVisible(true);
-
-        /* Set This Window Disable */
-        setEnabled(false);
+        getScroll().setVisible(false);
+        changeterrainPanel.setVisible(false);
+        New.setVisible(true);
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         /* Save Map */
-        IOObject.Save(mapLogic, "tes.map");
-        this.setEnabled(true);
-        SaveMap save = new SaveMap(this);
+        scroll.setVisible(false);
+        changeterrainPanel.setVisible(false);
         save.setVisible(true);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadActionPerformed
         /* Create & Show LoadMap Window */
-        LoadFile load = new LoadFile(this);
+        scroll.setVisible(false);
+        changeterrainPanel.setVisible(false);
         load.setVisible(true);
-
-        /* Disabled this Window */
-        this.setEnabled(false);
     }//GEN-LAST:event_LoadActionPerformed
 
     private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
         /* Get All Component in contentPanel */
-        Component[] list = contentPanel.getComponents();
+        Component[] list = getContentPanel().getComponents();
 
         JLabel l;
 
@@ -408,20 +464,25 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         paintMap();
     }//GEN-LAST:event_randomButtonActionPerformed
 
-    public void mouseClicked(MouseEvent e) {}
+    private void layerpaneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_layerpaneKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_layerpaneKeyPressed
+
+    public void mouseClicked(MouseEvent e) {
+    }
 
     public void mouseEntered(MouseEvent e) {}
 
     public void mouseExited(MouseEvent e) {}
 
     public void mousePressed(MouseEvent e) {
-        /* Get Component at mouse click's position */
-        Component c = contentPanel.getComponentAt(e.getX(), e.getY());
-
+         /* Get Component at mouse click's position */
+        
+        Component c = getContentPanel().getComponentAt(e.getX(), e.getY());
         /* Create temporary label*/
         JLabel l;
 
-        
+
         if (c instanceof JLabel) { /* Cek c is a Label */
              l = (JLabel)c; /* l point to c */
 
@@ -442,7 +503,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
 
     public void mouseDragged(MouseEvent e) {
         /* Get Label at mouse dragged's point */
-        Component c = contentPanel.getComponentAt(e.getX(), e.getY());
+        Component c = getContentPanel().getComponentAt(e.getX(), e.getY());
         JLabel l;
 
         if (c instanceof JLabel) {
@@ -455,6 +516,26 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     }
 
     public void mouseMoved(MouseEvent e) {}
+
+    public void keyPressed(KeyEvent e) {
+        System.out.println("press");
+        System.out.println(e.getKeyChar());
+        System.out.println(e);
+    }
+
+    public void keyReleased(KeyEvent e) {
+        System.out.println("release");
+        System.out.println(e.getKeyChar());
+        System.out.println(e);
+    }
+
+    public void keyTyped(KeyEvent e) {
+        System.out.println("type");
+        System.out.println(e.getKeyChar());
+        System.out.println(e);
+    }
+
+
 
     public void actionPerformed(ActionEvent e) {
         JLabel l;
@@ -482,37 +563,37 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         isFullScreen = device.isFullScreenSupported();
         setUndecorated(isFullScreen);
         setResizable(!isFullScreen);
+        Container pane = getContentPane();
         if (isFullScreen) {
             /* Full-screen mode */
             device.setFullScreenWindow(this);
             validate();
+            pane.setLayout(null);
+            pane.add(getLayerpane());
+            getLayerpane().setBounds(0, 0, getWidth(), getHeight());
+            getLayerpane().setLayout(null);
+            getScroll().setBounds(0, 0, getWidth(), getHeight());
+            getChangeterrainPanel().setBounds(0, getHeight()-getChangeterrainPanel().getHeight(), getChangeterrainPanel().getWidth(), getChangeterrainPanel().getHeight());
         } else {
             /* Windowed mode */
             pack();
             setVisible(true);
         }
         setBackground(Color.BLACK);
-        Container pane = getContentPane();
-        pane.setLayout(null);
         pane.setBackground(Color.BLACK);
-        pane.add(mainPanel);
-        int width = mainPanel.getWidth();
-        int height = mainPanel.getHeight();
-        int x = (getSize().width-width)/2;
-        int y = (getSize().height-height)/2;
-        mainPanel.setBounds(x, y, width, height);
+        getLayerpane().setBackground(Color.BLACK);
     }
 
     public void createContent(int x, int y, int width, int height, String iconName) {
         JLabel label = new JLabel(ImageSupport.createImageIcon(iconName+".png", null));
         label.setBounds(x, y, width, height);
-        contentPanel.add(label);
+        getContentPanel().add(label);
     }
 
     public void paintMap() {
         /* Remove all component in content Panel */
-        contentPanel.removeAll();
-        contentPanel.repaint();
+        getContentPanel().removeAll();
+        getContentPanel().repaint();
 
         /* Add new component(terrain & building ) in content Panel */
         for (int i=0;i<mapLogic.GetWidth();++i) {
@@ -520,12 +601,11 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                 createContent(i*ImageSupport.IMAGE_WIDTH, j*ImageSupport.IMAGE_HEIGHT, ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT, Map.GetString(mapLogic.GetContent(i, j)));
             }
         }
-        contentPanel.repaint();
+        getContentPanel().repaint();
 
         /* Set new Size for contentPanel */
         Dimension d = new Dimension(ImageSupport.IMAGE_WIDTH*mapLogic.GetWidth(), ImageSupport.IMAGE_HEIGHT*mapLogic.GetHeight());
-        contentPanel.setPreferredSize(d);
-        scroll.setViewportView(contentPanel);
+        getContentPanel().setPreferredSize(d);
     }
 
     public Map GetMap() {
@@ -539,7 +619,8 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     public void SetMapName(String mapName) {
         this.mapName = mapName;
     }
-   
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Load;
@@ -553,8 +634,8 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     private javax.swing.JPanel changeterrainPanel;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton deselectButton;
+    private javax.swing.JLayeredPane layerpane;
     private javax.swing.JButton lumpurButton;
-    private javax.swing.JPanel mainPanel;
     private javax.swing.JButton newButton;
     private javax.swing.JButton pohonButton;
     private javax.swing.JButton randomButton;
@@ -570,4 +651,37 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     private ArrayList<JLabel> selected = new ArrayList<JLabel>();
     private Map mapLogic;
     private String mapName = null;
+    private SaveMapPanel save;
+    private LoadMapPanel load;
+    private NewPanel New;
+
+    public static final int PANEL_LAYER = 2;
+
+    /**
+     * @return the contentPanel
+     */
+    public javax.swing.JPanel getContentPanel() {
+        return contentPanel;
+    }
+
+    /**
+     * @return the changeterrainPanel
+     */
+    public javax.swing.JPanel getChangeterrainPanel() {
+        return changeterrainPanel;
+    }
+
+    /**
+     * @return the layerpane
+     */
+    public javax.swing.JLayeredPane getLayerpane() {
+        return layerpane;
+    }
+
+    /**
+     * @return the scroll
+     */
+    public javax.swing.JScrollPane getScroll() {
+        return scroll;
+    }
 }
