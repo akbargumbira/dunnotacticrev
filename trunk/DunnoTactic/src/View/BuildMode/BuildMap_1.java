@@ -30,33 +30,33 @@ import java.awt.GraphicsDevice;
 import java.awt.Point;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseMotionListener;
-import javax.swing.JLayeredPane;
 
 /**
  *
  * @author user
  */
-public class BuildMap extends javax.swing.JFrame implements MouseListener, MouseMotionListener, KeyListener, ActionListener{
+public class BuildMap_1 extends javax.swing.JFrame implements MouseListener, MouseMotionListener, KeyListener, ActionListener{
 
     /** Creates new form BuildMap */
-    public BuildMap(MainMenu parent, GraphicsDevice device) {
+    public BuildMap_1(MainMenu parent, GraphicsDevice device) {
         super(device.getDefaultConfiguration());
         this.device = device;
         this.parent = parent; /* Pointed parent Window */
         initComponents();
-        ShowWindow();
 
         /* Initial Map */
         mapLogic = new Map(); /* Create map by default */
         paintMap(); /* Paint Map */
 
+        ShowWindow();
+
         /* Add key listener */
         this.addKeyListener(this);
-        mainLayerPane.addKeyListener(this);
+        layerpane.addKeyListener(this);
 
         /* Add Mouse Listener */
-        terrainPanel.addMouseListener(this);
-        terrainPanel.addMouseMotionListener(this);
+        contentPanel.addMouseListener(this);
+        contentPanel.addMouseMotionListener(this);
 
         /* Add Action Listener */
         rumputButton.addActionListener(this);
@@ -79,9 +79,9 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         castle4Button.setActionCommand(Map.GetString(Map.CASTLE4));
 
         /* Init save panel */
-        save = new SaveMapPanel(this);
-        mainLayerPane.add(save);
-        mainLayerPane.setLayer(save, MENU_LAYER);
+        //save = new SaveMapPanel(this);
+        layerpane.add(save);
+        layerpane.setLayer(save, PANEL_LAYER);
         int width = save.getPreferredSize().width;
         int height = save.getPreferredSize().height;
         int x = (getWidth()-width)/2;
@@ -90,9 +90,9 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         save.setVisible(false);
 
         /* Init load panel */
-        load = new LoadMapPanel(this);
-        mainLayerPane.add(load);
-        mainLayerPane.setLayer(load, MENU_LAYER);
+        //load = new LoadMapPanel(this);
+        layerpane.add(load);
+        layerpane.setLayer(load, PANEL_LAYER);
         width = load.getPreferredSize().width;
         height = load.getPreferredSize().height;
         x = (getWidth()-width)/2;
@@ -102,9 +102,9 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
 
 
         /* Init New Panel */
-        New = new NewPanel(this);
-        mainLayerPane.add(New);
-        mainLayerPane.setLayer(New, MENU_LAYER);
+        //New = new NewPanel(this);
+        layerpane.add(New);
+        layerpane.setLayer(New, PANEL_LAYER);
         width = New.getPreferredSize().width;
         height = New.getPreferredSize().height;
         x = (getWidth()-width)/2;
@@ -122,8 +122,8 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainLayerPane = new javax.swing.JLayeredPane();
-        MenuPanel = new javax.swing.JPanel();
+        layerpane = new javax.swing.JLayeredPane();
+        changeterrainPanel = new javax.swing.JPanel();
         airButton = new javax.swing.JButton();
         pohonButton = new javax.swing.JButton();
         lumpurButton = new javax.swing.JButton();
@@ -141,8 +141,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         newButton = new javax.swing.JButton();
         Load = new javax.swing.JButton();
         scroll = new javax.swing.JScrollPane();
-        mapLayerPane = new javax.swing.JLayeredPane();
-        terrainPanel = new javax.swing.JPanel();
+        contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Build Mode");
@@ -151,13 +150,13 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(java.awt.Color.black);
 
-        mainLayerPane.addKeyListener(new java.awt.event.KeyAdapter() {
+        layerpane.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                mainLayerPaneKeyPressed(evt);
+                layerpaneKeyPressed(evt);
             }
         });
 
-        MenuPanel.setOpaque(false);
+        changeterrainPanel.setOpaque(false);
 
         airButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/air.png"))); // NOI18N
         airButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -306,15 +305,15 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout MenuPanelLayout = new javax.swing.GroupLayout(MenuPanel);
-        MenuPanel.setLayout(MenuPanelLayout);
-        MenuPanelLayout.setHorizontalGroup(
-            MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout changeterrainPanelLayout = new javax.swing.GroupLayout(changeterrainPanel);
+        changeterrainPanel.setLayout(changeterrainPanelLayout);
+        changeterrainPanelLayout.setHorizontalGroup(
+            changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changeterrainPanelLayout.createSequentialGroup()
                 .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MenuPanelLayout.createSequentialGroup()
+                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(changeterrainPanelLayout.createSequentialGroup()
                         .addComponent(airButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lumpurButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,7 +321,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                         .addComponent(castle1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(castle2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(MenuPanelLayout.createSequentialGroup()
+                    .addGroup(changeterrainPanelLayout.createSequentialGroup()
                         .addComponent(pohonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rumputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,33 +330,33 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(castle4Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(randomButton, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                     .addComponent(selectAllButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deselectButton, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        MenuPanelLayout.setVerticalGroup(
-            MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuPanelLayout.createSequentialGroup()
-                .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MenuPanelLayout.createSequentialGroup()
+        changeterrainPanelLayout.setVerticalGroup(
+            changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(changeterrainPanelLayout.createSequentialGroup()
+                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(changeterrainPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(MenuPanelLayout.createSequentialGroup()
+                        .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(changeterrainPanelLayout.createSequentialGroup()
                                 .addComponent(selectAllButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(deselectButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(MenuPanelLayout.createSequentialGroup()
-                                .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(changeterrainPanelLayout.createSequentialGroup()
+                                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(castle1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lumpurButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(castle2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(airButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(changeterrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(pohonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rumputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(castle3Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,43 +365,38 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                 .addContainerGap())
         );
 
-        MenuPanel.setBounds(0, 360, 528, 180);
-        mainLayerPane.add(MenuPanel, new Integer(1));
+        changeterrainPanel.setBounds(0, 440, 528, 180);
+        layerpane.add(changeterrainPanel, new Integer(1));
 
         scroll.setBackground(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout terrainPanelLayout = new javax.swing.GroupLayout(terrainPanel);
-        terrainPanel.setLayout(terrainPanelLayout);
-        terrainPanelLayout.setHorizontalGroup(
-            terrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        contentPanel.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 688, Short.MAX_VALUE)
         );
-        terrainPanelLayout.setVerticalGroup(
-            terrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
         );
 
-        terrainPanel.setBounds(0, 0, 100, 100);
-        mapLayerPane.add(terrainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        scroll.setViewportView(contentPanel);
 
-        scroll.setViewportView(mapLayerPane);
-
-        scroll.setBounds(0, 0, 680, 340);
-        mainLayerPane.add(scroll, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        scroll.setBounds(0, 0, 680, 620);
+        layerpane.add(scroll, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainLayerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(layerpane, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainLayerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(layerpane, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -412,22 +406,28 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     }//GEN-LAST:event_backButtonMouseClicked
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
+        getScroll().setVisible(false);
+        changeterrainPanel.setVisible(false);
         New.setVisible(true);
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         /* Save Map */
+        scroll.setVisible(false);
+        changeterrainPanel.setVisible(false);
         save.setVisible(true);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadActionPerformed
         /* Create & Show LoadMap Window */
+        scroll.setVisible(false);
+        changeterrainPanel.setVisible(false);
         load.setVisible(true);
     }//GEN-LAST:event_LoadActionPerformed
 
     private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
         /* Get All Component in contentPanel */
-        Component[] list = terrainPanel.getComponents();
+        Component[] list = getContentPanel().getComponents();
 
         JLabel l;
 
@@ -464,9 +464,9 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         paintMap();
     }//GEN-LAST:event_randomButtonActionPerformed
 
-    private void mainLayerPaneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mainLayerPaneKeyPressed
+    private void layerpaneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_layerpaneKeyPressed
         // TODO add your handling code here:
-}//GEN-LAST:event_mainLayerPaneKeyPressed
+    }//GEN-LAST:event_layerpaneKeyPressed
 
     public void mouseClicked(MouseEvent e) {
     }
@@ -478,7 +478,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     public void mousePressed(MouseEvent e) {
          /* Get Component at mouse click's position */
         
-        Component c = terrainPanel.getComponentAt(e.getX(), e.getY());
+        Component c = getContentPanel().getComponentAt(e.getX(), e.getY());
         /* Create temporary label*/
         JLabel l;
 
@@ -503,7 +503,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
 
     public void mouseDragged(MouseEvent e) {
         /* Get Label at mouse dragged's point */
-        Component c = terrainPanel.getComponentAt(e.getX(), e.getY());
+        Component c = getContentPanel().getComponentAt(e.getX(), e.getY());
         JLabel l;
 
         if (c instanceof JLabel) {
@@ -535,8 +535,11 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         System.out.println(e);
     }
 
+
+
     public void actionPerformed(ActionEvent e) {
         JLabel l;
+
         /* Change image selected terrain or building and its Value in mapLogic */
         for (int i=0;i<selected.size();++i) {
             l = selected.get(i);
@@ -557,55 +560,40 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     }
 
     public void ShowWindow() {
-        Container pane = getContentPane();
-        int x, y, width, height;
-
         isFullScreen = device.isFullScreenSupported();
         setUndecorated(isFullScreen);
         setResizable(!isFullScreen);
+        Container pane = getContentPane();
         if (isFullScreen) {
             /* Full-screen mode */
             device.setFullScreenWindow(this);
             validate();
+            pane.setLayout(null);
+            pane.add(getLayerpane());
+            getLayerpane().setBounds(0, 0, getWidth(), getHeight());
+            getLayerpane().setLayout(null);
+            getScroll().setBounds(0, 0, getWidth(), getHeight());
+            getChangeterrainPanel().setBounds(0, getHeight()-getChangeterrainPanel().getHeight(), getChangeterrainPanel().getWidth(), getChangeterrainPanel().getHeight());
         } else {
             /* Windowed mode */
             pack();
             setVisible(true);
         }
+        setBackground(Color.BLACK);
         pane.setBackground(Color.BLACK);
-        /* add mainLayerPane to Frame */
-        pane.removeAll();
-        pane.setLayout(null);
-        pane.add(mainLayerPane);
-        int border = BORDER_MAIN_LAYER_PANE;
-        mainLayerPane.setBounds(border, border, getWidth()-2*border, getHeight()-2*border);
-
-        /* Set maniLayerPane's layout to null */
-        mainLayerPane.setLayout(null);
-
-        /* Set Bounds scroll*/
-        width = mainLayerPane.getWidth();
-        height = mainLayerPane.getHeight();
-        scroll.setBounds(0, 0, width, height);
-
-        /* Set Bounds MenuPanel in mainLayerPane */
-        width = MenuPanel.getPreferredSize().width;
-        height = MenuPanel.getPreferredSize().height;
-        x = (mainLayerPane.getWidth() - width)/2;
-        y = mainLayerPane.getHeight() - height;
-        MenuPanel.setBounds(x, y, width, height);
+        getLayerpane().setBackground(Color.BLACK);
     }
 
     public void createContent(int x, int y, int width, int height, String iconName) {
         JLabel label = new JLabel(ImageSupport.createImageIcon(iconName+".png", null));
         label.setBounds(x, y, width, height);
-        terrainPanel.add(label);
+        getContentPanel().add(label);
     }
 
     public void paintMap() {
         /* Remove all component in content Panel */
-        terrainPanel.removeAll();
-        terrainPanel.repaint();
+        getContentPanel().removeAll();
+        getContentPanel().repaint();
 
         /* Add new component(terrain & building ) in content Panel */
         for (int i=0;i<mapLogic.GetWidth();++i) {
@@ -613,12 +601,11 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                 createContent(i*ImageSupport.IMAGE_WIDTH, j*ImageSupport.IMAGE_HEIGHT, ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT, Map.GetString(mapLogic.GetContent(i, j)));
             }
         }
-        terrainPanel.repaint();
+        getContentPanel().repaint();
 
         /* Set new Size for contentPanel */
         Dimension d = new Dimension(ImageSupport.IMAGE_WIDTH*mapLogic.GetWidth(), ImageSupport.IMAGE_HEIGHT*mapLogic.GetHeight());
-        terrainPanel.setBounds(0, 0, d.width, d.height);
-        mapLayerPane.setPreferredSize(d);
+        getContentPanel().setPreferredSize(d);
     }
 
     public Map GetMap() {
@@ -637,7 +624,6 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Load;
-    private javax.swing.JPanel MenuPanel;
     private javax.swing.JButton airButton;
     private javax.swing.JButton backButton;
     private javax.swing.JPanel buttonPanel;
@@ -645,10 +631,11 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     private javax.swing.JButton castle2Button;
     private javax.swing.JButton castle3Button;
     private javax.swing.JButton castle4Button;
+    private javax.swing.JPanel changeterrainPanel;
+    private javax.swing.JPanel contentPanel;
     private javax.swing.JButton deselectButton;
+    private javax.swing.JLayeredPane layerpane;
     private javax.swing.JButton lumpurButton;
-    private javax.swing.JLayeredPane mainLayerPane;
-    private javax.swing.JLayeredPane mapLayerPane;
     private javax.swing.JButton newButton;
     private javax.swing.JButton pohonButton;
     private javax.swing.JButton randomButton;
@@ -656,7 +643,6 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     private javax.swing.JButton saveButton;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JButton selectAllButton;
-    private javax.swing.JPanel terrainPanel;
     // End of variables declaration//GEN-END:variables
 
     private MainMenu parent;
@@ -669,9 +655,33 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     private LoadMapPanel load;
     private NewPanel New;
 
-    public static final int BORDER_MAIN_LAYER_PANE = 5;
-    public static final int MAP_LAYER_PANE_LAYER = JLayeredPane.DEFAULT_LAYER;
-    public static final int MENU_LAYER = JLayeredPane.DEFAULT_LAYER+1;
-    public static final int TERRAIN_LAYER = JLayeredPane.DEFAULT_LAYER;
-    public static final int BUILDING_LAYER = JLayeredPane.DEFAULT_LAYER+1;
+    public static final int PANEL_LAYER = 2;
+
+    /**
+     * @return the contentPanel
+     */
+    public javax.swing.JPanel getContentPanel() {
+        return contentPanel;
+    }
+
+    /**
+     * @return the changeterrainPanel
+     */
+    public javax.swing.JPanel getChangeterrainPanel() {
+        return changeterrainPanel;
+    }
+
+    /**
+     * @return the layerpane
+     */
+    public javax.swing.JLayeredPane getLayerpane() {
+        return layerpane;
+    }
+
+    /**
+     * @return the scroll
+     */
+    public javax.swing.JScrollPane getScroll() {
+        return scroll;
+    }
 }

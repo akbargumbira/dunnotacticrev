@@ -9,10 +9,10 @@ package Model.Building;
  *
  * @author user
  */
-public class Barrack_Novice extends Building
+public class Barrack extends Building
 {
     public static final int COST =100;
-    public Barrack_Novice()
+    public Barrack()
     {
         Building_BaseAtribut[BUILDING_HP_ID] = 20000;
         Building_BaseAtribut[BUILDING_DEFENSE_ID] = 100;

@@ -23,10 +23,12 @@ public class Map implements Serializable{
     public final static int CASTLE2 = 5;
     public final static int CASTLE3 = 6;
     public final static int CASTLE4 = 7;
+
+    public final static int NO_BUILDING = 0;
     private final static String[] contentString = {
-        "rumput",
-        "lumpur",
-        "air",
+        "Rumput1",
+        "Lumpur1",
+        "Water",
         "pohon",
         "castle1",
         "castle2",
@@ -41,12 +43,16 @@ public class Map implements Serializable{
     
     private int width;
     private int height;
-    private int[][] Content;
+    private int numPlayer;
+    private int[][] Terrain;
+    private int[][] Building;
+    
 
     public Map() {
        this.width = MIN_WIDTH;
-        this.height = MIN_HEIGHT;
-       Content = new int[width][height];
+       this.height = MIN_HEIGHT;
+       Terrain = new int[width][height];
+       Building = new int[width][height];
        FillDefault();
     }
 
@@ -54,20 +60,20 @@ public class Map implements Serializable{
         this.height = height;
         this.width = width;
 
-        Content = new int[width][height];
+        Terrain = new int[width][height];
         FillDefault();
     }
 
     private void FillDefault() {
         for (int i=0;i<width;++i) {
             for (int j=0;j<height;++j) {
-                Content[i][j] = 0;
+                Terrain[i][j] = 0;
             }
         }
     }
 
     public void SetContent(int x, int y, int terrain) {
-        Content[x][y] = terrain;
+        Terrain[x][y] = terrain;
     }
 
     public int GetHeight() {
@@ -78,10 +84,18 @@ public class Map implements Serializable{
         return width;
     }
 
+    public int GetNumPlayer() {
+        return numPlayer;
+    }
+
+    public void SetNumPlayer(int numPlayer) {
+        this.numPlayer = numPlayer;
+    }
+
     public Point GetCastlePosition(int number) {
         for (int i =0;i<width;++i) {
             for (int j=0;j<height;++j) {
-                if (Content[i][j] == number) {
+                if (Terrain[i][j] == number) {
                     return new Point(i, j);
                 }
             }
@@ -90,7 +104,7 @@ public class Map implements Serializable{
     }
 
     public int GetContent(int x, int y) {
-        return Content[x][y];
+        return Terrain[x][y];
     }
 
     public static String GetString(int contentnumber) {
@@ -147,7 +161,7 @@ public class Map implements Serializable{
         {
             randnum = Math.abs(rand.nextInt())%listpoint.size();
             p = listpoint.get(randnum);
-            Content[p.x][p.y] = AIR;
+            Terrain[p.x][p.y] = AIR;
             listpoint.remove(randnum);
         }
 
@@ -156,7 +170,7 @@ public class Map implements Serializable{
         {
             randnum = Math.abs(rand.nextInt())%listpoint.size();
             p = listpoint.get(randnum);
-            Content[p.x][p.y] = POHON;
+            Terrain[p.x][p.y] = POHON;
             listpoint.remove(randnum);
         }
 
@@ -166,7 +180,7 @@ public class Map implements Serializable{
         {
             randnum = Math.abs(rand.nextInt())%listpoint.size();
             p = listpoint.get(randnum);
-            Content[p.x][p.y] = LUMPUR;
+            Terrain[p.x][p.y] = LUMPUR;
             listpoint.remove(randnum);
         }
 
@@ -175,7 +189,7 @@ public class Map implements Serializable{
         {
             randnum = Math.abs(rand.nextInt())%listpoint.size();
             p = listpoint.get(randnum);
-            Content[p.x][p.y] = CASTLE1+i;
+            Terrain[p.x][p.y] = CASTLE1+i;
             listpoint.remove(randnum);
         }
 
@@ -184,7 +198,7 @@ public class Map implements Serializable{
         for (int i=0;i<nterrain;++i)
         {
             p = listpoint.get(i);
-            Content[p.x][p.y] = RUMPUT;
+            Terrain[p.x][p.y] = RUMPUT;
         }
     }
 
@@ -197,7 +211,7 @@ public class Map implements Serializable{
                 s += ",";
                 s += Integer.toString(j);
                 s += " : ";
-                s += Integer.toString(Content[i][j]);
+                s += Integer.toString(Terrain[i][j]);
                 s += "\n";
             }
         }

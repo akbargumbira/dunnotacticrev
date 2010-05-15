@@ -118,8 +118,8 @@ public class NewPanel extends javax.swing.JPanel {
         parent.paintMap();
 
         /* Close this windows*/
-        parent.getScroll().setVisible(true);
-        parent.getChangeterrainPanel().setVisible(true);
+//        parent.getScroll().setVisible(true);
+//        parent.getChangeterrainPanel().setVisible(true);
         this.setVisible(false);
 }//GEN-LAST:event_okButtonActionPerformed
 
