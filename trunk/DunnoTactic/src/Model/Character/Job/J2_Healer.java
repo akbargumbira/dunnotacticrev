@@ -25,7 +25,7 @@ public class J2_Healer extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_HEALER_ID;
+        JobID=Constanta.JOB2_HEALER_ID;
         JobClass=2;
         AttackType=Constanta.ATTACK_MATT_TYPE_ID;
         SpecialAvail[0]=ConstantaSp.SP_HEALER_HEALING_PRAY_ID;

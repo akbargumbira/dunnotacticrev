@@ -34,10 +34,10 @@ public class ConstantaSp {
     public static final int SP_DEFENDER_BARRIER_ID=102;
     public static final int SP_PALADIN_SWORD_REFLECT_ID=103;
     public static final int SP_PALADIN_SAINT_CROSS_ID=104;
-    public static final int SP_SCOUT_SONG_OF_FREEDOM_ID=105;
-    public static final int SP_SCOUT_DOWN_MENTAL_ID=106;
+    public static final int SP_BARD_SONG_OF_FREEDOM_ID=105;
+    public static final int SP_BARD_DOWN_MENTAL_ID=106;
     public static final int SP_TIME_MAGE_TIME_WARP_ID=107;
-    public static final int SP_TIME_MAGE_TIME_LAG_ID=108;
+    public static final int SP_TIME_MAGE_TIME_SWAP_ID=108;
     public static final int SP_SAGE_MANA_LEAK_ID=109;
     public static final int SP_SAGE_PSYCHOKINETIC_ID=110;
     public static final int SP_DARK_STALKER_OBLIVION_ID=111;

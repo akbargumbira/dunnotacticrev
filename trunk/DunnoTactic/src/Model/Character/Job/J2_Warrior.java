@@ -25,7 +25,7 @@ public class J2_Warrior extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_WARRIOR_ID;
+        JobID=Constanta.JOB2_WARRIOR_ID;
         JobClass=2;
         AttackType=Constanta.ATTACK_ATT_TYPE_ID;
         SpecialAvail[0]=ConstantaSp.SP_WARRIOR_CRITICAL_SLASH_ID;

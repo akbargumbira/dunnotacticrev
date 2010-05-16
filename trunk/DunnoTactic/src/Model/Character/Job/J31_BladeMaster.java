@@ -23,7 +23,7 @@ public class J31_BladeMaster extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB2_BLADE_MASTER_ID;
+        JobID=Constanta.JOB31_BLADE_MASTER_ID;
         JobClass=3;
         AttackType=Constanta.ATTACK_ATT_TYPE_ID;
         SpecialAvail[0]=ConstantaSp.SP_WARRIOR_CRITICAL_SLASH_ID;

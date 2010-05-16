@@ -200,86 +200,86 @@ public class Character {
         if(SpecialID<50){
             switch(SpecialID){
                 case ConstantaSp.SP_KNIGHT_BLOOD_CLOTING_ID : {
-                    SpecialList[Indeks] = new Sp_BloodCloting();
+                    SpecialList[Indeks] = new Sp2_BloodCloting();
                 }
                 break;
                 case ConstantaSp.SP_WARRIOR_CRITICAL_SLASH_ID : {
-                    SpecialList[Indeks] = new Sp_CriticalSlash();
+                    SpecialList[Indeks] = new Sp2_CriticalSlash();
                 }
                 break;
                 case ConstantaSp.SP_HEALER_HEALING_PRAY_ID : {
-                    SpecialList[Indeks] = new Sp_HealingPray();
+                    SpecialList[Indeks] = new Sp2_HealingPray();
                 }
                 break;
                 case ConstantaSp.SP_MAGE_HELL_FIRE_ID : {
-                    SpecialList[Indeks] = new Sp_HellFire();
+                    SpecialList[Indeks] = new Sp2_HellFire();
                 }
                 break;
                 case ConstantaSp.SP_ARCHER_STRIKE_SHOT_ID : {
-                    SpecialList[Indeks] = new Sp_StrikeShot();
+                    SpecialList[Indeks] = new Sp2_StrikeShot();
                 }
                 break;
                 case ConstantaSp.SP_NINJA_THROW_KUNAI_ID : {
-                    SpecialList[Indeks] = new Sp_ThrowKunai();
+                    SpecialList[Indeks] = new Sp2_ThrowKunai();
                 }
                 break;
                 default : {
-                    SpecialList[Indeks] = new Sp_StrikeShot();
+                    
                 }
                 break;
             }
         } else if(SpecialID<100){
             switch(SpecialID){
                 case ConstantaSp.SP_ARCH_KNIGHT_SWORD_FURY_ID : {
-                    SpecialList[Indeks] = new Sp2_SwordFury();
+                    SpecialList[Indeks] = new Sp31_SwordFury();
                 }
                 break;
                 case ConstantaSp.SP_ARCH_KNIGHT_SHOCKWAVE_ID : {
-                    SpecialList[Indeks] = new Sp2_Shockwave();
+                    SpecialList[Indeks] = new Sp31_Shockwave();
                 }
                 break;
                 case ConstantaSp.SP_BLADEMASTER_HURRICANE_SWORD_ID : {
-                    SpecialList[Indeks] = new Sp2_HurricaneSword();
+                    SpecialList[Indeks] = new Sp31_HurricaneSword();
                 }
                 break;
                 case ConstantaSp.SP_BLADEMASTER_SWORD_MELTING_ID : {
-                    SpecialList[Indeks] = new Sp2_SwordMelting();
+                    SpecialList[Indeks] = new Sp31_SwordMelting();
                 }
                 break;
                 case ConstantaSp.SP_RANGER_FOCUS_SIGHT_ID : {
-                    SpecialList[Indeks] = new Sp2_FocusSight();
+                    SpecialList[Indeks] = new Sp31_FocusSight();
                 }
                 break;
                 case ConstantaSp.SP_RANGER_DOUBLE_STRIKE_ID : {
-                    SpecialList[Indeks] = new Sp2_DoubleStrike();
+                    SpecialList[Indeks] = new Sp31_DoubleStrike();
                 }
                 break;
                 case ConstantaSp.SP_ARCH_MAGE_HALF_LIFE_ID : {
-                    SpecialList[Indeks] = new Sp2_HalfLife();
+                    SpecialList[Indeks] = new Sp31_HalfLife();
                 }
                 break;
                 case ConstantaSp.SP_ARCH_MAGE_IFRIT_RAGE_ID : {
-                    SpecialList[Indeks] = new Sp2_IfritRage();
+                    SpecialList[Indeks] = new Sp31_IfritRage();
                 }
                 break;
                 case ConstantaSp.SP_BISHOP_HEALING_CIRCLE_ID : {
-                    SpecialList[Indeks] = new Sp2_HealingCircle();
+                    SpecialList[Indeks] = new Sp31_HealingCircle();
                 }
                 break;
                 case ConstantaSp.SP_BISHOP_PHOENIX_TEAR_ID : {
-                    SpecialList[Indeks] = new Sp2_PhoenixTear();
+                    SpecialList[Indeks] = new Sp31_PhoenixTear();
                 }
                 break;
                 case ConstantaSp.SP_ASSASSIN_VENOM_SMOKE_ID : {
-                    SpecialList[Indeks] = new Sp2_VenomSmoke();
+                    SpecialList[Indeks] = new Sp31_VenomSmoke();
                 }
                 break;
                 case ConstantaSp.SP_ASSASSIN_SHADOW_BIND_ID : {
-                    SpecialList[Indeks] = new Sp2_ShadowBind();
+                    SpecialList[Indeks] = new Sp31_ShadowBind();
                 }
                 break;
                 default : {
-                    SpecialList[Indeks] = new Sp_StrikeShot();
+                    
                 }
                 break;
             }

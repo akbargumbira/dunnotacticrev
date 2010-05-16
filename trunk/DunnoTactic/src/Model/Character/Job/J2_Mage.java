@@ -25,7 +25,7 @@ public class J2_Mage extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_MAGE_ID;
+        JobID=Constanta.JOB2_MAGE_ID;
         JobClass=2;
         AttackType=Constanta.ATTACK_MATT_TYPE_ID;
         SpecialAvail[0]=ConstantaSp.SP_MAGE_HELL_FIRE_ID;

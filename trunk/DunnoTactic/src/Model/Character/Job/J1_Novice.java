@@ -24,7 +24,7 @@ public class J1_Novice extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_NOVICE_ID;
+        JobID=Constanta.JOB1_NOVICE_ID;
         JobClass=1;
         AttackType=Constanta.ATTACK_MATT_TYPE_ID;
         SpecialAvail[0]=0;

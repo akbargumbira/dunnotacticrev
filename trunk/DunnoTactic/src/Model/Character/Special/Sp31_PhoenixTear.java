@@ -7,24 +7,26 @@ package Model.Character.Special;
 import Model.Character.CharAtribut;
 import Model.Character.Constanta;
 import java.util.Vector;
-
 /**
  *
  * @author ifan
  */
-public class Sp_BloodCloting extends Special {
-    public Sp_BloodCloting(){
-        SpecialName="Blood Cloting";
-        SpecialID=ConstantaSp.SP_KNIGHT_BLOOD_CLOTING_ID;
+public class Sp31_PhoenixTear extends Special {
+    public Sp31_PhoenixTear(){
+        SpecialName="Tear Phoenix";
+        SpecialID=ConstantaSp.SP_BISHOP_PHOENIX_TEAR_ID;
         SPCost = 30;
         BaseAcc=100;
-        RangeSpecial = 0;
+        RangeSpecial = 11;
     }
-    
+
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){
         int SP = KarakterAtribut.GetCurrent(Constanta.SP_ID)-SPCost;
         KarakterAtribut.SetCurrentAtribut(Constanta.SP_ID, SP);
-
-        KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_BLOOD_CLOTING_ID);
+        CharAtribut temp = new CharAtribut();
+        for(int i=0;i<TargetAtribut.size();++i){
+            temp = TargetAtribut.get(i);
+            temp.ClearAllBuff();
+        }
     }
 }
