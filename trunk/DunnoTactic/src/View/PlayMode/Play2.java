@@ -411,7 +411,14 @@ public class Play2 extends javax.swing.JFrame {
 
         /* set layerpane's layout to null */
         layerpane.setLayout(null);
-        
+
+        /* set bounds  scrollpane */
+        width = layerpane.getWidth();
+        height = layerpane.getHeight();
+        scrollPane.setBounds(0, 0, width, height);
+
+        /* set bounds */
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actioncharacterPanel;
