@@ -27,6 +27,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.Point;
+import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -34,6 +35,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicBorders.FieldBorder;
 
@@ -82,7 +84,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         warnaPanel = new javax.swing.JPanel();
         karakterPanel = new javax.swing.JPanel();
         menuPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         info_and_menuPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -201,13 +203,18 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
 
         scrollPane.setViewportView(mapLayerPane);
 
-        scrollPane.setBounds(0, 10, 730, 670);
+        scrollPane.setBounds(0, 10, 730, 480);
         layerpane.add(scrollPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuPanel.setOpaque(false);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18));
-        jButton1.setText("Save Game");
+        saveButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        saveButton.setText("Save Game");
+        saveButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                saveButtonKeyPressed(evt);
+            }
+        });
 
         closeButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         closeButton.setText("Close");
@@ -222,7 +229,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addComponent(saveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
         );
@@ -230,7 +237,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(saveButton)
                     .addComponent(closeButton))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -494,7 +501,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
                 .addComponent(upgradestatusButton))
         );
 
-        upgradecharacterPanel.setBounds(670, 600, 153, 68);
+        upgradecharacterPanel.setBounds(290, 540, 153, 68);
         layerpane.add(upgradecharacterPanel, new Integer(1));
 
         buildingactionPanel.setOpaque(false);
@@ -525,7 +532,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
                 .addComponent(upgradeBuldingButton))
         );
 
-        buildingactionPanel.setBounds(460, 600, 187, 68);
+        buildingactionPanel.setBounds(470, 600, 187, 68);
         layerpane.add(buildingactionPanel, new Integer(1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -551,7 +558,18 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
     }//GEN-LAST:event_waitButtonActionPerformed
 
     private void upgradejobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upgradejobButtonActionPerformed
-        // TODO add your handling code here:
+        JLabel l=selectedchar;
+        Point p = l.getLocation();
+        Point pGrid = Converter.PointToGrid(p);
+        int x = pGrid.x;
+        int y = pGrid.y;
+        String s;
+
+        Model.Character.Character c = game.getCharacters().get(x, y);
+        c.JobChange(2);
+        s = Integer.toString(c.GetAtribut().GetRaceID());
+        s += Integer.toString(2);
+        l.setIcon(ImageSupport.createImageIcon(s+".png", null));
     }//GEN-LAST:event_upgradejobButtonActionPerformed
 
     private void playerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerComboBoxActionPerformed
@@ -587,7 +605,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
 
     private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
         Model.Character.Character c;
-
+        
         Point p = Converter.PointToGrid(selectedchar.getX(), selectedchar.getY());
         c = game.getCharacters().get(p.x, p.y);
         game.getCharactermap()[p.x][p.y] = 0;
@@ -595,7 +613,21 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         c.Move(p.x, p.y);
         game.getCharactermap()[p.x][p.y] = c.GetAtribut().GetCharID();
         p = Converter.GridToPoint(p);
-        selectedchar.setLocation(p.x, p.y);
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                Point p = selectedchar.getLocation();
+                for (int i=1;i<=50;++i) {
+                    selectedchar.setLocation(p.x, p.y+i);
+                    try{
+                        Thread.sleep(20);
+                    } catch (InterruptedException e){
+                        
+                    }
+                }
+            }
+        });
+        t.start();
+        
     }//GEN-LAST:event_moveButtonActionPerformed
 
     private void summonCharacterButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summonCharacterButtonMousePressed
@@ -688,6 +720,10 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         InitMap();
     }//GEN-LAST:event_bcButtonMousePressed
 
+    private void saveButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_saveButtonKeyPressed
+        
+    }//GEN-LAST:event_saveButtonKeyPressed
+
     private void isCanBuild(){
         
     }
@@ -712,7 +748,8 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
                     Model.Character.Character c = game.getCharacters().get(p.x, p.y);
                     if (c.getPlayer() == game.getPlayerturn()) {
                         actioncharacterPanel.setVisible(true);
-                        upgradecharacterPanel.setVisible(true);
+                        if (game.getMap().GetBuildings().IsBlackSmithIn(game.getPlayerturn()))
+                            upgradecharacterPanel.setVisible(true);
                         selectedchar = (JLabel)e.getSource();
                     }
                 }
@@ -913,7 +950,6 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JButton endTurnButton;
     private javax.swing.JTextArea infoTextArea;
     private javax.swing.JPanel info_and_menuPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -929,6 +965,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton moveButton;
     private javax.swing.JComboBox playerComboBox;
+    private javax.swing.JButton saveButton;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JButton specialButton;
     private javax.swing.JButton summonCharacterButton;
