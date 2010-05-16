@@ -103,17 +103,17 @@ public class Map implements Serializable{
 
         switch (building) {
             case CASTLE : {
-                b = new Castle(player,x,y);
+                b = new Castle(player,x,y,1);
                 break;
             }
 
             case BARRACK : {
-                b = new Barrack(player,x,y);
+                b = new Barrack(player,x,y,1,1);
                 break;
             }
 
             case BLACKSMITH : {
-                b = new Blacksmith(player,x,y);
+                b = new Blacksmith(player,x,y,1,1);
                 break;
             }
         }
