@@ -44,15 +44,20 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         newgameButton.setText("New Game");
         newgameButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 newgameButtonMousePressed(evt);
             }
         });
+        newgameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newgameButtonActionPerformed(evt);
+            }
+        });
 
-        exitButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        exitButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         exitButton.setText("Exit");
         exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -60,7 +65,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        buildmapButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buildmapButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         buildmapButton.setText("Build Map");
         buildmapButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -133,6 +138,10 @@ public class MainMenu extends javax.swing.JFrame {
         GraphicsDevice[] devices = env.getScreenDevices();
         buildmap = new BuildMap(this,devices[0]);
     }//GEN-LAST:event_buildmapButtonMouseClicked
+
+    private void newgameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newgameButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newgameButtonActionPerformed
 
     /**
     * @param args the command line arguments

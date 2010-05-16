@@ -11,10 +11,20 @@
 
 package View.PlayMode;
 
+import Model.Building.Barrack;
+import Model.Building.Blacksmith;
+import Model.Building.Building;
+import Model.Building.Castle;
+import Model.Map.Map;
+import Support.ImageSupport;
 import View.MainMenu;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GraphicsDevice;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,12 +33,14 @@ import java.awt.GraphicsDevice;
 public class Play2 extends javax.swing.JFrame {
 
     /** Creates new form Play */
-    public Play2(MainMenu parent, GraphicsDevice device) {
+    public Play2(MainMenu parent, GraphicsDevice device, Map map) {
         super(device.getDefaultConfiguration());
         this.device = device;
         this.parent = parent; /* Pointed parent Window */
+        this.map = map; /* init map */
         initComponents();
         ShowWindow();
+        InitMap();
     }
 
 
@@ -41,12 +53,17 @@ public class Play2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        playerComboBox = new javax.swing.JComboBox();
         layerpane = new javax.swing.JLayeredPane();
         scrollPane = new javax.swing.JScrollPane();
         mapLayerPane = new javax.swing.JLayeredPane();
+        terrainPanel = new javax.swing.JPanel();
+        buildingPanel = new javax.swing.JPanel();
+        warnaPanel = new javax.swing.JPanel();
+        karakterPanel = new javax.swing.JPanel();
         menuPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
         info_and_menuPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -57,10 +74,11 @@ public class Play2 extends javax.swing.JFrame {
         endTurnButton = new javax.swing.JButton();
         surrenderButton = new javax.swing.JButton();
         listPlayerPanel = new javax.swing.JPanel();
-        playerComboBox = new javax.swing.JComboBox();
+        listButton = new javax.swing.JButton();
+        listinnerPannel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listcharacterTextArea = new javax.swing.JTextArea();
-        listButton = new javax.swing.JButton();
+        listPlayerLabel = new javax.swing.JLabel();
         actioncharacterPanel = new javax.swing.JPanel();
         attackButton = new javax.swing.JButton();
         moveButton = new javax.swing.JButton();
@@ -74,24 +92,105 @@ public class Play2 extends javax.swing.JFrame {
         summonCharacterButton = new javax.swing.JButton();
         upgradeBuldingButton = new javax.swing.JButton();
 
+        playerComboBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        playerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        playerComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playerComboBoxActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dunno");
         setResizable(false);
+        setUndecorated(true);
 
         layerpane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        mapLayerPane.setBackground(new java.awt.Color(0, 0, 0));
+        mapLayerPane.setOpaque(true);
+
+        terrainPanel.setOpaque(false);
+
+        javax.swing.GroupLayout terrainPanelLayout = new javax.swing.GroupLayout(terrainPanel);
+        terrainPanel.setLayout(terrainPanelLayout);
+        terrainPanelLayout.setHorizontalGroup(
+            terrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        terrainPanelLayout.setVerticalGroup(
+            terrainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        terrainPanel.setBounds(30, 80, 100, 100);
+        mapLayerPane.add(terrainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        buildingPanel.setOpaque(false);
+
+        javax.swing.GroupLayout buildingPanelLayout = new javax.swing.GroupLayout(buildingPanel);
+        buildingPanel.setLayout(buildingPanelLayout);
+        buildingPanelLayout.setHorizontalGroup(
+            buildingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        buildingPanelLayout.setVerticalGroup(
+            buildingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        buildingPanel.setBounds(280, 80, 100, 100);
+        mapLayerPane.add(buildingPanel, new Integer(2));
+
+        warnaPanel.setOpaque(false);
+
+        javax.swing.GroupLayout warnaPanelLayout = new javax.swing.GroupLayout(warnaPanel);
+        warnaPanel.setLayout(warnaPanelLayout);
+        warnaPanelLayout.setHorizontalGroup(
+            warnaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        warnaPanelLayout.setVerticalGroup(
+            warnaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        warnaPanel.setBounds(150, 80, 100, 100);
+        mapLayerPane.add(warnaPanel, new Integer(1));
+
+        karakterPanel.setOpaque(false);
+
+        javax.swing.GroupLayout karakterPanelLayout = new javax.swing.GroupLayout(karakterPanel);
+        karakterPanel.setLayout(karakterPanelLayout);
+        karakterPanelLayout.setHorizontalGroup(
+            karakterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        karakterPanelLayout.setVerticalGroup(
+            karakterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        karakterPanel.setBounds(420, 80, 100, 100);
+        mapLayerPane.add(karakterPanel, new Integer(3));
+
         scrollPane.setViewportView(mapLayerPane);
 
-        scrollPane.setBounds(0, 10, 940, 670);
+        scrollPane.setBounds(0, 10, 730, 670);
         layerpane.add(scrollPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        menuPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        menuPanel.setOpaque(false);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18));
         jButton1.setText("Save Game");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Exit");
+        closeButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        closeButton.setText("Close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -100,23 +199,23 @@ public class Play2 extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                .addComponent(closeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(closeButton))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         menuPanel.setBounds(0, 0, 256, 46);
         layerpane.add(menuPanel, new Integer(1));
 
-        info_and_menuPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         info_and_menuPanel.setAlignmentX(0.0F);
         info_and_menuPanel.setAlignmentY(0.0F);
+        info_and_menuPanel.setOpaque(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Info"));
 
@@ -137,10 +236,10 @@ public class Play2 extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Build"));
 
-        barrackButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        barrackButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         barrackButton.setText("B");
 
-        bcButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bcButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         bcButton.setText("BC");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -159,10 +258,10 @@ public class Play2 extends javax.swing.JFrame {
                 .addComponent(bcButton))
         );
 
-        endTurnButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        endTurnButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         endTurnButton.setText("End Turn");
 
-        surrenderButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        surrenderButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         surrenderButton.setText("Surrender");
 
         javax.swing.GroupLayout info_and_menuPanelLayout = new javax.swing.GroupLayout(info_and_menuPanel);
@@ -187,74 +286,101 @@ public class Play2 extends javax.swing.JFrame {
                 .addComponent(endTurnButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(surrenderButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        info_and_menuPanel.setBounds(10, 360, 182, 306);
+        info_and_menuPanel.setBounds(10, 360, 178, 306);
         layerpane.add(info_and_menuPanel, new Integer(1));
 
-        listPlayerPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        listPlayerPanel.setOpaque(false);
 
-        playerComboBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        playerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        playerComboBox.addActionListener(new java.awt.event.ActionListener() {
+        listButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        listButton.setText("L");
+        listButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playerComboBoxActionPerformed(evt);
+                listButtonActionPerformed(evt);
             }
         });
+
+        listinnerPannel.setOpaque(false);
 
         listcharacterTextArea.setColumns(20);
         listcharacterTextArea.setRows(5);
         jScrollPane1.setViewportView(listcharacterTextArea);
 
-        listButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        listButton.setText("L");
+        listPlayerLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        listPlayerLabel.setForeground(new java.awt.Color(255, 255, 255));
+        listPlayerLabel.setText("List Player :");
+
+        javax.swing.GroupLayout listinnerPannelLayout = new javax.swing.GroupLayout(listinnerPannel);
+        listinnerPannel.setLayout(listinnerPannelLayout);
+        listinnerPannelLayout.setHorizontalGroup(
+            listinnerPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listinnerPannelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(listinnerPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(listPlayerLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        listinnerPannelLayout.setVerticalGroup(
+            listinnerPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listinnerPannelLayout.createSequentialGroup()
+                .addComponent(listPlayerLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout listPlayerPanelLayout = new javax.swing.GroupLayout(listPlayerPanel);
         listPlayerPanel.setLayout(listPlayerPanelLayout);
         listPlayerPanelLayout.setHorizontalGroup(
             listPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listPlayerPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(listPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(listButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(playerComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, 177, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addContainerGap(165, Short.MAX_VALUE)
+                .addComponent(listButton))
+            .addComponent(listinnerPannel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         listPlayerPanelLayout.setVerticalGroup(
             listPlayerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listPlayerPanelLayout.createSequentialGroup()
                 .addComponent(listButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(listinnerPannel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        listPlayerPanel.setBounds(760, 0, 191, 325);
+        listPlayerPanel.setBounds(740, 20, 200, 309);
         layerpane.add(listPlayerPanel, new Integer(1));
 
-        actioncharacterPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        actioncharacterPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        actioncharacterPanel.setOpaque(false);
+        actioncharacterPanel.setPreferredSize(new java.awt.Dimension(125, 185));
 
-        attackButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        attackButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         attackButton.setText("Attack");
+        attackButton.setAlignmentY(0.0F);
 
-        moveButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        moveButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         moveButton.setText("Move");
+        moveButton.setAlignmentY(0.0F);
 
-        specialButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        specialButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         specialButton.setText("Special");
+        specialButton.setAlignmentY(0.0F);
 
-        waitButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        waitButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         waitButton.setText("Wait");
+        waitButton.setAlignmentY(0.0F);
         waitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 waitButtonActionPerformed(evt);
             }
         });
 
-        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         cancelButton.setText("Cancel");
+        cancelButton.setAlignmentY(0.0F);
 
         javax.swing.GroupLayout actioncharacterPanelLayout = new javax.swing.GroupLayout(actioncharacterPanel);
         actioncharacterPanel.setLayout(actioncharacterPanelLayout);
@@ -289,12 +415,12 @@ public class Play2 extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        actioncharacterPanel.setBounds(830, 490, 121, 181);
+        actioncharacterPanel.setBounds(780, 400, 125, 185);
         layerpane.add(actioncharacterPanel, new Integer(1));
 
-        upgradecharacterPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        upgradecharacterPanel.setOpaque(false);
 
-        upgradejobButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        upgradejobButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         upgradejobButton.setText("Upgrade Job");
         upgradejobButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,7 +428,7 @@ public class Play2 extends javax.swing.JFrame {
             }
         });
 
-        upgradestatusButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        upgradestatusButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         upgradestatusButton.setText("Upgrade Status");
 
         javax.swing.GroupLayout upgradecharacterPanelLayout = new javax.swing.GroupLayout(upgradecharacterPanel);
@@ -321,23 +447,23 @@ public class Play2 extends javax.swing.JFrame {
                 .addComponent(upgradestatusButton))
         );
 
-        upgradecharacterPanel.setBounds(670, 600, 157, 72);
+        upgradecharacterPanel.setBounds(670, 600, 153, 68);
         layerpane.add(upgradecharacterPanel, new Integer(1));
 
-        buildingactionPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buildingactionPanel.setOpaque(false);
 
-        summonCharacterButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        summonCharacterButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         summonCharacterButton.setText("Summon Character");
 
-        upgradeBuldingButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        upgradeBuldingButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         upgradeBuldingButton.setText("Upgrade Building");
 
         javax.swing.GroupLayout buildingactionPanelLayout = new javax.swing.GroupLayout(buildingactionPanel);
         buildingactionPanel.setLayout(buildingactionPanelLayout);
         buildingactionPanelLayout.setHorizontalGroup(
             buildingactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(upgradeBuldingButton, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-            .addComponent(summonCharacterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(upgradeBuldingButton, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+            .addComponent(summonCharacterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
         );
         buildingactionPanelLayout.setVerticalGroup(
             buildingactionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,7 +473,7 @@ public class Play2 extends javax.swing.JFrame {
                 .addComponent(upgradeBuldingButton))
         );
 
-        buildingactionPanel.setBounds(480, 600, 187, 72);
+        buildingactionPanel.setBounds(480, 600, 187, 68);
         layerpane.add(buildingactionPanel, new Integer(1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -356,7 +482,7 @@ public class Play2 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(layerpane, javax.swing.GroupLayout.PREFERRED_SIZE, 953, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,6 +506,68 @@ public class Play2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_playerComboBoxActionPerformed
 
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        parent.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void listButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listButtonActionPerformed
+       list = !list;
+       listinnerPannel.setVisible(list);
+    }//GEN-LAST:event_listButtonActionPerformed
+
+    public void createContent(int x, int y, int width, int height, String iconName, JPanel p) {
+        Component c =  p.getComponentAt(x, y);
+        if (c!=null) {
+            p.remove(c);
+        }
+        JLabel label;
+        label = new JLabel(ImageSupport.createImageIcon(iconName+".png", null));
+        label.setBounds(x, y, width, height);
+        p.add(label);
+    }
+
+    private void InitMap() {
+        /* Add new component(terrain & building ) in content Panel */
+        int x,y,width,height;
+        String image;
+        Building b;
+        for (int i=0;i<map.GetWidth();++i) {
+            for (int j=0;j<map.GetHeight();++j) {
+                x = i*ImageSupport.IMAGE_WIDTH;
+                y = j*ImageSupport.IMAGE_HEIGHT;
+                width = ImageSupport.IMAGE_WIDTH;
+                height = ImageSupport.IMAGE_HEIGHT;
+                image = Map.GetString(map.GetTerrain(i, j));
+                createContent(x, y, width, height, image, terrainPanel);
+                b = map.GetBuilding(i, j);
+                if (b!=null) {
+                    String s=null;
+                    if (b instanceof Castle) {
+                        s = Building.CASTLE_S;
+                    } else if (b instanceof Barrack) {
+                        s = Building.BARRACK_S;
+                    } else if (b instanceof Blacksmith) {
+                        s = Building.BLACKSMITH_S;
+                    }
+                    s+=Integer.toString(b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX));
+                    createContent(x, y, width, height, s, buildingPanel);
+                }
+            }
+        }
+        terrainPanel.repaint();
+        buildingPanel.repaint();
+
+        /* Set new Size for contentPanel */
+        Dimension d = new Dimension(ImageSupport.IMAGE_WIDTH*map.GetWidth(), ImageSupport.IMAGE_HEIGHT*map.GetHeight());
+        terrainPanel.setBounds(0, 0, d.width, d.height);
+        buildingPanel.setBounds(0, 0, d.width, d.height);
+        if (d.width<2000) {
+            d = new Dimension(2000, 2000);
+        }
+        mapLayerPane.setPreferredSize(d);
+    }
+
     private void ShowWindow()
     {
         Container pane = getContentPane();
@@ -388,7 +576,7 @@ public class Play2 extends javax.swing.JFrame {
         
         boolean isFullScreen;
         isFullScreen = device.isFullScreenSupported();
-        setUndecorated(isFullScreen);
+        //setUndecorated(isFullScreen);
         setResizable(!isFullScreen);
 
         if (isFullScreen) {
@@ -407,7 +595,7 @@ public class Play2 extends javax.swing.JFrame {
         pane.removeAll();
         pane.setLayout(null);
         pane.add(layerpane);
-        layerpane.setBounds(border, border, getWidth()-2*border, getHeight()-2*border);
+        layerpane.setBounds(border, border, getWidth()-(2*border), getHeight()-(2*border));
 
         /* set layerpane's layout to null */
         layerpane.setLayout(null);
@@ -418,20 +606,20 @@ public class Play2 extends javax.swing.JFrame {
         scrollPane.setBounds(0, 0, width, height);
 
         /* set bounds menuPanel */
-        width = menuPanel.getWidth();
-        height = menuPanel.getHeight();
+        width = menuPanel.getPreferredSize().width;
+        height = menuPanel.getPreferredSize().height;
         menuPanel.setBounds(0, 0, width, height);
 
         /* set bounds listPlayePanel */
-        width = listPlayerPanel.getWidth();
-        height = listPlayerPanel.getHeight();
+        width = listPlayerPanel.getPreferredSize().width;
+        height = listPlayerPanel.getPreferredSize().height;
         x = layerpane.getWidth()-width;
         y = 0;
         listPlayerPanel.setBounds(x, y, width, height);
 
         /* set bounds info_and_mainPanel */
-        width = info_and_menuPanel.getWidth();
-        height = info_and_menuPanel.getHeight();
+        width = info_and_menuPanel.getPreferredSize().width;
+        height = info_and_menuPanel.getPreferredSize().height;
         x = 0;
         y = layerpane.getHeight()-height;
         info_and_menuPanel.setBounds(x, y, width, height);
@@ -444,35 +632,47 @@ public class Play2 extends javax.swing.JFrame {
         actioncharacterPanel.setBounds(x, y, width, height);
 
         /* set bounds updgradecharacterpanel */
-        width = upgradecharacterPanel.getWidth();
-        height = upgradecharacterPanel.getHeight();
+        width = upgradecharacterPanel.getPreferredSize().width;
+        height = upgradecharacterPanel.getPreferredSize().height;
         x = actioncharacterPanel.getX() - width;
-        y = actioncharacterPanel.getY() - height;
+        y = layerpane.getHeight() - height;
+        upgradecharacterPanel.setBounds(x, y, width, height);
 
         /* set bounds */
-        //width
+        width = buildingactionPanel.getPreferredSize().width;
+        height = buildingactionPanel.getPreferredSize().height;
+        x = upgradecharacterPanel.getX() - width;
+        y = layerpane.getHeight() - height;
+        buildingactionPanel.setBounds(x, y, width, height);
 
+        /* scroll */
+        scrollPane.setBackground(Color.black);
+        scrollPane.setOpaque(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actioncharacterPanel;
     private javax.swing.JButton attackButton;
     private javax.swing.JButton barrackButton;
     private javax.swing.JButton bcButton;
+    private javax.swing.JPanel buildingPanel;
     private javax.swing.JPanel buildingactionPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton closeButton;
     private javax.swing.JButton endTurnButton;
     private javax.swing.JTextArea infoTextArea;
     private javax.swing.JPanel info_and_menuPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel karakterPanel;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JButton listButton;
+    private javax.swing.JLabel listPlayerLabel;
     private javax.swing.JPanel listPlayerPanel;
     private javax.swing.JTextArea listcharacterTextArea;
+    private javax.swing.JPanel listinnerPannel;
     private javax.swing.JLayeredPane mapLayerPane;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton moveButton;
@@ -481,13 +681,17 @@ public class Play2 extends javax.swing.JFrame {
     private javax.swing.JButton specialButton;
     private javax.swing.JButton summonCharacterButton;
     private javax.swing.JButton surrenderButton;
+    private javax.swing.JPanel terrainPanel;
     private javax.swing.JButton upgradeBuldingButton;
     private javax.swing.JPanel upgradecharacterPanel;
     private javax.swing.JButton upgradejobButton;
     private javax.swing.JButton upgradestatusButton;
     private javax.swing.JButton waitButton;
+    private javax.swing.JPanel warnaPanel;
     // End of variables declaration//GEN-END:variables
     private GraphicsDevice device;
     private MainMenu parent;
     public static final int BORDER_MAIN_LAYER_PANE = 5;
+    private boolean list = true;
+    private Map map;
 }
