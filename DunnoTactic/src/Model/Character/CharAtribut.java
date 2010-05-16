@@ -262,6 +262,10 @@ public class CharAtribut {
         }
     }
 
+    public double[] GetFactorBuildingByRace(){
+        return RaceChar.GetFactorBuilding();
+    }
+
     public void Upgrade(){
         RaceChar.UpgrageRace();
         SetFirstDefaultAtribut();
