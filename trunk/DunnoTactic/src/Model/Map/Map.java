@@ -94,7 +94,7 @@ public class Map implements Serializable{
         }
     }
 
-    public void SetBuilding(int building, int player, int x, int y) {
+    public void SetBuilding(int building, int player, int x, int y, double goldFactor, double buildFactor) {
         Building b = building_container.get(x, y);
 
         if (b!=null) {
@@ -103,17 +103,17 @@ public class Map implements Serializable{
 
         switch (building) {
             case CASTLE : {
-                b = new Castle(player,x,y,1);
+                b = new Castle(player,x,y,goldFactor);
                 break;
             }
 
             case BARRACK : {
-                b = new Barrack(player,x,y,1,1);
+                b = new Barrack(player,x,y,goldFactor,buildFactor);
                 break;
             }
 
             case BLACKSMITH : {
-                b = new Blacksmith(player,x,y,1,1);
+                b = new Blacksmith(player,x,y,goldFactor,buildFactor);
                 break;
             }
         }
@@ -220,7 +220,7 @@ public class Map implements Serializable{
         {
             randnum = Math.abs(rand.nextInt())%listpoint.size();
             p = listpoint.get(randnum);
-            SetBuilding(CASTLE, i+1, p.x, p.y);
+            SetBuilding(CASTLE, i+1, p.x, p.y, 1, 0);
             listpoint.remove(randnum);
         }
 

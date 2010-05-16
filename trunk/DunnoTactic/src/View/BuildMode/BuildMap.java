@@ -616,7 +616,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                 createContent(l.getX(), l.getY(), ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT, s, buildingPanel);
                 buildingPanel.repaint();
                 Point gridpoint = Converter.PointToGrid(l.getX(), l.getY());
-                mapLogic.SetBuilding(mapLogic.CASTLE, player, gridpoint.x, gridpoint.y);
+                mapLogic.SetBuilding(mapLogic.CASTLE, player, gridpoint.x, gridpoint.y, 1, 0);
             }
 
             for (int i=0; i<selected.size(); ++i) {
