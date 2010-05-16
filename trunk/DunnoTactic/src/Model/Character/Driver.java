@@ -13,11 +13,11 @@ import java.util.Vector;
 public class Driver {
     private static Character Karakter;
     private static Character Karakter2;
-    private static Vector<Character> Target;
+    private static CharacterContainer Target;
     public static void main(String[] args){
-        Karakter = new Character(1,Constanta.RACE_HUMAN_ID);
-        Karakter2 = new Character(2,Constanta.RACE_FAIRY_ID);
-        Target = new Vector();
+        Karakter = new Character(Constanta.RACE_HUMAN_ID, 1);
+        Karakter2 = new Character(Constanta.RACE_FAIRY_ID, 1);
+        Target = new CharacterContainer();
         Target.add(Karakter);
         Target.add(Karakter2);
         System.out.println("Default:");

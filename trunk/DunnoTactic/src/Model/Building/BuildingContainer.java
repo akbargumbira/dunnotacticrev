@@ -45,6 +45,17 @@ public class BuildingContainer extends Vector<Building> {
         return null;
     }
 
+    public synchronized Building getCastle(int player) {
+        Building b=null;
+        for (int i=0;i<super.size();++i) {
+            b = super.get(i);
+            if (b.getBuilding_BaseAtribut(Building.BUILDING_PLAYER_IDX)==player) {
+                return b;
+            }
+        }
+        return b;
+    }
+
     public boolean IsCastleIn(int player) {
         Building b;
         for (int i=0;i<super.size();++i) {

@@ -44,6 +44,13 @@ public class CharacterContainer extends Vector<Character> {
         return null;
     }
 
-
-
+    @Override
+    public synchronized String toString() {
+        String s = new String();
+        for (int i=0;i<super.size();++i) {
+            s += super.get(i).toString();
+            s += "\n";
+        }
+        return s;
+    }
 }

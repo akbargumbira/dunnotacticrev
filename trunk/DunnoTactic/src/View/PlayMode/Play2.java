@@ -15,6 +15,7 @@ import Model.Building.Barrack;
 import Model.Building.Blacksmith;
 import Model.Building.Building;
 import Model.Building.Castle;
+import Model.Game.Game1;
 import Model.Map.Map;
 import Support.ImageSupport;
 import View.MainMenu;
@@ -23,21 +24,26 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicBorders.FieldBorder;
 
 /**
  *
  * @author user
  */
-public class Play2 extends javax.swing.JFrame {
+public class Play2 extends javax.swing.JFrame implements MouseListener{
 
     /** Creates new form Play */
-    public Play2(MainMenu parent, GraphicsDevice device, Map map) {
+    public Play2(MainMenu parent, GraphicsDevice device, Map map, Vector<Integer> vrace) {
         super(device.getDefaultConfiguration());
         this.device = device;
         this.parent = parent; /* Pointed parent Window */
         this.map = map; /* init map */
+        this.game = new Game1(map, vrace);
         initComponents();
         ShowWindow();
         InitMap();
@@ -92,7 +98,7 @@ public class Play2 extends javax.swing.JFrame {
         summonCharacterButton = new javax.swing.JButton();
         upgradeBuldingButton = new javax.swing.JButton();
 
-        playerComboBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        playerComboBox.setFont(new java.awt.Font("Tahoma", 0, 18));
         playerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         playerComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +115,11 @@ public class Play2 extends javax.swing.JFrame {
 
         mapLayerPane.setBackground(new java.awt.Color(0, 0, 0));
         mapLayerPane.setOpaque(true);
+        mapLayerPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mapLayerPaneMousePressed(evt);
+            }
+        });
 
         terrainPanel.setOpaque(false);
 
@@ -123,7 +134,7 @@ public class Play2 extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        terrainPanel.setBounds(30, 80, 100, 100);
+        terrainPanel.setBounds(30, 80, -1, -1);
         mapLayerPane.add(terrainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         buildingPanel.setOpaque(false);
@@ -139,7 +150,7 @@ public class Play2 extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        buildingPanel.setBounds(280, 80, 100, 100);
+        buildingPanel.setBounds(280, 80, -1, -1);
         mapLayerPane.add(buildingPanel, new Integer(2));
 
         warnaPanel.setOpaque(false);
@@ -155,7 +166,7 @@ public class Play2 extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        warnaPanel.setBounds(150, 80, 100, 100);
+        warnaPanel.setBounds(150, 80, -1, -1);
         mapLayerPane.add(warnaPanel, new Integer(1));
 
         karakterPanel.setOpaque(false);
@@ -171,7 +182,7 @@ public class Play2 extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        karakterPanel.setBounds(420, 80, 100, 100);
+        karakterPanel.setBounds(420, 80, -1, -1);
         mapLayerPane.add(karakterPanel, new Integer(3));
 
         scrollPane.setViewportView(mapLayerPane);
@@ -308,7 +319,7 @@ public class Play2 extends javax.swing.JFrame {
         listcharacterTextArea.setRows(5);
         jScrollPane1.setViewportView(listcharacterTextArea);
 
-        listPlayerLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        listPlayerLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
         listPlayerLabel.setForeground(new java.awt.Color(255, 255, 255));
         listPlayerLabel.setText("List Player :");
 
@@ -415,7 +426,7 @@ public class Play2 extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        actioncharacterPanel.setBounds(780, 400, 125, 185);
+        actioncharacterPanel.setBounds(770, 400, 125, 185);
         layerpane.add(actioncharacterPanel, new Integer(1));
 
         upgradecharacterPanel.setOpaque(false);
@@ -516,6 +527,22 @@ public class Play2 extends javax.swing.JFrame {
        listinnerPannel.setVisible(list);
     }//GEN-LAST:event_listButtonActionPerformed
 
+    private void mapLayerPaneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapLayerPaneMousePressed
+        Component c = terrainPanel.getComponentAt(evt.getX(), evt.getY());
+        JLabel l;
+        if (c instanceof JLabel) {
+            l = (JLabel) c;
+            if (selected.size()>0) {
+                selected.get(0).setBorder(null);
+            }
+            l.setBorder(new FieldBorder(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK));
+            selected.removeAllElements();
+            selected.add(l);
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_mapLayerPaneMousePressed
+
     public void createContent(int x, int y, int width, int height, String iconName, JPanel p) {
         Component c =  p.getComponentAt(x, y);
         if (c!=null) {
@@ -531,18 +558,23 @@ public class Play2 extends javax.swing.JFrame {
         /* Add new component(terrain & building ) in content Panel */
         int x,y,width,height;
         String image;
+        String s =  new String();
         Building b;
+        Model.Character.Character c;
         for (int i=0;i<map.GetWidth();++i) {
             for (int j=0;j<map.GetHeight();++j) {
                 x = i*ImageSupport.IMAGE_WIDTH;
                 y = j*ImageSupport.IMAGE_HEIGHT;
                 width = ImageSupport.IMAGE_WIDTH;
                 height = ImageSupport.IMAGE_HEIGHT;
+
+                /* paint terrain */
                 image = Map.GetString(map.GetTerrain(i, j));
                 createContent(x, y, width, height, image, terrainPanel);
+
+                /* paint building */
                 b = map.GetBuilding(i, j);
                 if (b!=null) {
-                    String s=null;
                     if (b instanceof Castle) {
                         s = Building.CASTLE_S;
                     } else if (b instanceof Barrack) {
@@ -553,15 +585,25 @@ public class Play2 extends javax.swing.JFrame {
                     s+=Integer.toString(b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX));
                     createContent(x, y, width, height, s, buildingPanel);
                 }
+
+                /* paint character */
+                c = game.getCharacters().get(i, j);
+                if (c!=null) {
+                    s = Integer.toString(c.GetAtribut().GetRaceID());
+                    s += Integer.toString(c.GetAtribut().GetJobID());
+                    createContent(x, y, width, height, s, karakterPanel);
+                }
             }
         }
         terrainPanel.repaint();
         buildingPanel.repaint();
+        karakterPanel.repaint();
 
         /* Set new Size for contentPanel */
         Dimension d = new Dimension(ImageSupport.IMAGE_WIDTH*map.GetWidth(), ImageSupport.IMAGE_HEIGHT*map.GetHeight());
         terrainPanel.setBounds(0, 0, d.width, d.height);
         buildingPanel.setBounds(0, 0, d.width, d.height);
+        karakterPanel.setBounds(0, 0, d.width, d.height);
         if (d.width<2000) {
             d = new Dimension(2000, 2000);
         }
@@ -649,6 +691,16 @@ public class Play2 extends javax.swing.JFrame {
         scrollPane.setBackground(Color.black);
         scrollPane.setOpaque(false);
     }
+
+    public void mouseClicked(MouseEvent e) {}
+
+    public void mouseEntered(MouseEvent e) {}
+
+    public void mouseExited(MouseEvent e) {}
+
+    public void mousePressed(MouseEvent e) {}
+
+    public void mouseReleased(MouseEvent e) {}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actioncharacterPanel;
     private javax.swing.JButton attackButton;
@@ -694,4 +746,6 @@ public class Play2 extends javax.swing.JFrame {
     public static final int BORDER_MAIN_LAYER_PANE = 5;
     private boolean list = true;
     private Map map;
+    private Game1 game;
+    private Vector<JLabel> selected = new Vector<JLabel>();
 }
