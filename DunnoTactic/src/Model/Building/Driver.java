@@ -16,12 +16,12 @@ public class Driver
 
     public static void main (String args[])
     {
-        Build = new Castle(1, 0, 1);
+        Build = new Castle(1, 0, 1, 0.1);
         C.add(Build);
-        Build = new Barrack(2,0, 0);
+        Build = new Barrack(2,0, 0, 0.2, 0.3);
         C.add(Build);
-        Build = new Blacksmith(3, 0, 2);
-        Build = new Blacksmith(3, 0, 2);
+        Build = new Blacksmith(3, 0, 2, 0.2, 0.3);
+        Build = new Blacksmith(3, 0, 2, 0.1, 0.4);
         C.add(Build);
 
 

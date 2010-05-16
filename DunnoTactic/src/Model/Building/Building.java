@@ -29,12 +29,13 @@ abstract public class Building implements Serializable
     public static final int BUILDING_LEVEL_IDX =6;
     public static final int BUILDING_X_IDX =7;
     public static final int BUILDING_Y_IDX =8;
+
     public static final int BLACKSMITH_COST = 20000;
-    public static final int BARRACK_NOVICE_COST = 7500;
-    public static final int BARRACK_JOB_COST = 9000;
+    public static final int BARRACK_COST = 12500;
     protected static int BUILDING_NEXT_ID = 1;
 
     protected int[] Building_BaseAtribut = new int[NUMBER_BUILDING_ATRIBUT];
+    protected int BuildingCost;
 
     public Building(int player, int x, int y)
     {
@@ -60,6 +61,8 @@ abstract public class Building implements Serializable
     {
         this.Building_BaseAtribut = Building_BaseAtribut;
     }
+
+    abstract public void SetCostBuilding();
 
     public void DecreaseBuildingBuildTime()
     {
