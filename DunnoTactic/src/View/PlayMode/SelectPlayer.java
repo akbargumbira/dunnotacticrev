@@ -292,11 +292,9 @@ public class SelectPlayer extends javax.swing.JFrame {
     }//GEN-LAST:event_selectButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-       this.setVisible(false);
        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
        GraphicsDevice[] devices = env.getScreenDevices();
-       JFrame f = new Play2((MainMenu)parent, devices[0]);
-       f.setVisible(true);
+       Play2 f = new Play2((MainMenu)parent, devices[0], map);
        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
