@@ -15,6 +15,7 @@ public class Race {
     protected  int RaceID;
     protected  int[] BaseAtribut = new int[Constanta.NUMBER_ATRIBUT];
     protected int RaceLevel;
+    protected double[] FactorBuilding = new double[2];
 
     public Race(){
         for (int i = 0;i<10;++i) {
@@ -32,6 +33,10 @@ public class Race {
 
     public int GetRaceLevel(){
         return RaceLevel;
+    }
+
+    public double[] GetFactorBuilding(){
+        return FactorBuilding;
     }
 
     public void UpgrageRace(){

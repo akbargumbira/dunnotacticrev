@@ -14,16 +14,16 @@ import Model.Character.Special.ConstantaSp;
  */
 public class J2_Ninja extends Job {
     public J2_Ninja(){
-        FactorJob[Constanta.HP_ID]=0;
-        FactorJob[Constanta.SP_ID]=0;
-        FactorJob[Constanta.ATTACK_ID]=0;
-        FactorJob[Constanta.MATTACK_ID]=0;
-        FactorJob[Constanta.DEF_ID]=0;
-        FactorJob[Constanta.MDEF_ID]=0;
-        FactorJob[Constanta.ACC_ID]=0;
-        FactorJob[Constanta.EVA_ID]=0;
-        FactorJob[Constanta.RANGE_MOVE_ID]=0;
-        FactorJob[Constanta.RANGE_ATTACK_ID]=0;
+        FactorJob[Constanta.HP_ID]=0.15;
+        FactorJob[Constanta.SP_ID]=0.1;
+        FactorJob[Constanta.ATTACK_ID]=0.1;
+        FactorJob[Constanta.MATTACK_ID]=-0.1;
+        FactorJob[Constanta.DEF_ID]=-0.2;
+        FactorJob[Constanta.MDEF_ID]=-0.1;
+        FactorJob[Constanta.ACC_ID]=0.3;
+        FactorJob[Constanta.EVA_ID]=0.4;
+        FactorJob[Constanta.RANGE_MOVE_ID]=0.5;
+        FactorJob[Constanta.RANGE_ATTACK_ID]=2;
 
         JobID=Constanta.JOB2_NINJA_ID;
         JobClass=2;

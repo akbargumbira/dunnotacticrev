@@ -13,16 +13,19 @@ import Model.Character.Constanta;
  */
 public class Elf extends Race {
     public Elf(){
-        BaseAtribut[Constanta.HP_ID]=100;
-        BaseAtribut[Constanta.SP_ID]=100;
-        BaseAtribut[Constanta.ATTACK_ID]=100;
-        BaseAtribut[Constanta.MATTACK_ID]=100;
-        BaseAtribut[Constanta.DEF_ID]=100;
-        BaseAtribut[Constanta.MDEF_ID]=100;
-        BaseAtribut[Constanta.ACC_ID]=100;
-        BaseAtribut[Constanta.EVA_ID]=100;
-        BaseAtribut[Constanta.RANGE_MOVE_ID]=100;
-        BaseAtribut[Constanta.RANGE_ATTACK_ID]=100;
+        BaseAtribut[Constanta.HP_ID]=2000;
+        BaseAtribut[Constanta.SP_ID]=220;
+        BaseAtribut[Constanta.ATTACK_ID]=380;
+        BaseAtribut[Constanta.MATTACK_ID]=400;
+        BaseAtribut[Constanta.DEF_ID]=210;
+        BaseAtribut[Constanta.MDEF_ID]=240;
+        BaseAtribut[Constanta.ACC_ID]=220;
+        BaseAtribut[Constanta.EVA_ID]=180;
+        BaseAtribut[Constanta.RANGE_MOVE_ID]=5;
+        BaseAtribut[Constanta.RANGE_ATTACK_ID]=1;
+
+        FactorBuilding[0]=0.1;
+        FactorBuilding[1]=0.3;
 
         RaceID=Constanta.RACE_ELF_ID;
         RaceLevel=1;
