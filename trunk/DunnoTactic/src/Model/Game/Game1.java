@@ -7,10 +7,7 @@ package Model.Game;
 import Model.Building.Building;
 import Model.Character.Character;
 import Model.Character.CharacterContainer;
-import Model.Character.Constanta;
-import Model.Character.Race.Race;
 import Model.Map.Map;
-import com.sun.xml.internal.ws.message.saaj.SAAJHeader;
 import java.util.Vector;
 
 /**
@@ -24,6 +21,7 @@ public class Game1
     private Vector<Integer> vrace;
     private int[][] charactermap;
     private CharacterContainer characters;
+    private int playerturn = 1;
 
     public Game1(Map map, Vector<Integer> vrace)
     {
@@ -104,6 +102,20 @@ public class Game1
      */
     public void setCharacters(CharacterContainer characters) {
         this.characters = characters;
+    }
+
+    /**
+     * @return the playerturn
+     */
+    public int getPlayerturn() {
+        return playerturn;
+    }
+
+    /**
+     * @param playerturn the playerturn to set
+     */
+    public void setPlayerturn(int playerturn) {
+        this.playerturn = playerturn;
     }
     
 }
