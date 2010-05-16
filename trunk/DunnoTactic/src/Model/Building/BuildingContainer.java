@@ -67,6 +67,17 @@ public class BuildingContainer extends Vector<Building> {
         return false;
     }
 
+    public boolean IsBlackSmithIn(int player) {
+        Building b;
+        for (int i=0;i<super.size();++i) {
+            b = super.get(i);
+            if (b instanceof Blacksmith && b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX)==player) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public synchronized String toString() {
         String s=null;
