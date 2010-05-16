@@ -431,7 +431,26 @@ public class Play2 extends javax.swing.JFrame {
 
         /* set bounds info_and_mainPanel */
         width = info_and_menuPanel.getWidth();
-        
+        height = info_and_menuPanel.getHeight();
+        x = 0;
+        y = layerpane.getHeight()-height;
+        info_and_menuPanel.setBounds(x, y, width, height);
+
+        /* set bounds actioncharacterpanel */
+        width = actioncharacterPanel.getWidth();
+        height = actioncharacterPanel.getHeight();
+        x = layerpane.getWidth()- width;
+        y = layerpane.getHeight() - height;
+        actioncharacterPanel.setBounds(x, y, width, height);
+
+        /* set bounds updgradecharacterpanel */
+        width = upgradecharacterPanel.getWidth();
+        height = upgradecharacterPanel.getHeight();
+        x = actioncharacterPanel.getX() - width;
+        y = actioncharacterPanel.getY() - height;
+
+        /* set bounds */
+        //width
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
