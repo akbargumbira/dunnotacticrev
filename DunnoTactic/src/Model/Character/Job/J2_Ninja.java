@@ -25,7 +25,7 @@ public class J2_Ninja extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_NINJA_ID;
+        JobID=Constanta.JOB2_NINJA_ID;
         JobClass=2;
         AttackType=Constanta.ATTACK_ATT_TYPE_ID;
         SpecialAvail[0]=ConstantaSp.SP_NINJA_THROW_KUNAI_ID;

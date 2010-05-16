@@ -25,7 +25,7 @@ public class J2_Knight extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB_KNIGHT_ID;
+        JobID=Constanta.JOB2_KNIGHT_ID;
         JobClass=2;
         AttackType=Constanta.ATTACK_ATT_TYPE_ID;
         SpecialAvail[0]=ConstantaSp.SP_KNIGHT_BLOOD_CLOTING_ID;

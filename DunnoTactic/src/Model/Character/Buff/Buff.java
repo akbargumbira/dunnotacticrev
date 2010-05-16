@@ -72,6 +72,11 @@ public class Buff {
                     BuffID=Constanta.BUFF_STATUS_TIME_LAGGING_ID;
                 }
                 break;
+                case Constanta.BUFF_STATUS_DOWN_MENTAL_ID : {
+                    BuffEfekChar = new BuffDownMental();
+                    BuffID=Constanta.BUFF_STATUS_DOWN_MENTAL_ID;
+                }
+                break;
                 default : {
 
                 }

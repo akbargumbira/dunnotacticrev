@@ -11,19 +11,19 @@ import java.util.Vector;
  *
  * @author ifan
  */
-public class Sp3_AbundanceLife extends Special {
-    public Sp3_AbundanceLife(){
-        SpecialName="Abundance Life";
-        SpecialID=ConstantaSp.SP_DEFENDER_ABUNDANCE_LIFE_ID;
+public class Sp32_SwordReflect extends Special {
+    public Sp32_SwordReflect(){
+        SpecialName="Sword Reflect";
+        SpecialID=ConstantaSp.SP_PALADIN_SWORD_REFLECT_ID;
         SPCost = 30;
         BaseAcc=90;
-        RangeSpecial = 0;
+        RangeSpecial = 100;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){
         int SP = KarakterAtribut.GetCurrent(Constanta.SP_ID)-SPCost;
         KarakterAtribut.SetCurrentAtribut(Constanta.SP_ID, SP);
 
-        KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_BLOOD_CLOTING_ID);
+        
     }
 }

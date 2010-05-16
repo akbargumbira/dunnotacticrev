@@ -13,7 +13,7 @@ import Model.Character.Constanta;
  */
 public class Fairy extends Race {
     public Fairy(){
-        BaseAtribut[Constanta.HP_ID]=100;
+        BaseAtribut[Constanta.HP_ID]=700;
         BaseAtribut[Constanta.SP_ID]=100;
         BaseAtribut[Constanta.ATTACK_ID]=100;
         BaseAtribut[Constanta.MATTACK_ID]=100;

@@ -23,7 +23,7 @@ public class J31_Ranger extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB2_RANGER_ID;
+        JobID=Constanta.JOB31_RANGER_ID;
         JobClass=3;
         AttackType=Constanta.ATTACK_ATT_TYPE_ID;
         SpecialAvail[0]=ConstantaSp.SP_ARCHER_STRIKE_SHOT_ID;

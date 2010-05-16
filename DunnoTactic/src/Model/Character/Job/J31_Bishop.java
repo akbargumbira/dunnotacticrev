@@ -23,7 +23,7 @@ public class J31_Bishop extends Job {
         FactorJob[Constanta.RANGE_MOVE_ID]=0;
         FactorJob[Constanta.RANGE_ATTACK_ID]=0;
 
-        JobID=Constanta.JOB2_BISHOP_ID;
+        JobID=Constanta.JOB31_BISHOP_ID;
         JobClass=3;
         AttackType=Constanta.ATTACK_MATT_TYPE_ID;
         SpecialAvail[0]=ConstantaSp.SP_HEALER_HEALING_PRAY_ID;

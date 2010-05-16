@@ -29,20 +29,27 @@ public class Constanta {
     public static final int RACE_ELF_ID = 2;
     public static final int RACE_FAIRY_ID = 3;
 
-    public static final int JOB_NOVICE_ID = 0;
-    public static final int JOB_KNIGHT_ID = 1;
-    public static final int JOB_WARRIOR_ID = 2;
-    public static final int JOB_ARCHER_ID = 3;
-    public static final int JOB_MAGE_ID = 4;
-    public static final int JOB_HEALER_ID = 5;
-    public static final int JOB_NINJA_ID = 6;
+    public static final int JOB1_NOVICE_ID = 0;
+    public static final int JOB2_KNIGHT_ID = 1;
+    public static final int JOB2_WARRIOR_ID = 2;
+    public static final int JOB2_ARCHER_ID = 3;
+    public static final int JOB2_MAGE_ID = 4;
+    public static final int JOB2_HEALER_ID = 5;
+    public static final int JOB2_NINJA_ID = 6;
 
-    public static final int JOB2_ARCH_KNIGHT_ID = 51;
-    public static final int JOB2_BLADE_MASTER_ID = 52;
-    public static final int JOB2_RANGER_ID = 53;
-    public static final int JOB2_ARCH_MAGE_ID = 54;
-    public static final int JOB2_BISHOP_ID = 55;
-    public static final int JOB2_ASSASSIN_ID = 56;
+    public static final int JOB31_ARCH_KNIGHT_ID = 51;
+    public static final int JOB31_BLADE_MASTER_ID = 52;
+    public static final int JOB31_RANGER_ID = 53;
+    public static final int JOB31_ARCH_MAGE_ID = 54;
+    public static final int JOB31_BISHOP_ID = 55;
+    public static final int JOB31_ASSASSIN_ID = 56;
+
+    public static final int JOB32_DEFENDER_ID = 101;
+    public static final int JOB32_PALADIN_ID = 102;
+    public static final int JOB32_BARD_ID = 103;
+    public static final int JOB32_TIME_MAGE_ID = 104;
+    public static final int JOB32_SAGE_ID = 105;
+    public static final int JOB32_DARK_STALKER_ID = 106;
 
     public static final int PRICE_SUMMON_NOVICE = 1000;
     public static final int PRICE_UPGRADE_JOB2_HUMAN = 800;
@@ -66,6 +73,7 @@ public class Constanta {
     public static final int BUFF_STATUS_BLIND_ID = 14;
     public static final int BUFF_STATUS_TIME_FREEZE_ID = 15;
     public static final int BUFF_STATUS_TIME_LAGGING_ID = 16;
+    public static final int BUFF_STATUS_DOWN_MENTAL_ID = 17;
 
     public static final int BUFF_STATUS_BLOOD_CLOTING_ID = 51;
     public static final int BUFF_STATUS_HOLY_GUARD_ID = 52;

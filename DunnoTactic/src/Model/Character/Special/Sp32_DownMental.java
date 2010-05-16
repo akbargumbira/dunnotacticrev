@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -12,23 +13,27 @@ import java.util.Random;
  *
  * @author ifan
  */
-public class Sp2_PhoenixTear extends Special {
-    public Sp2_PhoenixTear(){
-        SpecialName="Tear Phoenix";
-        SpecialID=ConstantaSp.SP_BISHOP_PHOENIX_TEAR_ID;
+public class Sp32_DownMental extends Special {
+    public Sp32_DownMental(){
+        SpecialName="Down Mental";
+        SpecialID=ConstantaSp.SP_BARD_DOWN_MENTAL_ID;
         SPCost = 30;
         BaseAcc=100;
-        RangeSpecial = 11;
+        RangeSpecial = 7;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){
         int SP = KarakterAtribut.GetCurrent(Constanta.SP_ID)-SPCost;
         KarakterAtribut.SetCurrentAtribut(Constanta.SP_ID, SP);
-
+        CharAtribut temp = new CharAtribut();
         for(int i=0;i<TargetAtribut.size();++i){
-            CharAtribut temp = new CharAtribut();
             temp = TargetAtribut.get(i);
-            temp.ClearAllBuff();
+
+            Random r = new Random();
+            int RandFactor = r.nextInt(100);
+            if(RandFactor<85){
+                temp.SetBuff(Constanta.BUFF_STATUS_DOWN_MENTAL_ID);
+            }
         }
     }
 }
