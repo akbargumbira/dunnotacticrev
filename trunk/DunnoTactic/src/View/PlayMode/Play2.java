@@ -417,7 +417,21 @@ public class Play2 extends javax.swing.JFrame {
         height = layerpane.getHeight();
         scrollPane.setBounds(0, 0, width, height);
 
-        /* set bounds */
+        /* set bounds menuPanel */
+        width = menuPanel.getWidth();
+        height = menuPanel.getHeight();
+        menuPanel.setBounds(0, 0, width, height);
+
+        /* set bounds listPlayePanel */
+        width = listPlayerPanel.getWidth();
+        height = listPlayerPanel.getHeight();
+        x = layerpane.getWidth()-width;
+        y = 0;
+        listPlayerPanel.setBounds(x, y, width, height);
+
+        /* set bounds info_and_mainPanel */
+        width = info_and_menuPanel.getWidth();
+        
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
