@@ -364,6 +364,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="B"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="barrackButtonMousePressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="bcButton">
                   <Properties>
@@ -372,6 +375,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="BC"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bcButtonMousePressed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

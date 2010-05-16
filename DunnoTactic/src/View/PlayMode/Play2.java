@@ -148,7 +148,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        terrainPanel.setBounds(30, 80, 100, 100);
+        terrainPanel.setBounds(30, 80, -1, -1);
         mapLayerPane.add(terrainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         buildingPanel.setOpaque(false);
@@ -164,7 +164,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        buildingPanel.setBounds(280, 80, 100, 100);
+        buildingPanel.setBounds(280, 80, -1, -1);
         mapLayerPane.add(buildingPanel, new Integer(2));
 
         warnaPanel.setOpaque(false);
@@ -180,7 +180,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        warnaPanel.setBounds(150, 80, 100, 100);
+        warnaPanel.setBounds(150, 80, -1, -1);
         mapLayerPane.add(warnaPanel, new Integer(1));
 
         karakterPanel.setOpaque(false);
@@ -196,7 +196,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        karakterPanel.setBounds(420, 80, 100, 100);
+        karakterPanel.setBounds(420, 80, -1, -1);
         mapLayerPane.add(karakterPanel, new Integer(3));
 
         scrollPane.setViewportView(mapLayerPane);
@@ -265,9 +265,19 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
 
         barrackButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         barrackButton.setText("B");
+        barrackButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                barrackButtonMousePressed(evt);
+            }
+        });
 
         bcButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         bcButton.setText("BC");
+        bcButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bcButtonMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -589,7 +599,29 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
     }//GEN-LAST:event_moveButtonActionPerformed
 
     private void summonCharacterButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summonCharacterButtonMousePressed
+        /* check if barrack is selected */
+        Point p = selectedbuilding .getLocation();
+        Point pGrid = Converter.PointToGrid(p);
+        int x = pGrid.x;
+        int y = pGrid.y;
+
+        Building b = game.getMap().GetBuilding(x, y);
+        if (!(b instanceof Barrack))
+            return;
         
+        /* Character is on building? -> can't summon if there is character on barrack */
+        Model.Character.Character c= game.getCharacters().get(x, y);
+        if (c!=null)
+            return;
+
+        int player = game.getPlayerturn();
+        int RaceID = game.getVrace().get(player-1);
+        c = new Model.Character.Character(RaceID, player);
+        c.GetAtribut().SetPositionXY(x, y);
+        game.getCharactermap()[x][y] = c.GetAtribut().GetCharID();
+        game.getCharacters().add(c);
+
+        InitMap();
     }//GEN-LAST:event_summonCharacterButtonMousePressed
 
     private void endTurnButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_endTurnButtonMousePressed
@@ -599,6 +631,66 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         game.setPlayerturn(n);
         infoTextArea.setText("Player "+Integer.toString(n));
     }//GEN-LAST:event_endTurnButtonMousePressed
+
+    private void barrackButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barrackButtonMousePressed
+        /* Check selected grid -> can't build if there is no grid selected */
+        if (selectedterrain==null)
+            return;
+        
+        /* Check Money -> can't build if no enaugh money */
+
+        /* Check terrain -> can't build on water and mud */
+        Point p = selectedterrain.getLocation();
+        Point pGrid = Converter.PointToGrid(p);
+        int t = game.getMap().GetTerrain(pGrid.x, pGrid.y);
+        if (t == Map.AIR || t == Map.LUMPUR)
+            return;
+
+        /* Check Building -> can't build if there is a building */
+        Building b = game.getMap().GetBuilding(pGrid.x, pGrid.y);
+        if (b!=null)
+            return;
+
+        /* Check character -> can't build if there is a character*/
+        Model.Character.Character c = game.getCharacters().get(pGrid.x, pGrid.y);
+        if (c!=null)
+            return;
+
+        game.getMap().SetBuilding(Map.BARRACK, game.getPlayerturn(), pGrid.x, pGrid.y, 0, 0);
+        InitMap();
+    }//GEN-LAST:event_barrackButtonMousePressed
+
+    private void bcButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bcButtonMousePressed
+        /* Check selected grid -> can't build if there is no grid selected */
+        if (selectedterrain==null)
+            return;
+
+        /* Check Money -> can't build if no enaugh money */
+
+        /* Check terrain -> can't build on water and mud */
+        Point p = selectedterrain.getLocation();
+        Point pGrid = Converter.PointToGrid(p);
+        int t = game.getMap().GetTerrain(pGrid.x, pGrid.y);
+        if (t == Map.AIR || t == Map.LUMPUR)
+            return;
+
+        /* Check Building -> can't build if there is a building */
+        Building b = game.getMap().GetBuilding(pGrid.x, pGrid.y);
+        if (b!=null)
+            return;
+
+        /* Check character -> can't build if there is a character*/
+        Model.Character.Character c = game.getCharacters().get(pGrid.x, pGrid.y);
+        if (c!=null)
+            return;
+
+        game.getMap().SetBuilding(Map.BLACKSMITH, game.getPlayerturn(), pGrid.x, pGrid.y, 0, 0);
+        InitMap();
+    }//GEN-LAST:event_bcButtonMousePressed
+
+    private void isCanBuild(){
+        
+    }
 
     public void createContent(int x, int y, int width, int height, String iconName, JPanel p) {
         Component c =  p.getComponentAt(x, y);
@@ -631,6 +723,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
             label.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     disableAllActionPanel();
+                    summonCharacterButton.setVisible(false);
                     JLabel l = (JLabel)e.getSource();
                     int x = l.getX();
                     int y = l.getY();
@@ -639,11 +732,13 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
                     String s = infoTextArea.getText();
                     s += b.toString();
                     infoTextArea.setText(s);
-
-                        buildingactionPanel.setVisible(true);
                     if (b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX)==game.getPlayerturn()) {
                         buildingactionPanel.setVisible(true);
                         selectedbuilding = (JLabel)e.getSource();
+
+                        if (b instanceof Barrack) {
+                            summonCharacterButton.setVisible(true);
+                        }
                     }
                 }
 
