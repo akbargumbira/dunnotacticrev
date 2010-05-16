@@ -11,8 +11,8 @@ package Model.Map;
  */
 public class MapDriver {
     public static void main(String[] args) {
-        Map m = new Map(5, 5);
-        m.SetContent(0, 0, 6);
-       System.out.println(10);
+        Map m = new Map(2, 5, 5);
+        m.SetTerrain(0, 0, 6);
+        System.out.println(10);
     }
 }

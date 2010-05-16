@@ -11,17 +11,26 @@ package Model.Building;
  */
 public class Castle extends Building
 {
-    public Castle()
+    public Castle(int player, int x, int y)
     {
-      Building_BaseAtribut[BUILDING_HP_ID] = 50000;
-      Building_BaseAtribut[BUILDING_DEFENSE_ID] = 600;
-      Building_BaseAtribut[BUILDING_BUILD_TIME_ID] = 0;
-      Building_BaseAtribut[BUILDING_GOLD_PER_TURN_ID] = 300;
-      Building_BaseAtribut[BUILDING_LEVEL_ID] = 1;
+        super(player,x,y);
+        Building_BaseAtribut[BUILDING_HP_IDX] = 50000;
+        Building_BaseAtribut[BUILDING_DEFENSE_IDX] = 600;
+        Building_BaseAtribut[BUILDING_BUILD_TIME_IDX] = 0;
+        Building_BaseAtribut[BUILDING_GOLD_PER_TURN_IDX] = 300;
+        Building_BaseAtribut[BUILDING_LEVEL_IDX] = 1;
     }
 
     public void PerfectBuilding()
     {
-        Building_BaseAtribut[BUILDING_BUILD_TIME_ID] = -1;
+        Building_BaseAtribut[BUILDING_BUILD_TIME_IDX] = -1;
     }
+
+    @Override
+    public String toString() {
+        String s = new String("Castle :\n");
+        return s+super.toString();
+    }
+
+    
 }

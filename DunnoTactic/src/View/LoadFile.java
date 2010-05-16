@@ -26,7 +26,7 @@ public class LoadFile extends javax.swing.JFrame {
     public LoadFile(JFrame parent) {
         initComponents();
         this.parent = parent;
-        listfile = FileSupport.GetListFile(".");
+        listfile = FileSupport.GetListFile(".", ".map");
         listmodel = new DefaultListModel();
         for (int i=0;i<listfile.length;++i) {
             listmodel.addElement(listfile[i]);

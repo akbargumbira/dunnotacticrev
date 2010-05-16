@@ -11,6 +11,10 @@
 
 package View.BuildMode;
 
+import Model.Building.Barrack;
+import Model.Building.Blacksmith;
+import Model.Building.Building;
+import Model.Building.Castle;
 import Model.Map.Map;
 import java.awt.Color;
 import java.awt.Component;
@@ -31,6 +35,7 @@ import java.awt.Point;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -47,12 +52,11 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         ShowWindow();
 
         /* Initial Map */
-        mapLogic = new Map(); /* Create map by default */
+        mapLogic = new Map(2); /* Create map by default */
         paintMap(); /* Paint Map */
 
         /* Add key listener */
         this.addKeyListener(this);
-        mainLayerPane.addKeyListener(this);
 
         /* Add Mouse Listener */
         terrainPanel.addMouseListener(this);
@@ -63,20 +67,19 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         airButton.addActionListener(this);
         lumpurButton.addActionListener(this);
         pohonButton.addActionListener(this);
-        castle1Button.addActionListener(this);
-        castle2Button.addActionListener(this);
-        castle3Button.addActionListener(this);
-        castle4Button.addActionListener(this);
+        castleButton.addActionListener(this);
+        barrackButton.addActionListener(this);
+        blacksmithButton.addActionListener(this);
 
         /* Set Action Command Name */
         rumputButton.setActionCommand(Map.GetString(Map.RUMPUT));
         airButton.setActionCommand(Map.GetString(Map.AIR));
         lumpurButton.setActionCommand(Map.GetString(Map.LUMPUR));
         pohonButton.setActionCommand(Map.GetString(Map.POHON));
-        castle1Button.setActionCommand(Map.GetString(Map.CASTLE1));
-        castle2Button.setActionCommand(Map.GetString(Map.CASTLE2));
-        castle3Button.setActionCommand(Map.GetString(Map.CASTLE3));
-        castle4Button.setActionCommand(Map.GetString(Map.CASTLE4));
+
+        castleButton.setActionCommand(Building.CASTLE_S);
+        barrackButton.setActionCommand(Building.BARRACK_S);
+        blacksmithButton.setActionCommand(Building.BLACKSMITH_S);
 
         /* Init save panel */
         save = new SaveMapPanel(this);
@@ -111,6 +114,17 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         y = (getHeight()-height)/2;
         New.setBounds(x, y, width, height);
         New.setVisible(false);
+
+        /* Init input player Panel */
+        input = new InputPlayerPanel(this);
+        getMainLayerPane().add(input);
+        getMainLayerPane().setLayer(input, MENU_LAYER);
+        width = input.getPreferredSize().width;
+        height = input.getPreferredSize().height;
+        x = (getWidth()-width)/2;
+        y = (getHeight()-height)/2;
+        input.setBounds(x, y, width, height);
+        input.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -128,10 +142,9 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         pohonButton = new javax.swing.JButton();
         lumpurButton = new javax.swing.JButton();
         rumputButton = new javax.swing.JButton();
-        castle1Button = new javax.swing.JButton();
-        castle3Button = new javax.swing.JButton();
-        castle2Button = new javax.swing.JButton();
-        castle4Button = new javax.swing.JButton();
+        castleButton = new javax.swing.JButton();
+        blacksmithButton = new javax.swing.JButton();
+        barrackButton = new javax.swing.JButton();
         selectAllButton = new javax.swing.JButton();
         deselectButton = new javax.swing.JButton();
         randomButton = new javax.swing.JButton();
@@ -143,6 +156,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         scroll = new javax.swing.JScrollPane();
         mapLayerPane = new javax.swing.JLayeredPane();
         terrainPanel = new javax.swing.JPanel();
+        buildingPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Build Mode");
@@ -151,15 +165,15 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(java.awt.Color.black);
 
+        mainLayerPane.setBackground(new java.awt.Color(0, 0, 0));
+        mainLayerPane.setOpaque(true);
         mainLayerPane.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mainLayerPaneKeyPressed(evt);
             }
         });
 
-        MenuPanel.setOpaque(false);
-
-        airButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/air.png"))); // NOI18N
+        airButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Water.png"))); // NOI18N
         airButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         airButton.setMaximumSize(new java.awt.Dimension(60, 60));
         airButton.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -173,43 +187,37 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         pohonButton.setOpaque(false);
         pohonButton.setPreferredSize(new java.awt.Dimension(60, 60));
 
-        lumpurButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/lumpur.png"))); // NOI18N
+        lumpurButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Lumpur1.png"))); // NOI18N
         lumpurButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         lumpurButton.setMaximumSize(new java.awt.Dimension(60, 60));
         lumpurButton.setMinimumSize(new java.awt.Dimension(60, 60));
         lumpurButton.setOpaque(false);
         lumpurButton.setPreferredSize(new java.awt.Dimension(60, 60));
 
-        rumputButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rumput.png"))); // NOI18N
+        rumputButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Rumput1.png"))); // NOI18N
         rumputButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         rumputButton.setMaximumSize(new java.awt.Dimension(60, 60));
         rumputButton.setMinimumSize(new java.awt.Dimension(60, 60));
         rumputButton.setOpaque(false);
         rumputButton.setPreferredSize(new java.awt.Dimension(60, 60));
 
-        castle1Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle1.png"))); // NOI18N
-        castle1Button.setMaximumSize(new java.awt.Dimension(60, 60));
-        castle1Button.setMinimumSize(new java.awt.Dimension(60, 60));
-        castle1Button.setOpaque(false);
-        castle1Button.setPreferredSize(new java.awt.Dimension(60, 60));
+        castleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle1.png"))); // NOI18N
+        castleButton.setMaximumSize(new java.awt.Dimension(60, 60));
+        castleButton.setMinimumSize(new java.awt.Dimension(60, 60));
+        castleButton.setOpaque(false);
+        castleButton.setPreferredSize(new java.awt.Dimension(60, 60));
 
-        castle3Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle3.png"))); // NOI18N
-        castle3Button.setMaximumSize(new java.awt.Dimension(60, 60));
-        castle3Button.setMinimumSize(new java.awt.Dimension(60, 60));
-        castle3Button.setOpaque(false);
-        castle3Button.setPreferredSize(new java.awt.Dimension(60, 60));
+        blacksmithButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/blacksmith1.png"))); // NOI18N
+        blacksmithButton.setMaximumSize(new java.awt.Dimension(60, 60));
+        blacksmithButton.setMinimumSize(new java.awt.Dimension(60, 60));
+        blacksmithButton.setOpaque(false);
+        blacksmithButton.setPreferredSize(new java.awt.Dimension(60, 60));
 
-        castle2Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle2.png"))); // NOI18N
-        castle2Button.setMaximumSize(new java.awt.Dimension(60, 60));
-        castle2Button.setMinimumSize(new java.awt.Dimension(60, 60));
-        castle2Button.setOpaque(false);
-        castle2Button.setPreferredSize(new java.awt.Dimension(60, 60));
-
-        castle4Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/castle4.png"))); // NOI18N
-        castle4Button.setMaximumSize(new java.awt.Dimension(60, 60));
-        castle4Button.setMinimumSize(new java.awt.Dimension(60, 60));
-        castle4Button.setOpaque(false);
-        castle4Button.setPreferredSize(new java.awt.Dimension(60, 60));
+        barrackButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/barrack1.png"))); // NOI18N
+        barrackButton.setMaximumSize(new java.awt.Dimension(60, 60));
+        barrackButton.setMinimumSize(new java.awt.Dimension(60, 60));
+        barrackButton.setOpaque(false);
+        barrackButton.setPreferredSize(new java.awt.Dimension(60, 60));
 
         selectAllButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         selectAllButton.setText("Select All");
@@ -319,17 +327,15 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lumpurButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(castle1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(castleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(castle2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(barrackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(MenuPanelLayout.createSequentialGroup()
                         .addComponent(pohonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rumputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(castle3Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(castle4Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(blacksmithButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(randomButton, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
@@ -352,24 +358,25 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                                 .addComponent(randomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(MenuPanelLayout.createSequentialGroup()
                                 .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(castle1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(castleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lumpurButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(castle2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(barrackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(airButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(pohonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rumputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(castle3Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(castle4Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(blacksmithButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        MenuPanel.setBounds(0, 360, 528, 180);
+        MenuPanel.setBounds(0, 360, -1, -1);
         mainLayerPane.add(MenuPanel, new Integer(1));
 
         scroll.setBackground(new java.awt.Color(0, 0, 0));
+
+        mapLayerPane.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout terrainPanelLayout = new javax.swing.GroupLayout(terrainPanel);
         terrainPanel.setLayout(terrainPanelLayout);
@@ -382,8 +389,24 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        terrainPanel.setBounds(0, 0, 100, 100);
+        terrainPanel.setBounds(0, 0, -1, -1);
         mapLayerPane.add(terrainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        buildingPanel.setOpaque(false);
+
+        javax.swing.GroupLayout buildingPanelLayout = new javax.swing.GroupLayout(buildingPanel);
+        buildingPanel.setLayout(buildingPanelLayout);
+        buildingPanelLayout.setHorizontalGroup(
+            buildingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        buildingPanelLayout.setVerticalGroup(
+            buildingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        buildingPanel.setBounds(170, 60, -1, -1);
+        mapLayerPane.add(buildingPanel, new Integer(1));
 
         scroll.setViewportView(mapLayerPane);
 
@@ -458,6 +481,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
 
     private void randomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomButtonActionPerformed
         /* Random */
+        mapLogic.GetBuildings().removeAllElements();
         mapLogic.SetMapRandom();
 
         /* Repaint */
@@ -479,9 +503,14 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
          /* Get Component at mouse click's position */
         
         Component c = terrainPanel.getComponentAt(e.getX(), e.getY());
+        Component c2 = buildingPanel.getComponentAt(e.getX(), e.getY());
         /* Create temporary label*/
         JLabel l;
-
+        JLabel l2 = null;
+        
+         if (c2 instanceof JLabel) {
+            l2 = (JLabel)c2;
+         }
 
         if (c instanceof JLabel) { /* Cek c is a Label */
              l = (JLabel)c; /* l point to c */
@@ -490,8 +519,15 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
             if (selected.contains(l)) { /* Cek is selected */
                 l.setBorder(null); /* Erase border */
                 selected.remove(l); /* Remove Label l from selected List */
+//                if (l2!=null) {
+//                    l2.setBorder(null);
+//                }
             } else { /* Cek is not yet selected */
-                l.setBorder(new FieldBorder(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK)); /* Set border for Label l */
+                FieldBorder b = new FieldBorder(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK);
+//                if (l2!=null) {
+//                    l2.setBorder(b);
+//                }
+                l.setBorder(b); /* Set border for Label l */
                 selected.add(l); /* Add Label l to selected List */
             }
         } else { /* c isn't a Label */
@@ -537,25 +573,64 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
 
     public void actionPerformed(ActionEvent e) {
         JLabel l;
+        Component c;
+        String s = e.getActionCommand();
         /* Change image selected terrain or building and its Value in mapLogic */
-        for (int i=0;i<selected.size();++i) {
-            l = selected.get(i);
-            int n = Map.GetContentNumber(e.getActionCommand());
 
-            if (!mapLogic.IsCastle(n) || !mapLogic.IsCastleIn(n)) {
+        if (s.equals(Building.CASTLE_S) || s.equals(Building.BARRACK_S) || s.equals(Building.BLACKSMITH_S)) {
+           input.update(mapLogic.GetNumPlayer(), s);
+           input.setVisible(true);
+        } else  {
+            for (int i=0;i<selected.size();++i) {
+                l = selected.get(i);
                 l.setIcon(ImageSupport.createImageIcon(e.getActionCommand()+".png", null));
+
                 Point gridpoint = Converter.PointToGrid(l.getX(), l.getY());
-                mapLogic.SetContent(gridpoint.x, gridpoint.y, Map.GetContentNumber(e.getActionCommand()));
+                /* remove building if any */
+                c = buildingPanel.getComponentAt(l.getX(), l.getY());
+                if (c instanceof JLabel) {
+                    mapLogic.DelBuilding(gridpoint.x, gridpoint.y);
+                    buildingPanel.remove(c);
+                }
+                /* chane terrain */
+                mapLogic.SetTerrain(gridpoint.x, gridpoint.y, Map.GetTerrrainNumber(e.getActionCommand()));
+
+                /* Remove border selected Label */
+                l.setBorder(null);
             }
-
-            /* Remove border selected Label */
-            l.setBorder(null);
+            buildingPanel.repaint();
+            /* Remove All Label from selected List */
+            selected.clear();
         }
-
-        /* Remove All Label from selected List */
-        selected.clear();
     }
 
+    @SuppressWarnings("static-access")
+    public void UpdateBuilding(int player, String buildingname) {
+        int n = buildingname.length();
+        String s;
+        JLabel l;
+        if (selected.size()>0) {
+            if (!(buildingname.equals("castle") && mapLogic.IsCastleIn(player))) {
+                s = buildingname + Integer.toString(player);
+                l = selected.get(0);
+                createContent(l.getX(), l.getY(), ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT, s, buildingPanel);
+                buildingPanel.repaint();
+                Point gridpoint = Converter.PointToGrid(l.getX(), l.getY());
+                mapLogic.SetBuilding(mapLogic.CASTLE, player, gridpoint.x, gridpoint.y);
+            }
+
+            for (int i=0; i<selected.size(); ++i) {
+                l = selected.get(i);
+                l.setBorder(null);
+            }
+            selected.clear();
+        }
+    }
+
+    public void ShowInputPlayer() {
+        input.setVisible(true);
+    }
+    
     public void ShowWindow() {
         Container pane = getContentPane();
         int x, y, width, height;
@@ -573,51 +648,89 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
             setVisible(true);
         }
         pane.setBackground(Color.BLACK);
+        scroll.setBackground(Color.BLACK);
+        mainLayerPane.setBackground(Color.BLACK);
+        mapLayerPane.setBackground(Color.BLACK);
+        mapLayerPane.setOpaque(true);
+        
         /* add mainLayerPane to Frame */
         pane.removeAll();
         pane.setLayout(null);
-        pane.add(mainLayerPane);
+        pane.add(getMainLayerPane());
         int border = BORDER_MAIN_LAYER_PANE;
-        mainLayerPane.setBounds(border, border, getWidth()-2*border, getHeight()-2*border);
+        getMainLayerPane().setBounds(border, border, getWidth()-2*border, getHeight()-2*border);
 
         /* Set maniLayerPane's layout to null */
-        mainLayerPane.setLayout(null);
+        getMainLayerPane().setLayout(null);
 
         /* Set Bounds scroll*/
-        width = mainLayerPane.getWidth();
-        height = mainLayerPane.getHeight();
+        width = getMainLayerPane().getWidth();
+        height = getMainLayerPane().getHeight();
         scroll.setBounds(0, 0, width, height);
 
         /* Set Bounds MenuPanel in mainLayerPane */
         width = MenuPanel.getPreferredSize().width;
         height = MenuPanel.getPreferredSize().height;
-        x = (mainLayerPane.getWidth() - width)/2;
-        y = mainLayerPane.getHeight() - height;
+        x = (getMainLayerPane().getWidth() - width)/2;
+        y = getMainLayerPane().getHeight() - height;
         MenuPanel.setBounds(x, y, width, height);
     }
 
-    public void createContent(int x, int y, int width, int height, String iconName) {
-        JLabel label = new JLabel(ImageSupport.createImageIcon(iconName+".png", null));
+    public void createContent(int x, int y, int width, int height, String iconName, JPanel p) {
+        Component c =  p.getComponentAt(x, y);
+        if (c!=null) {
+            p.remove(c);
+        }
+        JLabel label;
+        label = new JLabel(ImageSupport.createImageIcon(iconName+".png", null));
         label.setBounds(x, y, width, height);
-        terrainPanel.add(label);
+        p.add(label);
     }
 
     public void paintMap() {
         /* Remove all component in content Panel */
         terrainPanel.removeAll();
         terrainPanel.repaint();
+        buildingPanel.removeAll();
+        buildingPanel.repaint();
 
         /* Add new component(terrain & building ) in content Panel */
+        int x,y,width,height;
+        String image;
+        Building b;
         for (int i=0;i<mapLogic.GetWidth();++i) {
             for (int j=0;j<mapLogic.GetHeight();++j) {
-                createContent(i*ImageSupport.IMAGE_WIDTH, j*ImageSupport.IMAGE_HEIGHT, ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT, Map.GetString(mapLogic.GetContent(i, j)));
+                x = i*ImageSupport.IMAGE_WIDTH;
+                y = j*ImageSupport.IMAGE_HEIGHT;
+                width = ImageSupport.IMAGE_WIDTH;
+                height = ImageSupport.IMAGE_HEIGHT;
+                image = Map.GetString(mapLogic.GetTerrain(i, j));
+                createContent(x, y, width, height, image, terrainPanel);
+                b = mapLogic.GetBuilding(i, j);
+                if (b!=null) {
+                    String s=null;
+                    if (b instanceof Castle) {
+                        s = Building.CASTLE_S;
+                    } else if (b instanceof Barrack) {
+                        s = Building.BARRACK_S;
+                    } else if (b instanceof Blacksmith) {
+                        s = Building.BLACKSMITH_S;
+                    }
+                    s+=Integer.toString(b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX));
+                    createContent(x, y, width, height, s, buildingPanel);
+                }
             }
         }
         terrainPanel.repaint();
+        buildingPanel.repaint();
 
         /* Set new Size for contentPanel */
         Dimension d = new Dimension(ImageSupport.IMAGE_WIDTH*mapLogic.GetWidth(), ImageSupport.IMAGE_HEIGHT*mapLogic.GetHeight());
         terrainPanel.setBounds(0, 0, d.width, d.height);
+        buildingPanel.setBounds(0, 0, d.width, d.height);
+        if (d.width<2000) {
+            d = new Dimension(2000, 2000);
+        }
         mapLayerPane.setPreferredSize(d);
     }
 
@@ -640,11 +753,11 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     private javax.swing.JPanel MenuPanel;
     private javax.swing.JButton airButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JButton barrackButton;
+    private javax.swing.JButton blacksmithButton;
+    private javax.swing.JPanel buildingPanel;
     private javax.swing.JPanel buttonPanel;
-    private javax.swing.JButton castle1Button;
-    private javax.swing.JButton castle2Button;
-    private javax.swing.JButton castle3Button;
-    private javax.swing.JButton castle4Button;
+    private javax.swing.JButton castleButton;
     private javax.swing.JButton deselectButton;
     private javax.swing.JButton lumpurButton;
     private javax.swing.JLayeredPane mainLayerPane;
@@ -668,10 +781,26 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
     private SaveMapPanel save;
     private LoadMapPanel load;
     private NewPanel New;
+    private InputPlayerPanel input;
+    private int playerbuilding;
 
     public static final int BORDER_MAIN_LAYER_PANE = 5;
     public static final int MAP_LAYER_PANE_LAYER = JLayeredPane.DEFAULT_LAYER;
     public static final int MENU_LAYER = JLayeredPane.DEFAULT_LAYER+1;
     public static final int TERRAIN_LAYER = JLayeredPane.DEFAULT_LAYER;
     public static final int BUILDING_LAYER = JLayeredPane.DEFAULT_LAYER+1;
+
+    /**
+     * @return the mainLayerPane
+     */
+    public javax.swing.JLayeredPane getMainLayerPane() {
+        return mainLayerPane;
+    }
+
+    /**
+     * @param playerbuilding the playerbuilding to set
+     */
+    public void setPlayerbuilding(int playerbuilding) {
+        this.playerbuilding = playerbuilding;
+    }
 }

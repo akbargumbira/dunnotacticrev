@@ -13,6 +13,7 @@ package View;
 
 import View.BuildMode.BuildMap;
 import View.PlayMode.Play2;
+import View.PlayMode.SelectPlayer;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
@@ -43,6 +44,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         newgameButton.setText("New Game");
         newgameButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -50,6 +52,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        exitButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         exitButton.setText("Exit");
         exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -57,6 +60,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        buildmapButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         buildmapButton.setText("Build Map");
         buildmapButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -71,8 +75,8 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(152, 152, 152)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(exitButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                    .addComponent(buildmapButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                    .addComponent(exitButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                    .addComponent(buildmapButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                     .addComponent(newgameButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(165, 165, 165))
         );
@@ -85,7 +89,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(buildmapButton)
                 .addGap(18, 18, 18)
                 .addComponent(exitButton)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         newgameButton.getAccessibleContext().setAccessibleName("newgameButton");
@@ -108,12 +112,13 @@ public class MainMenu extends javax.swing.JFrame {
     private void newgameButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newgameButtonMousePressed
         // TODO add your handling code here:
         this.setVisible(false);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                play = new Play2(me);
-                play.setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                play = new Play2(me);
+//                play.setVisible(true);
+//            }
+//        });
+        new SelectPlayer(this).setVisible(true);
     }//GEN-LAST:event_newgameButtonMousePressed
 
     private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
