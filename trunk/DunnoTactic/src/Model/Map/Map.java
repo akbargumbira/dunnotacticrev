@@ -5,10 +5,16 @@
 
 package Model.Map;
 
+import Model.Building.Barrack;
+import Model.Building.Blacksmith;
+import Model.Building.Building;
+import Model.Building.BuildingContainer;
+import Model.Building.Castle;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 /**
  *
@@ -25,6 +31,10 @@ public class Map implements Serializable{
     public final static int CASTLE4 = 7;
 
     public final static int NO_BUILDING = 0;
+    public final static int CASTLE = 1;
+    public final static int BARRACK = 2;
+    public final static int BLACKSMITH = 3;
+
     private final static String[] contentString = {
         "Rumput1",
         "Lumpur1",
@@ -44,37 +54,74 @@ public class Map implements Serializable{
     private int width;
     private int height;
     private int numPlayer;
-    private int[][] Terrain;
-    private int[][] Building;
-    
+    private int[][] terrain;
+    private int[][] building;
 
-    public Map() {
-       this.width = MIN_WIDTH;
-       this.height = MIN_HEIGHT;
-       Terrain = new int[width][height];
-       Building = new int[width][height];
-       FillDefault();
+    private BuildingContainer building_container = new BuildingContainer();
+
+    public Map(int numplayer) {
+       this(numplayer, MIN_WIDTH, MIN_HEIGHT);
     }
 
-    public Map(int width, int height) {
+    public Map(int numplayer, int width, int height) {
         this.height = height;
         this.width = width;
 
-        Terrain = new int[width][height];
+        terrain = new int[width][height];
+        building = new int[width][height];
         FillDefault();
+        this.numPlayer = numplayer;
     }
 
     private void FillDefault() {
         for (int i=0;i<width;++i) {
             for (int j=0;j<height;++j) {
-                Terrain[i][j] = 0;
+                terrain[i][j] = 0;
+                building[i][j] = 0;
             }
         }
     }
 
-    public void SetContent(int x, int y, int terrain) {
-        Terrain[x][y] = terrain;
+    public void SetTerrain(int x, int y, int terrain) {
+        this.terrain[x][y] = terrain;
     }
+
+    public void DelBuilding(int x, int y) {
+        this.building[x][y] = 0;
+        Building b = building_container.get(x, y);
+        if (b!=null) {
+            building_container.remove(b);
+        }
+    }
+
+    public void SetBuilding(int building, int player, int x, int y) {
+        Building b = building_container.get(x, y);
+
+        if (b!=null) {
+            building_container.remove(b);
+        }
+
+        switch (building) {
+            case CASTLE : {
+                b = new Castle(player,x,y);
+                break;
+            }
+
+            case BARRACK : {
+                b = new Barrack(player,x,y);
+                break;
+            }
+
+            case BLACKSMITH : {
+                b = new Blacksmith(player,x,y);
+                break;
+            }
+        }
+
+        building_container.add(b);
+        this.building[x][y] = b.getBuilding_BaseAtribut(Building.BUILDING_ID_IDX);
+    }
+
 
     public int GetHeight() {
         return height;
@@ -92,26 +139,23 @@ public class Map implements Serializable{
         this.numPlayer = numPlayer;
     }
 
-    public Point GetCastlePosition(int number) {
-        for (int i =0;i<width;++i) {
-            for (int j=0;j<height;++j) {
-                if (Terrain[i][j] == number) {
-                    return new Point(i, j);
-                }
-            }
-        }
-        return null;
+    public int GetTerrain(int x, int y) {
+        return terrain[x][y];
     }
 
-    public int GetContent(int x, int y) {
-        return Terrain[x][y];
+    public Building GetBuilding(int x, int y) {
+        return building_container.get(x, y);
+    }
+
+    public BuildingContainer GetBuildings() {
+        return building_container;
     }
 
     public static String GetString(int contentnumber) {
         return contentString[contentnumber];
     }
 
-    public static int GetContentNumber(String s) {
+    public static int GetTerrrainNumber(String s) {
         for (int i=0;i<contentString.length;++i) {
             if (s.equals(contentString[i])) {
                 return i;
@@ -120,25 +164,12 @@ public class Map implements Serializable{
         return -1;
     }
 
-    public boolean IsCastleIn(int number) {
-        if (GetCastlePosition(number)==null) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public boolean IsCastle(int number) {
-        if (number >= CASTLE1 && number <= CASTLE4) {
-            return true;
-        }
-
-        return false;
+    public boolean IsCastleIn(int player) {
+        return building_container.IsCastleIn(player);
     }
 
     public void SetMapRandom()
     {
-        int Castle = 4;
         int randterrain,randnum;
         Random rand = new Random();
 
@@ -161,7 +192,7 @@ public class Map implements Serializable{
         {
             randnum = Math.abs(rand.nextInt())%listpoint.size();
             p = listpoint.get(randnum);
-            Terrain[p.x][p.y] = AIR;
+            terrain[p.x][p.y] = AIR;
             listpoint.remove(randnum);
         }
 
@@ -170,7 +201,7 @@ public class Map implements Serializable{
         {
             randnum = Math.abs(rand.nextInt())%listpoint.size();
             p = listpoint.get(randnum);
-            Terrain[p.x][p.y] = POHON;
+            terrain[p.x][p.y] = POHON;
             listpoint.remove(randnum);
         }
 
@@ -180,16 +211,16 @@ public class Map implements Serializable{
         {
             randnum = Math.abs(rand.nextInt())%listpoint.size();
             p = listpoint.get(randnum);
-            Terrain[p.x][p.y] = LUMPUR;
+            terrain[p.x][p.y] = LUMPUR;
             listpoint.remove(randnum);
         }
 
         /* random castle */
-        for (int i=0;i<Castle;++i)
+        for (int i=0;i<numPlayer;++i)
         {
             randnum = Math.abs(rand.nextInt())%listpoint.size();
             p = listpoint.get(randnum);
-            Terrain[p.x][p.y] = CASTLE1+i;
+            SetBuilding(CASTLE, i+1, p.x, p.y);
             listpoint.remove(randnum);
         }
 
@@ -198,27 +229,40 @@ public class Map implements Serializable{
         for (int i=0;i<nterrain;++i)
         {
             p = listpoint.get(i);
-            Terrain[p.x][p.y] = RUMPUT;
+            terrain[p.x][p.y] = RUMPUT;
         }
     }
 
     @Override
     public String toString() {
         String s = new String();
+        s += "Terrain :\n";
         for (int i=0;i<width;++i) {
             for (int j=0;j<height;++j) {
                 s += Integer.toString(i);
                 s += ",";
                 s += Integer.toString(j);
                 s += " : ";
-                s += Integer.toString(Terrain[i][j]);
+                s += Integer.toString(terrain[i][j]);
                 s += "\n";
             }
         }
+
+        s += "Building :\n";
+        for (int i=0;i<width;++i) {
+            for (int j=0;j<height;++j) {
+                s += Integer.toString(i);
+                s += ",";
+                s += Integer.toString(j);
+                s += " : ";
+                s += Integer.toString(building[i][j]);
+                s += "\n";
+            }
+        }
+
+        s += building_container.toString();
         return s;
     }
-
-
         
 }
 

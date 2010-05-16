@@ -14,11 +14,11 @@ import java.io.IOException;
  * @author user
  */
 public class FileSupport {
-    public static String[] GetListFile(String directory) {
+    public static String[] GetListFile(String directory, String ext) {
         File dir = new File (".");
         String CurDir;
         String[] listFile = null;
-        String Ext = new String(".map");
+        String Ext = new String(ext);
         int i=0;
         int j=0;
         try

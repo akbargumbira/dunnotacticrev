@@ -12,32 +12,21 @@ package Model.Building;
 public class Driver
 {
     private static Building Build;
-    public static void PrintBuildingAttribute()
-    {
-        System.out.println("HP : "+ Build.getBuilding_BaseAtribut(0));
-        System.out.println("Defense : "+ Build.getBuilding_BaseAtribut(1));
-        System.out.println("Gold/turn : "+ Build.getBuilding_BaseAtribut(2));
-        System.out.println("BuildTime : "+ Build.getBuilding_BaseAtribut(3));
-        System.out.println("IsDestroyed : "+Build.IsBuildingDestroyed());
-        System.out.println();
-    }
+    private static BuildingContainer C = new BuildingContainer();
 
     public static void main (String args[])
     {
-        Build = new Castle();
-        System.out.println("Castle : ");
-        PrintBuildingAttribute();
-        Build = new Barrack();
-        System.out.println("Castle : ");
-        PrintBuildingAttribute();
-        //Build = new Barrack_Job();
-        System.out.println("Castle : ");
-        PrintBuildingAttribute();
-        Build = new Blacksmith();
-        System.out.println("Castle : ");
-        PrintBuildingAttribute();
+        Build = new Castle(1, 0, 1);
+        C.add(Build);
+        Build = new Barrack(2,0, 0);
+        C.add(Build);
+        Build = new Blacksmith(3, 0, 2);
+        Build = new Blacksmith(3, 0, 2);
+        C.add(Build);
 
-     
+
+        System.out.println(C.get(0, 2));
+
     }
 
 }

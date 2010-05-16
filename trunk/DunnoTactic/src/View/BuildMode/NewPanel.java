@@ -46,6 +46,9 @@ public class NewPanel extends javax.swing.JPanel {
         heightSpinner = new javax.swing.JSpinner();
         widthLabel = new javax.swing.JLabel();
         widthSpinner = new javax.swing.JSpinner();
+        numberplayerLabel = new javax.swing.JLabel();
+        numberplayerSpinner = new javax.swing.JSpinner();
+        cancelButton = new javax.swing.JButton();
 
         okButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         okButton.setText("OK");
@@ -55,52 +58,78 @@ public class NewPanel extends javax.swing.JPanel {
             }
         });
 
-        heightLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        heightLabel.setText("Height : ");
+        heightLabel.setFont(new java.awt.Font("Tahoma", 0, 18));
+        heightLabel.setText("Height            : ");
 
-        heightSpinner.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        heightSpinner.setFont(new java.awt.Font("Tahoma", 0, 18));
 
-        widthLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        widthLabel.setText("Width  : ");
+        widthLabel.setFont(new java.awt.Font("Tahoma", 0, 18));
+        widthLabel.setText("Width             : ");
 
-        widthSpinner.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        widthSpinner.setFont(new java.awt.Font("Tahoma", 0, 18));
+
+        numberplayerLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        numberplayerLabel.setText("Number Player :");
+
+        numberplayerSpinner.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        numberplayerSpinner.setModel(new javax.swing.SpinnerNumberModel(2, 2, 4, 1));
+
+        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(heightLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(heightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(widthLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(widthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(numberplayerLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(numberplayerSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(heightLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(heightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(widthLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(widthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(okButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(25, 25, 25)
+                        .addComponent(cancelButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(okButton)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(heightLabel)
+                    .addComponent(heightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(widthLabel)
+                    .addComponent(widthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(heightLabel)
-                            .addComponent(heightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(widthLabel)
-                            .addComponent(widthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(okButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(numberplayerLabel)
+                    .addComponent(numberplayerSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(okButton)
+                    .addComponent(cancelButton))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -109,9 +138,10 @@ public class NewPanel extends javax.swing.JPanel {
         /* Get new Size from Spinner */
         int height = (Integer)heightSpinner.getValue();
         int width = (Integer)widthSpinner.getValue();
+        int num = (Integer)numberplayerSpinner.getValue();
 
         /* Send New Map to parent */
-        Map map = new Map(height, width);
+        Map map = new Map(num, height, width);
         parent.SetMap(map);
 
         /* Repaint Map */
@@ -123,10 +153,17 @@ public class NewPanel extends javax.swing.JPanel {
         this.setVisible(false);
 }//GEN-LAST:event_okButtonActionPerformed
 
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+       this.setVisible(false);
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel heightLabel;
     private javax.swing.JSpinner heightSpinner;
+    private javax.swing.JLabel numberplayerLabel;
+    private javax.swing.JSpinner numberplayerSpinner;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel widthLabel;
     private javax.swing.JSpinner widthSpinner;

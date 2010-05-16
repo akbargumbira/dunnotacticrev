@@ -11,20 +11,26 @@ package Model.Building;
  */
 public class Blacksmith extends Building
 {
-    public Blacksmith()
+    public Blacksmith(int player, int x, int y)
     {
-        Building_BaseAtribut[BUILDING_HP_ID] = 20000;
-        Building_BaseAtribut[BUILDING_DEFENSE_ID] = 200;
-        Building_BaseAtribut[BUILDING_BUILD_TIME_ID] = 3;
-        Building_BaseAtribut[BUILDING_GOLD_PER_TURN_ID] = 0;
-        Building_BaseAtribut[BUILDING_LEVEL_ID]=1;
+        super(player,x,y);
+        Building_BaseAtribut[BUILDING_HP_IDX] = 20000;
+        Building_BaseAtribut[BUILDING_DEFENSE_IDX] = 200;
+        Building_BaseAtribut[BUILDING_BUILD_TIME_IDX] = 3;
+        Building_BaseAtribut[BUILDING_GOLD_PER_TURN_IDX] = 0;
+        Building_BaseAtribut[BUILDING_LEVEL_IDX]=1;
     }
 
     public void PerfectBuilding()
     {
-        Building_BaseAtribut[BUILDING_HP_ID]=2*Building_BaseAtribut[BUILDING_HP_ID];
-        Building_BaseAtribut[BUILDING_DEFENSE_ID] = 2*Building_BaseAtribut[BUILDING_DEFENSE_ID];
-        Building_BaseAtribut[BUILDING_GOLD_PER_TURN_ID]=300;
-        Building_BaseAtribut[BUILDING_BUILD_TIME_ID] = -1;
+        Building_BaseAtribut[BUILDING_HP_IDX]=2*Building_BaseAtribut[BUILDING_HP_IDX];
+        Building_BaseAtribut[BUILDING_DEFENSE_IDX] = 2*Building_BaseAtribut[BUILDING_DEFENSE_IDX];
+        Building_BaseAtribut[BUILDING_GOLD_PER_TURN_IDX]=300;
+        Building_BaseAtribut[BUILDING_BUILD_TIME_IDX] = -1;
+    }
+
+    @Override
+    public String toString() {
+        return "BlackSmith:\n"+super.toString();
     }
 }
