@@ -17,6 +17,7 @@ import Support.IOObject;
 import View.MainMenu;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
@@ -294,7 +295,31 @@ public class SelectPlayer extends javax.swing.JFrame {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
        GraphicsDevice[] devices = env.getScreenDevices();
-       Play2 f = new Play2((MainMenu)parent, devices[0], map);
+
+       int num = map.GetNumPlayer(); /* get num player */
+       Vector<Integer> vrace = new Vector<Integer>(); /* race container */
+       int n = 1;
+
+       /* add player 1 race to container */
+       n = player1ComboBox.getSelectedIndex()+1;
+       vrace.add(n);
+
+       /* add player 2's race to container */
+       n = player2ComboBox.getSelectedIndex()+1;
+       vrace.add(n);
+
+       if (num==3 || num==4) {
+           /* add player 3's race to container */
+           n = player3ComboBox.getSelectedIndex()+1;
+            vrace.add(n);
+       }
+
+       if (num==4) {
+           /* add player 4's race to container */
+           n = player4ComboBox.getSelectedIndex()+1;
+            vrace.add(n);
+       }
+       Play2 f = new Play2((MainMenu)parent, devices[0], map, vrace);
        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 

@@ -21,13 +21,13 @@ public class Character {
     private CharAtribut KarakterAtribut;
     private int LevelChar;
     private Special[] SpecialList = new Special[5];
+    private static int NEXT_ID = 1;
+    private int player;
 
-    public Character(){
-        
-    }
-
-    public Character(int ID, int RaceID){
-        KarakterAtribut = new CharAtribut(ID, RaceID, 0);
+    public Character(int RaceID, int player){
+        KarakterAtribut = new CharAtribut(NEXT_ID, RaceID, 0);
+        this.player = player;
+        ++NEXT_ID;
     }
 
     public CharAtribut GetAtribut(){
@@ -288,7 +288,33 @@ public class Character {
 
     @Override
     public String toString() {
-        return super.toString();
+        String s = new String();
+        s += "ID : ";
+        s += Integer.toString(GetAtribut().GetCharID());
+        s += "\n";
+
+        s += "Player : ";
+        s += Integer.toString(getPlayer());
+        s += "\n";
+
+        s += "Race : ";
+        s += Integer.toString(GetAtribut().GetRaceID());
+        s += "\n";
+        return s;
+    }
+
+    /**
+     * @return the player
+     */
+    public int getPlayer() {
+        return player;
+    }
+
+    /**
+     * @param player the player to set
+     */
+    public void setPlayer(int player) {
+        this.player = player;
     }
 
 
