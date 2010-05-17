@@ -4,7 +4,7 @@
  */
 
 package Model.Character;
-import Model.Game.Game;
+import Model.Game;
 import java.util.Random;
 import Model.Character.Special.*;
 import java.util.Vector;
@@ -71,7 +71,7 @@ public class Character {
     }
             
     public void AttackTree(int targetX, int targetY){
-        Game.M.SetTerrain(Game.M.RUMPUT, targetY, targetY);
+        //Game.M.SetTerrain(Game.M.RUMPUT, targetY, targetY);
         Random r = new Random();
         int RandBuffType = r.nextInt(100);
         int RandBuffEfek = r.nextInt(100);

@@ -15,7 +15,7 @@ import Model.Building.Barrack;
 import Model.Building.Blacksmith;
 import Model.Building.Building;
 import Model.Building.Castle;
-import Model.Game.Game1;
+import Model.Game;
 import Model.Map.Map;
 import Support.Converter;
 import Support.ImageSupport;
@@ -59,7 +59,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         this.device = device;
         this.parent = parent; /* Pointed parent Window */
         this.map = map; /* init map */
-        this.game = new Game1(map, vrace);
+        this.game = new Game(map, vrace);
         initComponents();
         ShowWindow();
         InitMap();
@@ -983,7 +983,7 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
     public static final int BORDER_MAIN_LAYER_PANE = 5;
     private boolean list = true;
     private Map map;
-    private Game1 game;
+    private Game game;
     private JLabel selectedterrain;
     private JLabel selectedchar;
     private JLabel selectedbuilding;

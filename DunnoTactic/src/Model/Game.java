@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package Model.Game;
+package Model;
 import Model.Building.Building;
 import Model.Character.Character;
 import Model.Character.CharacterContainer;
@@ -14,7 +14,7 @@ import java.util.Vector;
  *
  * @author ifan
  */
-public class Game1
+public class Game
 {
 
     private Map map;
@@ -23,7 +23,7 @@ public class Game1
     private CharacterContainer characters;
     private int playerturn = 1;
 
-    public Game1(Map map, Vector<Integer> vrace)
+    public Game(Map map, Vector<Integer> vrace)
     {
         this.map = map;
         this.vrace = vrace;
