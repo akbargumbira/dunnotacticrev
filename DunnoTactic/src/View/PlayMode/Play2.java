@@ -20,22 +20,17 @@ import Model.Map.Map;
 import Support.Converter;
 import Support.ImageSupport;
 import View.MainMenu;
-import java.awt.AWTEventMulticaster;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.Point;
-import java.awt.Transparency;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicBorders.FieldBorder;
 
@@ -53,7 +48,9 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         }
         
     }
-    /** Creates new form Play */
+    /** 
+     * Creates new form Play
+     */
     public Play2(MainMenu parent, GraphicsDevice device, Map map, Vector<Integer> vrace) {
         super(device.getDefaultConfiguration());
         this.device = device;
@@ -405,10 +402,13 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         actioncharacterPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         actioncharacterPanel.setOpaque(false);
         actioncharacterPanel.setPreferredSize(new java.awt.Dimension(125, 185));
+        actioncharacterPanel.setLayout(null);
 
         attackButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         attackButton.setText("Attack");
         attackButton.setAlignmentY(0.0F);
+        actioncharacterPanel.add(attackButton);
+        attackButton.setBounds(0, 0, 118, 31);
 
         moveButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         moveButton.setText("Move");
@@ -418,58 +418,28 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
                 moveButtonActionPerformed(evt);
             }
         });
+        actioncharacterPanel.add(moveButton);
+        moveButton.setBounds(0, 30, 118, 31);
 
         specialButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         specialButton.setText("Special");
         specialButton.setAlignmentY(0.0F);
+        actioncharacterPanel.add(specialButton);
+        specialButton.setBounds(0, 60, 118, 31);
 
         waitButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         waitButton.setText("Wait");
         waitButton.setAlignmentY(0.0F);
-        waitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                waitButtonActionPerformed(evt);
-            }
-        });
+        actioncharacterPanel.add(waitButton);
+        waitButton.setBounds(0, 90, 118, 31);
 
         cancelButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         cancelButton.setText("Cancel");
         cancelButton.setAlignmentY(0.0F);
+        actioncharacterPanel.add(cancelButton);
+        cancelButton.setBounds(0, 120, 118, 31);
 
-        javax.swing.GroupLayout actioncharacterPanelLayout = new javax.swing.GroupLayout(actioncharacterPanel);
-        actioncharacterPanel.setLayout(actioncharacterPanelLayout);
-        actioncharacterPanelLayout.setHorizontalGroup(
-            actioncharacterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(actioncharacterPanelLayout.createSequentialGroup()
-                .addComponent(specialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actioncharacterPanelLayout.createSequentialGroup()
-                .addGroup(actioncharacterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(waitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actioncharacterPanelLayout.createSequentialGroup()
-                .addGroup(actioncharacterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(attackButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(moveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        actioncharacterPanelLayout.setVerticalGroup(
-            actioncharacterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actioncharacterPanelLayout.createSequentialGroup()
-                .addComponent(attackButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(moveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(specialButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(waitButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cancelButton)
-                .addGap(12, 12, 12))
-        );
-
-        actioncharacterPanel.setBounds(770, 400, 125, 185);
+        actioncharacterPanel.setBounds(770, 400, 120, 150);
         layerpane.add(actioncharacterPanel, new Integer(1));
 
         upgradecharacterPanel.setOpaque(false);
@@ -552,10 +522,6 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void waitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waitButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_waitButtonActionPerformed
 
     private void upgradejobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upgradejobButtonActionPerformed
         JLabel l=selectedchar;
@@ -783,6 +749,9 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         }
     }
 
+    /**
+     * Tes
+     */
     private void InitMap() {
         /* Add new component(terrain & building ) in content Panel */
         int x,y,width,height;
@@ -839,6 +808,10 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         mapLayerPane.setPreferredSize(d);
     }
 
+
+    /**
+     * Show FullScreen Window
+     */
     private void ShowWindow()
     {
         Container pane = getContentPane();
@@ -919,6 +892,12 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
         /* scroll */
         scrollPane.setBackground(Color.black);
         scrollPane.setOpaque(false);
+
+//        /* border Label */
+//        borderLabel = new JLabel();
+//        borderPanel.add(borderLabel);
+//        borderLabel.setBounds(0, 0, ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT);
+//        borderLabel.setBorder(new FieldBorder(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK));
         
         disableAllActionPanel();
     }
@@ -987,4 +966,5 @@ public class Play2 extends javax.swing.JFrame implements MouseListener{
     private JLabel selectedterrain;
     private JLabel selectedchar;
     private JLabel selectedbuilding;
+    private JLabel borderLabel;
 }
