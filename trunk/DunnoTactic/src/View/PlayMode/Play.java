@@ -40,6 +40,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.plaf.basic.BasicBorders.FieldBorder;
 
 /**
  *
@@ -107,7 +108,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         infoTextArea = new javax.swing.JTextArea();
         buildPanel = new javax.swing.JPanel();
         barrackButton = new javax.swing.JButton();
-        bcButton = new javax.swing.JButton();
+        blackSmithButton = new javax.swing.JButton();
         listButton = new javax.swing.JButton();
         ListCharacterPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -128,11 +129,6 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         setTitle("Dunno");
         setResizable(false);
         setUndecorated(true);
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
@@ -148,11 +144,6 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         mapLayerPane.setBackground(new java.awt.Color(0, 0, 0));
         mapLayerPane.setOpaque(true);
-        mapLayerPane.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                mapLayerPaneMousePressed(evt);
-            }
-        });
 
         terrainPanel.setOpaque(false);
         terrainPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -418,21 +409,16 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         buildPanel.add(barrackButton);
         barrackButton.setBounds(5, 15, 150, 25);
 
-        bcButton.setFont(new java.awt.Font("Tahoma", 0, 12));
-        bcButton.setText("BlackSmith");
-        bcButton.setFocusable(false);
-        bcButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        blackSmithButton.setFont(new java.awt.Font("Tahoma", 0, 12));
+        blackSmithButton.setText("BlackSmith");
+        blackSmithButton.setFocusable(false);
+        blackSmithButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                bcButtonMousePressed(evt);
+                blackSmithButtonMousePressed(evt);
             }
         });
-        bcButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bcButtonActionPerformed(evt);
-            }
-        });
-        buildPanel.add(bcButton);
-        bcButton.setBounds(5, 40, 150, 25);
+        buildPanel.add(blackSmithButton);
+        blackSmithButton.setBounds(5, 40, 150, 25);
 
         buildPanel.setBounds(1030, 470, 160, 70);
         layerpane.add(buildPanel, new Integer(1));
@@ -556,15 +542,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         }
     }//GEN-LAST:event_formMouseMoved
 
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        JOptionPane.showMessageDialog(this, evt);
-    }//GEN-LAST:event_formMouseClicked
-
-    private void bcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcButtonActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_bcButtonActionPerformed
-
-    private void bcButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bcButtonMousePressed
+    private void blackSmithButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_blackSmithButtonMousePressed
         /* Check selected grid -> can't build if there is no grid selected */
         if (selectedterrain==null)
             return;
@@ -575,7 +553,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         Point p = selectedterrain.getLocation();
         Point pGrid = Converter.PointToGrid(p);
         int t = game.getMap().GetTerrain(pGrid.x, pGrid.y);
-        if (t == Map.AIR || t == Map.LUMPUR)
+        if (t == Map.AIR || t == Map.LUMPUR || t == Map.POHON)
             return;
 
         /* Check Building -> can't build if there is a building */
@@ -590,7 +568,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         game.getMap().SetBuilding(Map.BLACKSMITH, game.getPlayerturn(), pGrid.x, pGrid.y, 0, 0);
         InitMap();
-}//GEN-LAST:event_bcButtonMousePressed
+}//GEN-LAST:event_blackSmithButtonMousePressed
 
     private void barrackButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barrackButtonMousePressed
         /* Check selected grid -> can't build if there is no grid selected */
@@ -705,22 +683,22 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         this.dispose();
 }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void mapLayerPaneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapLayerPaneMousePressed
-
-}//GEN-LAST:event_mapLayerPaneMousePressed
-
     private void terrainPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_terrainPanelMousePressed
         Component c = terrainPanel.getComponentAt(evt.getX(), evt.getY());
         JLabel l;
 
         disableAllActionPanel();
         if (c instanceof JLabel) {
+            if (selectedterrain!=null) {
+            selectedterrain.setBorder(null);
+            }
             l = (JLabel) c;
             selectedterrain = l;
+            l.setBorder(new FieldBorder(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK));
         } else {
             return;
         }
-}//GEN-LAST:event_terrainPanelMousePressed
+    }//GEN-LAST:event_terrainPanelMousePressed
 
     public void createContent(int x, int y, int width, int height, String iconName, JPanel p) {
         Component c =  p.getComponentAt(x, y);
@@ -992,7 +970,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JPanel ListCharacterPanel;
     private javax.swing.JButton attackButton;
     private javax.swing.JButton barrackButton;
-    private javax.swing.JButton bcButton;
+    private javax.swing.JButton blackSmithButton;
     private javax.swing.JPanel buildPanel;
     private javax.swing.JPanel buildingPanel;
     private javax.swing.JPanel buildingactionPanel;
