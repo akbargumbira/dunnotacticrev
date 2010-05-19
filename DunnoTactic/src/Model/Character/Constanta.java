@@ -51,16 +51,13 @@ public class Constanta {
     public static final int JOB32_SAGE_ID = 105;
     public static final int JOB32_DARK_STALKER_ID = 106;
 
-    public static final int PRICE_SUMMON_NOVICE = 1000;
-    public static final int PRICE_UPGRADE_JOB2_HUMAN = 800;
-    public static final int PRICE_UPGRADE_JOB3_HUMAN = 1800;
-    public static final int PRICE_UPGRADE_JOB2_ELF = 1000;
-    public static final int PRICE_UPGRADE_JOB3_ELF = 3000;
-    public static final int PRICE_UPGRADE_JOB2_FAIRY = 1200;
-    public static final int PRICE_UPGRADE_JOB3_FAIRY = 1800;
-    public static final int PRICE_UPGRADE_STATUS_HUMANF = 1400;
-    public static final int PRICE_UPGRADE_STATUS_ELF = 1200;
-    public static final int PRICE_UPGRADE_STATUS_FAIRY = 1000;
+    public static final int PRICE_SUMMON_NOVICE = 100;
+    public static final int PRICE_UPGRADE_JOB2 = 150;
+    public static final int PRICE_UPGRADE_JOB3 = 200;
+    public static final int PRICE_UPGRADE_STATUS_1 = 100;
+    public static final int PRICE_UPGRADE_STATUS_2 = 150;
+    public static final int PRICE_UPGRADE_STATUS_3 = 200;
+    public static final int PRICE_UPGRADE_STATUS_4 = 300;
 
     public static final int BUFF_ACTION_DISABLE_ID = 0;
     public static final int BUFF_ACTION_IMMOBILIZE_ID = 1;
