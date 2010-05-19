@@ -25,7 +25,7 @@ public class Fairy extends Race {
         BaseAtribut[Constanta.RANGE_ATTACK_ID]=1;
 
         FactorBuilding[0]=0.3;
-        FactorBuilding[1]=0.1;
+        FactorBuilding[1]=0.3;
         
         RaceID=Constanta.RACE_FAIRY_ID;
         RaceLevel=1;

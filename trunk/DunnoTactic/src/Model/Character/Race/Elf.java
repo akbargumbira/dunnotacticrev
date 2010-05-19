@@ -24,8 +24,8 @@ public class Elf extends Race {
         BaseAtribut[Constanta.RANGE_MOVE_ID]=5;
         BaseAtribut[Constanta.RANGE_ATTACK_ID]=1;
 
-        FactorBuilding[0]=0.1;
-        FactorBuilding[1]=0.3;
+        FactorBuilding[0]=0.2;
+        FactorBuilding[1]=0.2;
 
         RaceID=Constanta.RACE_ELF_ID;
         RaceLevel=1;

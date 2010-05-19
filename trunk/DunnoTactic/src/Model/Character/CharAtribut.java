@@ -241,10 +241,13 @@ public class CharAtribut {
             }
         }
         ClearAllBuff();
+        SetFirstDefaultAtribut();
+        CalculateCurrentAtribut();
     }
 
     public void Upgrade(){
         RaceChar.UpgradeRace();
+        ClearAllBuff();
         SetFirstDefaultAtribut();
         CalculateCurrentAtribut();
     }
@@ -259,6 +262,10 @@ public class CharAtribut {
             }
         }
         CalculateCurrentAtribut();
+    }
+
+    public int GetRangeMove(){
+        return CurrentAtribut[Constanta.RANGE_MOVE_ID];
     }
 
     @Override

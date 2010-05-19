@@ -28,7 +28,7 @@ public class Barrack extends Building
     {
         Building_BaseAtribut[BUILDING_HP_IDX]=2*Building_BaseAtribut[BUILDING_HP_IDX];
         Building_BaseAtribut[BUILDING_DEFENSE_IDX] = 2*Building_BaseAtribut[BUILDING_DEFENSE_IDX];
-        Building_BaseAtribut[BUILDING_GOLD_PER_TURN_IDX]=(int)Math.ceil(RaceFactorGold*100);
+        Building_BaseAtribut[BUILDING_GOLD_PER_TURN_IDX]=(int)Math.ceil(RaceFactorGold*300);
         Building_BaseAtribut[BUILDING_BUILD_TIME_IDX] = -1;
     }
 

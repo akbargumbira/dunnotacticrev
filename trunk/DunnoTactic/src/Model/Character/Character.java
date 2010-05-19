@@ -9,6 +9,7 @@ import java.util.Random;
 import Model.Character.Special.*;
 import java.util.Vector;
 import Model.Building.Building;
+import java.awt.Point;
 /**
  *
  * @author ifan
@@ -365,5 +366,9 @@ public class Character {
     public void setLocation(int x, int y) {
         this.X = x;
         this.Y = y;
+    }
+
+    public Point getLocation(){
+        return new Point(X,Y);
     }
 }
