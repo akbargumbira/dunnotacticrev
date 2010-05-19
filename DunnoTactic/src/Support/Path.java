@@ -5,6 +5,7 @@
 
 package Support;
 import Model.Character.Constanta;
+import Model.Map.Map;
 import java.awt.Point;
 
 /**
@@ -122,7 +123,7 @@ public class Path {
         if(RaceID==Constanta.RACE_FAIRY_ID){
             pass = true;
         } else {
-            if(TerrainID==2 || TerrainID == 3){
+            if(TerrainID==Map.AIR || TerrainID == Map.POHON){
                 pass = false;
             } else {
                 pass = true;

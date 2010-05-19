@@ -625,7 +625,19 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
                 createContent(l.getX(), l.getY(), ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT, s, buildingPanel);
                 buildingPanel.repaint();
                 Point gridpoint = Converter.PointToGrid(l.getX(), l.getY());
-                mapLogic.SetBuilding(mapLogic.CASTLE, player, gridpoint.x, gridpoint.y, 1, 0);
+                if (buildingname.equals(Building.CASTLE_S)) {
+                    n = Map.CASTLE;
+                }
+
+                if (buildingname.equals(Building.BARRACK_S)) {
+                    n = Map.BARRACK;
+                }
+
+                if (buildingname.equals(Building.BLACKSMITH_S)) {
+                    n = Map.BLACKSMITH;
+                }
+
+                mapLogic.SetBuilding(n, player, gridpoint.x, gridpoint.y, 1, 0);
             }
 
             for (int i=0; i<selected.size(); ++i) {
