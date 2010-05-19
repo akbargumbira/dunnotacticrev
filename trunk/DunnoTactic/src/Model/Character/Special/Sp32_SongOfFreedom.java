@@ -15,9 +15,9 @@ public class Sp32_SongOfFreedom extends Special {
     public Sp32_SongOfFreedom(){
         SpecialName="Song of Freedom";
         SpecialID=ConstantaSp.SP_BARD_SONG_OF_FREEDOM_ID;
-        SPCost = 30;
+        SPCost =100;
         BaseAcc=100;
-        RangeSpecial = 7;
+        RangeSpecial = 3;
         AreaType = true;
         TargetEnemy = false;
     }

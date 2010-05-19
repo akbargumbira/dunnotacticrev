@@ -16,9 +16,9 @@ public class Sp31_HealingCircle extends Special {
     public Sp31_HealingCircle(){
         SpecialName="Healing Circle";
         SpecialID=ConstantaSp.SP_BISHOP_HEALING_CIRCLE_ID;
-        SPCost = 30;
+        SPCost = 95;
         BaseAcc=100;
-        RangeSpecial = 5;
+        RangeSpecial = 2;
         AreaType = true;
         TargetEnemy = false;
     }

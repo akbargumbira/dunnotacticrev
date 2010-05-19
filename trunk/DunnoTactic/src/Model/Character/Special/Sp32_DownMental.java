@@ -17,9 +17,9 @@ public class Sp32_DownMental extends Special {
     public Sp32_DownMental(){
         SpecialName="Down Mental";
         SpecialID=ConstantaSp.SP_BARD_DOWN_MENTAL_ID;
-        SPCost = 30;
+        SPCost =110;
         BaseAcc=100;
-        RangeSpecial = 7;
+        RangeSpecial = 3;
         AreaType = true;
         TargetEnemy = true;
     }

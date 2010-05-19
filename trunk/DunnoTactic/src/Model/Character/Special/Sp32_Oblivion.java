@@ -17,7 +17,7 @@ public class Sp32_Oblivion extends Special {
     public Sp32_Oblivion(){
         SpecialName="Oblivion";
         SpecialID=ConstantaSp.SP_DARK_STALKER_OBLIVION_ID;
-        SPCost = 30;
+        SPCost =100;
         BaseAcc=80;
         RangeSpecial = 4;
         AreaType = false;

@@ -15,9 +15,9 @@ public class Sp32_AbundanceLife extends Special {
     public Sp32_AbundanceLife(){
         SpecialName="AbundanceLife";
         SpecialID=ConstantaSp.SP_DEFENDER_ABUNDANCE_LIFE_ID;
-        SPCost = 30;
+        SPCost =120;
         BaseAcc=100;
-        RangeSpecial = 0;
+        RangeSpecial = 4;
         AreaType = false;
         TargetEnemy = false;
     }

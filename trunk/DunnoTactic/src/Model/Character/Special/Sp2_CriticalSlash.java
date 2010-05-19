@@ -17,7 +17,7 @@ public class Sp2_CriticalSlash extends Special {
     public Sp2_CriticalSlash(){
         SpecialName="Critical Slash";
         SpecialID=ConstantaSp.SP_WARRIOR_CRITICAL_SLASH_ID;
-        SPCost = 10;
+        SPCost =60;
         BaseAcc=70;
         RangeSpecial = 1;
         AreaType = false;

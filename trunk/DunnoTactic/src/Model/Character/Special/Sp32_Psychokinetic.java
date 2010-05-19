@@ -17,9 +17,9 @@ public class Sp32_Psychokinetic extends Special {
     public Sp32_Psychokinetic(){
         SpecialName="Psychokinetic";
         SpecialID=ConstantaSp.SP_SAGE_PSYCHOKINETIC_ID;
-        SPCost = 30;
+        SPCost =160;
         BaseAcc=80;
-        RangeSpecial = 7;
+        RangeSpecial = 3;
         AreaType = false;
         TargetEnemy = true;
     }

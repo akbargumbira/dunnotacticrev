@@ -17,7 +17,7 @@ public class Sp32_SaintCross extends Special {
     public Sp32_SaintCross(){
         SpecialName="Saint Cross";
         SpecialID=ConstantaSp.SP_PALADIN_SAINT_CROSS_ID;
-        SPCost = 30;
+        SPCost =110;
         BaseAcc=80;
         RangeSpecial = 2;
         AreaType = true;

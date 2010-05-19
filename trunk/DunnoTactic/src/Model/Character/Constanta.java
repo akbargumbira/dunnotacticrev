@@ -81,4 +81,7 @@ public class Constanta {
     public static final int BUFF_STATUS_FLEETING_TIME_ID = 54;
     public static final int BUFF_STATUS_FOCUS_SIGHT_ID = 55;
     public static final int BUFF_STATUS_SWORD_MELTING_ID = 56;
+    public static final int BUFF_STATUS_HOLY_BARRIER_ID = 57;;
+    public static final int BUFF_STATUS_SEVEN_HEAVEN_ID = 58;
+
 }

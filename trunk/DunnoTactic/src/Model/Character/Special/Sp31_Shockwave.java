@@ -16,9 +16,9 @@ public class Sp31_Shockwave extends Special {
     public Sp31_Shockwave(){
         SpecialName="Sword Fury";
         SpecialID=ConstantaSp.SP_ARCH_KNIGHT_SWORD_FURY_ID;
-        SPCost = 30;
+        SPCost =140;
         BaseAcc=80;
-        RangeSpecial = 7;
+        RangeSpecial = 3;
         AreaType = true;
         TargetEnemy = true;
     }

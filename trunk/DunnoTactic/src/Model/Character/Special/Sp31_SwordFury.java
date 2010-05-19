@@ -17,7 +17,7 @@ public class Sp31_SwordFury extends Special {
     public Sp31_SwordFury(){
         SpecialName="Sword Fury";
         SpecialID=ConstantaSp.SP_ARCH_KNIGHT_SWORD_FURY_ID;
-        SPCost = 30;
+        SPCost =95;
         BaseAcc=80;
         RangeSpecial = 1;
         AreaType = false;

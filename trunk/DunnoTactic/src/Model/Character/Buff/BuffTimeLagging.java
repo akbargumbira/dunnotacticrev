@@ -26,6 +26,6 @@ public class BuffTimeLagging extends BuffEfek {
         StatusActionBuff[Constanta.BUFF_ACTION_IMMOBILIZE_ID]=false;
         StatusActionBuff[Constanta.BUFF_ACTION_SILENCE_ID]=false;
 
-        DurationBuff=3;
+        DurationBuff=2;
     }
 }

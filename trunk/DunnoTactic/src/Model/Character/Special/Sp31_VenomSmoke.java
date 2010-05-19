@@ -16,9 +16,9 @@ public class Sp31_VenomSmoke extends Special {
     public Sp31_VenomSmoke(){
         SpecialName="Venom Smoke";
         SpecialID=ConstantaSp.SP_ASSASSIN_VENOM_SMOKE_ID;
-        SPCost = 30;
+        SPCost =90;
         BaseAcc=90;
-        RangeSpecial = 9;
+        RangeSpecial = 4;
         AreaType = true;
         TargetEnemy = true;
     }

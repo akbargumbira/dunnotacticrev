@@ -15,9 +15,9 @@ public class Sp32_SwordReflect extends Special {
     public Sp32_SwordReflect(){
         SpecialName="Sword Reflect";
         SpecialID=ConstantaSp.SP_PALADIN_SWORD_REFLECT_ID;
-        SPCost = 30;
-        BaseAcc=90;
-        RangeSpecial = 100;
+        SPCost =130;
+        BaseAcc=100;
+        RangeSpecial = 3;
         AreaType = false;
         TargetEnemy = false;
     }
@@ -25,7 +25,11 @@ public class Sp32_SwordReflect extends Special {
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){
         int SP = KarakterAtribut.GetCurrent(Constanta.SP_ID)-SPCost;
         KarakterAtribut.SetCurrentAtribut(Constanta.SP_ID, SP);
-
+        CharAtribut temp = new CharAtribut();
+        for(int i=0;i<TargetAtribut.size();++i){
+            temp = TargetAtribut.get(i);
+            temp.SetBuff(Constanta.BUFF_STATUS_SEVEN_HEAVEN_ID);
+        }
         
     }
 }

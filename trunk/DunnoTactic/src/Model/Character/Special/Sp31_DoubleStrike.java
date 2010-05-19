@@ -16,7 +16,7 @@ public class Sp31_DoubleStrike extends Special {
     public Sp31_DoubleStrike(){
         SpecialName="Double Strike";
         SpecialID=ConstantaSp.SP_RANGER_DOUBLE_STRIKE_ID;
-        SPCost = 30;
+        SPCost =110;
         BaseAcc=80;
         RangeSpecial = 5;
         AreaType = false;

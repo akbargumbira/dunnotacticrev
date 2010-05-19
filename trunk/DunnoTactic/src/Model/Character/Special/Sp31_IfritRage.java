@@ -16,9 +16,9 @@ public class Sp31_IfritRage extends Special {
     public Sp31_IfritRage(){
         SpecialName="Ifrit Rage";
         SpecialID=ConstantaSp.SP_ARCH_MAGE_IFRIT_RAGE_ID;
-        SPCost = 30;
+        SPCost = 135;
         BaseAcc=85;
-        RangeSpecial = 7;
+        RangeSpecial = 3;
         AreaType = true;
         TargetEnemy = true;
     }

@@ -114,6 +114,16 @@ public class Buff {
                     BuffID=Constanta.BUFF_STATUS_SWORD_MELTING_ID;
                 }
                 break;
+                case Constanta.BUFF_STATUS_HOLY_BARRIER_ID : {
+                    BuffEfekChar = new BuffHolyBarrier();
+                    BuffID=Constanta.BUFF_STATUS_HOLY_BARRIER_ID;
+                }
+                break;
+                case Constanta.BUFF_STATUS_SEVEN_HEAVEN_ID : {
+                    BuffEfekChar = new BuffSevenHeaven();
+                    BuffID=Constanta.BUFF_STATUS_SEVEN_HEAVEN_ID;
+                }
+                break;
                 default : {
                     
                 }

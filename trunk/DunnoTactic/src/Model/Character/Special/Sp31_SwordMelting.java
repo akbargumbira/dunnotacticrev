@@ -16,7 +16,7 @@ public class Sp31_SwordMelting extends Special {
     public Sp31_SwordMelting(){
         SpecialName="Sword Melting";
         SpecialID=ConstantaSp.SP_BLADEMASTER_SWORD_MELTING_ID;
-        SPCost = 30;
+        SPCost =80;
         BaseAcc=90;
         RangeSpecial = 0;
         AreaType = false;

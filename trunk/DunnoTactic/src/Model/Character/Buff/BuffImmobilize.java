@@ -27,6 +27,6 @@ public class BuffImmobilize extends BuffEfek {
         StatusActionBuff[Constanta.BUFF_ACTION_IMMOBILIZE_ID]=true;
         StatusActionBuff[Constanta.BUFF_ACTION_SILENCE_ID]=false;
 
-        DurationBuff=4;
+        DurationBuff=2;
     }
 }
