@@ -19,6 +19,8 @@ public class Sp31_SwordMelting extends Special {
         SPCost = 30;
         BaseAcc=90;
         RangeSpecial = 0;
+        AreaType = false;
+        TargetEnemy = false;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

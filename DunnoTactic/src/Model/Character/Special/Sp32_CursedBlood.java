@@ -20,6 +20,8 @@ public class Sp32_CursedBlood extends Special {
         SPCost = 30;
         BaseAcc=80;
         RangeSpecial = 7;
+        AreaType = true;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

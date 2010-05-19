@@ -20,6 +20,8 @@ public class Sp2_CriticalSlash extends Special {
         SPCost = 10;
         BaseAcc=70;
         RangeSpecial = 1;
+        AreaType = false;
+        TargetEnemy = true;
     }
     
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

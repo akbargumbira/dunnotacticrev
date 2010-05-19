@@ -18,6 +18,8 @@ public class Sp31_PhoenixTear extends Special {
         SPCost = 30;
         BaseAcc=100;
         RangeSpecial = 11;
+        AreaType = false;
+        TargetEnemy = false;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

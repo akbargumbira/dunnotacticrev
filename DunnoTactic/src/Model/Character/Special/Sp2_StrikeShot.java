@@ -20,6 +20,8 @@ public class Sp2_StrikeShot extends Special {
         SPCost = 10;
         BaseAcc=80;
         RangeSpecial = 5;
+        AreaType = false;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

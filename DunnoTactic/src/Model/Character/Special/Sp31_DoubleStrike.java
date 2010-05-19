@@ -19,6 +19,8 @@ public class Sp31_DoubleStrike extends Special {
         SPCost = 30;
         BaseAcc=80;
         RangeSpecial = 5;
+        AreaType = false;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

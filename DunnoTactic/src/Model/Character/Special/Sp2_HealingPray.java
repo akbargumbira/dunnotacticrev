@@ -19,6 +19,8 @@ public class Sp2_HealingPray extends Special {
         SPCost = 30;
         BaseAcc=100;
         RangeSpecial = 5;
+        AreaType = false;
+        TargetEnemy = false;
     }
     
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

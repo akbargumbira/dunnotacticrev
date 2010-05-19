@@ -19,6 +19,8 @@ public class Sp31_HealingCircle extends Special {
         SPCost = 30;
         BaseAcc=100;
         RangeSpecial = 5;
+        AreaType = true;
+        TargetEnemy = false;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

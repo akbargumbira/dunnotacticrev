@@ -18,6 +18,8 @@ public class Sp32_SongOfFreedom extends Special {
         SPCost = 30;
         BaseAcc=100;
         RangeSpecial = 7;
+        AreaType = true;
+        TargetEnemy = false;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

@@ -19,6 +19,8 @@ public class Sp31_HurricaneSword extends Special {
         SPCost = 30;
         BaseAcc=75;
         RangeSpecial = 1;
+        AreaType = true;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

@@ -18,6 +18,8 @@ public class Sp32_SwordReflect extends Special {
         SPCost = 30;
         BaseAcc=90;
         RangeSpecial = 100;
+        AreaType = false;
+        TargetEnemy = false;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

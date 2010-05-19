@@ -272,7 +272,7 @@ public class CharAtribut {
     }
 
     public void Upgrade(){
-        RaceChar.UpgrageRace();
+        RaceChar.UpgradeRace();
         SetFirstDefaultAtribut();
         CalculateCurrentAtribut();
     }
@@ -292,8 +292,36 @@ public class CharAtribut {
     @Override
     public String toString() {
         String s = new String();
+        s += "Current Atribut :\n";
         s += "HP : ";
         s += Integer.toString(CurrentAtribut[Constanta.HP_ID]);
+        s += "\n";
+        s += "SP : ";
+        s += Integer.toString(CurrentAtribut[Constanta.SP_ID]);
+        s += "\n";
+        s += "Attack : ";
+        s += Integer.toString(CurrentAtribut[Constanta.ATTACK_ID]);
+        s += "\n";
+        s += "Magic Attack : ";
+        s += Integer.toString(CurrentAtribut[Constanta.MATTACK_ID]);
+        s += "\n";
+        s += "Defense : ";
+        s += Integer.toString(CurrentAtribut[Constanta.DEF_ID]);
+        s += "\n";
+        s += "Magic Defense : ";
+        s += Integer.toString(CurrentAtribut[Constanta.MDEF_ID]);
+        s += "\n";
+        s += "Accuracy : ";
+        s += Integer.toString(CurrentAtribut[Constanta.ACC_ID]);
+        s += "\n";
+        s += "Evasion : ";
+        s += Integer.toString(CurrentAtribut[Constanta.EVA_ID]);
+        s += "\n";
+        s += "Range Move : ";
+        s += Integer.toString(CurrentAtribut[Constanta.RANGE_MOVE_ID]);
+        s += "\n";
+        s += "Range Attack : ";
+        s += Integer.toString(CurrentAtribut[Constanta.RANGE_ATTACK_ID]);
         s += "\n";
         return s;
     }

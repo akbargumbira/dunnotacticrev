@@ -19,6 +19,8 @@ public class Sp31_VenomSmoke extends Special {
         SPCost = 30;
         BaseAcc=90;
         RangeSpecial = 9;
+        AreaType = true;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

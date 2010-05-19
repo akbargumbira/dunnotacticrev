@@ -19,7 +19,9 @@ public class Sp31_SwordFury extends Special {
         SpecialID=ConstantaSp.SP_ARCH_KNIGHT_SWORD_FURY_ID;
         SPCost = 30;
         BaseAcc=80;
-        RangeSpecial = 0;
+        RangeSpecial = 1;
+        AreaType = false;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

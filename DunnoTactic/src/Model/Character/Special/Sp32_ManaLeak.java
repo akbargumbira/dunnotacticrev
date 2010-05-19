@@ -19,6 +19,8 @@ public class Sp32_ManaLeak extends Special {
         SPCost = 30;
         BaseAcc=60;
         RangeSpecial = 7;
+        AreaType = true;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

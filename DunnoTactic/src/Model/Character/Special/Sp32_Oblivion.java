@@ -20,6 +20,8 @@ public class Sp32_Oblivion extends Special {
         SPCost = 30;
         BaseAcc=80;
         RangeSpecial = 4;
+        AreaType = false;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

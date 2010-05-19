@@ -19,6 +19,8 @@ public class Sp31_HalfLife extends Special {
         SPCost = 30;
         BaseAcc=75;
         RangeSpecial = 6;
+        AreaType = false;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

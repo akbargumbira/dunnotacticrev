@@ -16,8 +16,10 @@ public class Sp32_Barrier extends Special {
         SpecialName="Barrier";
         SpecialID=ConstantaSp.SP_DEFENDER_BARRIER_ID;
         SPCost = 30;
-        BaseAcc=90;
-        RangeSpecial = 100;
+        BaseAcc=100;
+        RangeSpecial = 0;
+        AreaType = false;
+        TargetEnemy = false;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){
