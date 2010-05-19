@@ -23,11 +23,14 @@ public class Character {
     private Special[] SpecialList = new Special[5];
     private static int NEXT_ID = 1;
     private int player;
+    private int X;
+    private int Y;
+    private int ID;
 
     public Character(int RaceID, int player){
-        KarakterAtribut = new CharAtribut(NEXT_ID, RaceID);
+        KarakterAtribut = new CharAtribut(RaceID);
         this.player = player;
-        ++NEXT_ID;
+        ID = NEXT_ID++;
     }
 
     public CharAtribut GetAtribut(){
@@ -35,7 +38,8 @@ public class Character {
     }
         
     public void Move(int targetX, int targetY){
-        KarakterAtribut.SetPositionXY(targetX, targetY);
+        X = targetX;
+        Y = targetY;
         ++EnableCounter;
         if(EnableCounter==2){
             enable=false;
@@ -292,7 +296,7 @@ public class Character {
     public String toString() {
         String s = new String();
         s += "ID : ";
-        s += Integer.toString(GetAtribut().GetCharID());
+        s += Integer.toString(getID());
         s += "\n";
 
         s += "Player : ";
@@ -319,5 +323,47 @@ public class Character {
         this.player = player;
     }
 
+    /**
+     * @return the X
+     */
+    public int getX() {
+        return X;
+    }
 
+    /**
+     * @param X the X to set
+     */
+    public void setX(int X) {
+        this.X = X;
+    }
+
+    /**
+     * @return the Y
+     */
+    public int getY() {
+        return Y;
+    }
+
+    /**
+     * @param Y the Y to set
+     */
+    public void setY(int Y) {
+        this.Y = Y;
+    }
+
+    /**
+     * @return the ID
+     */
+    public int getID() {
+        return ID;
+    }
+
+
+    /**
+     * Set Character Position
+     */
+    public void setLocation(int x, int y) {
+        this.X = x;
+        this.Y = y;
+    }
 }

@@ -42,8 +42,8 @@ public class Game
             b = getMap().GetBuildings().getCastle(i+1);
             x = b.getBuilding_BaseAtribut(Building.BUILDING_X_IDX);
             y = b.getBuilding_BaseAtribut(Building.BUILDING_Y_IDX);
-            c.GetAtribut().SetPositionXY(x, y);
-            getCharactermap()[x][y] = c.GetAtribut().GetCharID();
+            c.setLocation(x, y);
+            getCharactermap()[x][y] = c.getID();
             getCharacters().add(c);
         }
     }

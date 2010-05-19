@@ -12,7 +12,7 @@
 package View;
 
 import View.BuildMode.BuildMap;
-import View.PlayMode.Play2;
+import View.PlayMode.Play;
 import View.PlayMode.SelectPlayer;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -114,7 +114,7 @@ public class MainMenu extends javax.swing.JFrame {
         this.setVisible(false);
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                play = new Play2(me);
+//                play = new Play(me);
 //                play.setVisible(true);
 //            }
 //        });
@@ -151,7 +151,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton newgameButton;
     // End of variables declaration//GEN-END:variables
-    private Play2 play;
+    private Play play;
     private BuildMap buildmap;
     private MainMenu me=this;
 }

@@ -62,8 +62,8 @@ public class Driver {
         }
     }
     public static void PrintPosition(){
-        System.out.println(Karakter.GetAtribut().GetPositionX());
-        System.out.println(Karakter.GetAtribut().GetPositionY());
+        System.out.println(Karakter.getX());
+        System.out.println(Karakter.getY());
     }
 
     public static void PrintAtributDefault2(){
@@ -78,7 +78,7 @@ public class Driver {
         }
     }
     public static void PrintPosition2(){
-        System.out.println(Karakter.GetAtribut().GetPositionX());
-        System.out.println(Karakter.GetAtribut().GetPositionY());
+        System.out.println(Karakter.getX());
+        System.out.println(Karakter.getY());
     }
 }

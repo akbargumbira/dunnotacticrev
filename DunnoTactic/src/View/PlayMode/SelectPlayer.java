@@ -319,7 +319,7 @@ public class SelectPlayer extends javax.swing.JFrame {
            n = player4ComboBox.getSelectedIndex()+1;
             vrace.add(n);
        }
-       Play2 f = new Play2((MainMenu)parent, devices[0], map, vrace);
+       Play f = new Play((MainMenu)parent, devices[0], map, vrace);
        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
