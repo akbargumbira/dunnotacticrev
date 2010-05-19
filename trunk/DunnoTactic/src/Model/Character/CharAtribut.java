@@ -13,7 +13,6 @@ import Model.Character.Buff.Buff;
  * @author ifan
  */
 public class CharAtribut {
-    private int CharID;
     private int[] CurrentAtribut = new int[Constanta.NUMBER_ATRIBUT];
     private int[] DefaultAtribut = new int[Constanta.NUMBER_ATRIBUT];
     private boolean[] GuardStatus = new boolean[2];
@@ -21,8 +20,6 @@ public class CharAtribut {
     private int[] BuffListID = new int[3];
     private int[] BuffStatusDuration = new int[3];
     private int BuffCounter;
-    private int PositionX;
-    private int PositionY;
     private Race RaceChar;
     private Job JobChar;
     private Buff[] BuffChar = new Buff[3];
@@ -33,10 +30,8 @@ public class CharAtribut {
         }
     }
 
-    public CharAtribut(int CId, int RId){
-        for(int i = 0; i<3;++i){
-            BuffChar[i]=new Buff();
-        }
+    public CharAtribut(int RId){
+        this();
         switch(RId){
             case Constanta.RACE_HUMAN_ID : {
                 RaceChar = new Human();
@@ -56,14 +51,8 @@ public class CharAtribut {
             break;
         }
         JobChar = new J1_Novice();
-        
-        CharID = CId;
         SetFirstDefaultAtribut();
         CalculateCurrentAtribut();
-    }
-
-    public int GetCharID(){
-        return CharID;
     }
 
     public int GetRaceID(){
@@ -86,14 +75,6 @@ public class CharAtribut {
         return JobChar.GetAttackType();
     }
 
-    public int GetPositionX(){
-        return PositionX;
-    }
-
-    public int GetPositionY(){
-        return PositionY;
-    }
-
     public int GetJobClass(){
         return JobChar.GetJobClass();
     }
@@ -104,10 +85,6 @@ public class CharAtribut {
 
     public int GetSpecialAvail(int i){
         return JobChar.GetSpecialAvail(i);
-    }
-
-    public void SetCharID(int ID){
-        CharID=ID;
     }
 
     public void SetBuff(int ID){
@@ -129,11 +106,6 @@ public class CharAtribut {
             ++BuffCounter;
         }
         CalculateCurrentAtribut();   
-    }
-    
-    public void SetPositionXY(int X, int Y){
-        PositionX = X;
-        PositionY = Y;
     }
 
     public void SetCurrentAtribut(int AtribID, int Val){

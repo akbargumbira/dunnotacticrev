@@ -22,8 +22,8 @@ public class CharacterContainer extends Vector<Character> {
         Character c;
         for (int i=0;i<super.size();++i) {
             c = super.get(i);
-            cx = c.GetAtribut().GetPositionX();
-            cy = c.GetAtribut().GetPositionY();
+            cx = c.getX();
+            cy = c.getY();
             if (cx==x && cy==y) {
                 return c;
             }
@@ -36,7 +36,7 @@ public class CharacterContainer extends Vector<Character> {
         Character c;
         for (int i=0;i<super.size();++i) {
             c = super.get(i);
-            cid = c.GetAtribut().GetCharID();
+            cid = c.getID();
             if (cid==id) {
                 return c;
             }
