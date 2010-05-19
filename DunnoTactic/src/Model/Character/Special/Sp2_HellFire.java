@@ -17,9 +17,9 @@ public class Sp2_HellFire extends Special {
     public Sp2_HellFire(){
         SpecialName="Hell Fire";
         SpecialID=ConstantaSp.SP_MAGE_HELL_FIRE_ID;
-        SPCost = 30;
+        SPCost =70;
         BaseAcc=90;
-        RangeSpecial = 5;
+        RangeSpecial = 6;
         AreaType = false;
         TargetEnemy = true;
     }

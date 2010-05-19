@@ -16,7 +16,7 @@ public class Sp2_ThrowKunai extends Special {
     public Sp2_ThrowKunai(){
         SpecialName="Throw Kunai";
         SpecialID=ConstantaSp.SP_NINJA_THROW_KUNAI_ID;
-        SPCost = 10;
+        SPCost = 55;
         BaseAcc=90;
         RangeSpecial = 5;
         AreaType = false;

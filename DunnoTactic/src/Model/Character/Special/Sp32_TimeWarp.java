@@ -15,9 +15,9 @@ public class Sp32_TimeWarp extends Special {
     public Sp32_TimeWarp(){
         SpecialName="Time Warp";
         SpecialID=ConstantaSp.SP_TIME_MAGE_TIME_WARP_ID;
-        SPCost = 30;
+        SPCost = 80;
         BaseAcc=100;
-        RangeSpecial = 7;
+        RangeSpecial = 3;
         AreaType = false;
         TargetEnemy = true;
     }

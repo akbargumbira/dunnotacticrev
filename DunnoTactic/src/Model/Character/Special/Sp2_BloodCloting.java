@@ -16,7 +16,7 @@ public class Sp2_BloodCloting extends Special {
     public Sp2_BloodCloting(){
         SpecialName="Blood Cloting";
         SpecialID=ConstantaSp.SP_KNIGHT_BLOOD_CLOTING_ID;
-        SPCost = 30;
+        SPCost = 40;
         BaseAcc=100;
         RangeSpecial = 0;
         AreaType = false;

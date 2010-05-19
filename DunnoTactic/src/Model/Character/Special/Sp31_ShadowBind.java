@@ -16,7 +16,7 @@ public class Sp31_ShadowBind extends Special {
     public Sp31_ShadowBind(){
         SpecialName="Shadow Bind";
         SpecialID=ConstantaSp.SP_ASSASSIN_SHADOW_BIND_ID;
-        SPCost = 30;
+        SPCost =120;
         BaseAcc=90;
         RangeSpecial = 1;
         AreaType = false;

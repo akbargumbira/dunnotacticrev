@@ -15,7 +15,7 @@ public class Sp31_FocusSight extends Special {
     public Sp31_FocusSight(){
         SpecialName="FocusSight";
         SpecialID=ConstantaSp.SP_RANGER_FOCUS_SIGHT_ID;
-        SPCost = 30;
+        SPCost = 70;
         BaseAcc=100;
         RangeSpecial = 0;
         AreaType = false;

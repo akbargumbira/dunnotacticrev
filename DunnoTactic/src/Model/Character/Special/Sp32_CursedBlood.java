@@ -17,9 +17,9 @@ public class Sp32_CursedBlood extends Special {
     public Sp32_CursedBlood(){
         SpecialName="Cursed Blood";
         SpecialID=ConstantaSp.SP_DARK_STALKER_CURSED_BLOOD_ID;
-        SPCost = 30;
+        SPCost =100;
         BaseAcc=80;
-        RangeSpecial = 7;
+        RangeSpecial = 3;
         AreaType = true;
         TargetEnemy = true;
     }

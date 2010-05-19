@@ -16,7 +16,7 @@ public class Sp31_HurricaneSword extends Special {
     public Sp31_HurricaneSword(){
         SpecialName="Hurricane Sword";
         SpecialID=ConstantaSp.SP_BLADEMASTER_HURRICANE_SWORD_ID;
-        SPCost = 30;
+        SPCost =100;
         BaseAcc=75;
         RangeSpecial = 1;
         AreaType = true;

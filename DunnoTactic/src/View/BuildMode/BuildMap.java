@@ -35,6 +35,7 @@ import java.awt.Point;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -440,7 +441,15 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         /* Save Map */
-        save.setVisible(true);
+        int i=1;
+        while(mapLogic.IsCastleIn(i)==true && i<=mapLogic.GetNumPlayer()){
+            ++i;
+        }
+        if(i<=mapLogic.GetNumPlayer()){
+            JOptionPane.showConfirmDialog(this, "Castil untuk player belum diset semua.");
+        } else {
+            save.setVisible(true);
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadActionPerformed

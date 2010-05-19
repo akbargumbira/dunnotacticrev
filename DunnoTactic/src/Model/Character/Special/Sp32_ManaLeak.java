@@ -16,10 +16,10 @@ public class Sp32_ManaLeak extends Special {
     public Sp32_ManaLeak(){
         SpecialName="Mana Leak";
         SpecialID=ConstantaSp.SP_SAGE_MANA_LEAK_ID;
-        SPCost = 30;
+        SPCost =110;
         BaseAcc=60;
-        RangeSpecial = 7;
-        AreaType = true;
+        RangeSpecial = 2;
+        AreaType = false;
         TargetEnemy = true;
     }
 

@@ -17,9 +17,9 @@ public class Sp2_StrikeShot extends Special {
     public Sp2_StrikeShot(){
         SpecialName="Strike Shot";
         SpecialID=ConstantaSp.SP_ARCHER_STRIKE_SHOT_ID;
-        SPCost = 10;
+        SPCost =45;
         BaseAcc=80;
-        RangeSpecial = 5;
+        RangeSpecial = 6;
         AreaType = false;
         TargetEnemy = true;
     }

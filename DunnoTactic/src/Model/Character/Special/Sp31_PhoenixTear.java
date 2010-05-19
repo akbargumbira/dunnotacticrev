@@ -15,9 +15,9 @@ public class Sp31_PhoenixTear extends Special {
     public Sp31_PhoenixTear(){
         SpecialName="Tear Phoenix";
         SpecialID=ConstantaSp.SP_BISHOP_PHOENIX_TEAR_ID;
-        SPCost = 30;
+        SPCost = 90;
         BaseAcc=100;
-        RangeSpecial = 11;
+        RangeSpecial = 5;
         AreaType = false;
         TargetEnemy = false;
     }

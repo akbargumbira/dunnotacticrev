@@ -17,9 +17,9 @@ public class Sp32_TimeSwap extends Special {
     public Sp32_TimeSwap(){
         SpecialName="Time Swap";
         SpecialID=ConstantaSp.SP_TIME_MAGE_TIME_SWAP_ID;
-        SPCost = 30;
+        SPCost =130;
         BaseAcc=80;
-        RangeSpecial = 7;
+        RangeSpecial = 3;
         AreaType = false;
         TargetEnemy = true;
     }

@@ -16,7 +16,7 @@ public class Sp31_HalfLife extends Special {
     public Sp31_HalfLife(){
         SpecialName="Half Life";
         SpecialID=ConstantaSp.SP_ARCH_MAGE_HALF_LIFE_ID;
-        SPCost = 30;
+        SPCost =90;
         BaseAcc=75;
         RangeSpecial = 6;
         AreaType = false;

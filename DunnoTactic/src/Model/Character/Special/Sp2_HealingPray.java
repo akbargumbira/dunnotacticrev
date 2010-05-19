@@ -16,7 +16,7 @@ public class Sp2_HealingPray extends Special {
     public Sp2_HealingPray(){
         SpecialName="Healing Pray";
         SpecialID=ConstantaSp.SP_HEALER_HEALING_PRAY_ID;
-        SPCost = 30;
+        SPCost = 50;
         BaseAcc=100;
         RangeSpecial = 5;
         AreaType = false;

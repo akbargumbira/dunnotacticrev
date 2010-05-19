@@ -15,17 +15,21 @@ public class Sp32_Barrier extends Special {
     public Sp32_Barrier(){
         SpecialName="Barrier";
         SpecialID=ConstantaSp.SP_DEFENDER_BARRIER_ID;
-        SPCost = 30;
+        SPCost =110;
         BaseAcc=100;
-        RangeSpecial = 0;
-        AreaType = false;
+        RangeSpecial = 2;
+        AreaType = true;
         TargetEnemy = false;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){
         int SP = KarakterAtribut.GetCurrent(Constanta.SP_ID)-SPCost;
-        KarakterAtribut.SetCurrentAtribut(Constanta.SP_ID, SP);
-
+        KarakterAtribut.SetCurrentAtribut(Constanta.SP_ID, SP);        
+        CharAtribut temp = new CharAtribut();
+        for(int i=0;i<TargetAtribut.size();++i){
+            temp = TargetAtribut.get(i);
+            temp.SetBuff(Constanta.BUFF_STATUS_HOLY_BARRIER_ID);
+        }
         
     }
 }
