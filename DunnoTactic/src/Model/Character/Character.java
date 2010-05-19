@@ -25,7 +25,7 @@ public class Character {
     private int player;
 
     public Character(int RaceID, int player){
-        KarakterAtribut = new CharAtribut(NEXT_ID, RaceID, 0);
+        KarakterAtribut = new CharAtribut(NEXT_ID, RaceID);
         this.player = player;
         ++NEXT_ID;
     }
@@ -184,7 +184,7 @@ public class Character {
     }
 
     public void JobChange(int NewJobID){
-        KarakterAtribut = new CharAtribut(KarakterAtribut.GetCharID(), KarakterAtribut.GetRaceID(), NewJobID);
+        KarakterAtribut.UpgradeJob(NewJobID);
         for(int i =0;i<5;++i){
             if(KarakterAtribut.GetSpecialAvail(i)!=0){
                 SetSpecial(i, KarakterAtribut.GetSpecialAvail(i));

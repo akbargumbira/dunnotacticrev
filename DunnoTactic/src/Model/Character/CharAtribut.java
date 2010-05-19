@@ -33,7 +33,7 @@ public class CharAtribut {
         }
     }
 
-    public CharAtribut(int CId, int RId, int JId){
+    public CharAtribut(int CId, int RId){
         for(int i = 0; i<3;++i){
             BuffChar[i]=new Buff();
         }
@@ -55,106 +55,9 @@ public class CharAtribut {
             }
             break;
         }
-        if(JId<50){
-            switch(JId){
-                case Constanta.JOB1_NOVICE_ID : {
-                    JobChar = new J1_Novice();
-                }
-                break;
-                case Constanta.JOB2_KNIGHT_ID : {
-                    JobChar = new J2_Knight();
-                }
-                break;
-                case Constanta.JOB2_WARRIOR_ID : {
-                    JobChar = new J2_Warrior();
-                }
-                break;
-                case Constanta.JOB2_MAGE_ID : {
-                    JobChar = new J2_Mage();
-                }
-                break;
-                case Constanta.JOB2_ARCHER_ID : {
-                    JobChar = new J2_Archer();
-                }
-                break;
-                case Constanta.JOB2_HEALER_ID : {
-                    JobChar = new J2_Healer();
-                }
-                break;
-                case Constanta.JOB2_NINJA_ID : {
-                    JobChar = new J2_Ninja();
-                }
-                break;
-                default: {
-
-                }
-                break;
-            }
-        } else if(JId<100){
-            switch(JId){
-                case Constanta.JOB31_ARCH_KNIGHT_ID : {
-                    JobChar = new J31_ArchKnight();
-                }
-                break;
-                case Constanta.JOB31_BLADE_MASTER_ID : {
-                    JobChar = new J31_BladeMaster();
-                }
-                break;
-                case Constanta.JOB31_RANGER_ID : {
-                    JobChar = new J31_Ranger();
-                }
-                break;
-                case Constanta.JOB31_ARCH_MAGE_ID : {
-                    JobChar = new J31_ArchMage();
-                }
-                break;
-                case Constanta.JOB31_BISHOP_ID : {
-                    JobChar = new J31_Bishop();
-                }
-                break;
-                case Constanta.JOB31_ASSASSIN_ID : {
-                    JobChar = new J31_Assassin();
-                }
-                break;
-                default: {
-
-                }
-                break;
-            }
-        } else {
-            switch(JId){
-                case Constanta.JOB32_DEFENDER_ID : {
-                    JobChar = new J32_Defender();
-                }
-                break;
-                case Constanta.JOB32_PALADIN_ID : {
-                    JobChar = new J32_Paladin();
-                }
-                break;
-                case Constanta.JOB32_BARD_ID : {
-                    JobChar = new J32_Bard();
-                }
-                break;
-                case Constanta.JOB32_TIME_MAGE_ID : {
-                    JobChar = new J32_TimeMage();
-                }
-                break;
-                case Constanta.JOB32_SAGE_ID : {
-                    JobChar = new J32_Sage();
-                }
-                break;
-                case Constanta.JOB32_DARK_STALKER_ID : {
-                    JobChar = new J32_DarkStalker();
-                }
-                break;
-                default: {
-
-                }
-                break;
-            }
-        }
+        JobChar = new J1_Novice();
+        
         CharID = CId;
-        ClearAllBuff();
         SetFirstDefaultAtribut();
         CalculateCurrentAtribut();
     }
@@ -264,6 +167,108 @@ public class CharAtribut {
 
     public double[] GetFactorBuildingByRace(){
         return RaceChar.GetFactorBuilding();
+    }
+
+    public void UpgradeJob(int JId){
+        if(JId<50){
+            switch(JId){
+                case Constanta.JOB1_NOVICE_ID : {
+                    JobChar = new J1_Novice();
+                }
+                break;
+                case Constanta.JOB2_KNIGHT_ID : {
+                    JobChar = new J2_Knight();
+                }
+                break;
+                case Constanta.JOB2_WARRIOR_ID : {
+                    JobChar = new J2_Warrior();
+                }
+                break;
+                case Constanta.JOB2_MAGE_ID : {
+                    JobChar = new J2_Mage();
+                }
+                break;
+                case Constanta.JOB2_ARCHER_ID : {
+                    JobChar = new J2_Archer();
+                }
+                break;
+                case Constanta.JOB2_HEALER_ID : {
+                    JobChar = new J2_Healer();
+                }
+                break;
+                case Constanta.JOB2_NINJA_ID : {
+                    JobChar = new J2_Ninja();
+                }
+                break;
+                default: {
+
+                }
+                break;
+            }
+        } else if(JId<100){
+            switch(JId){
+                case Constanta.JOB31_ARCH_KNIGHT_ID : {
+                    JobChar = new J31_ArchKnight();
+                }
+                break;
+                case Constanta.JOB31_BLADE_MASTER_ID : {
+                    JobChar = new J31_BladeMaster();
+                }
+                break;
+                case Constanta.JOB31_RANGER_ID : {
+                    JobChar = new J31_Ranger();
+                }
+                break;
+                case Constanta.JOB31_ARCH_MAGE_ID : {
+                    JobChar = new J31_ArchMage();
+                }
+                break;
+                case Constanta.JOB31_BISHOP_ID : {
+                    JobChar = new J31_Bishop();
+                }
+                break;
+                case Constanta.JOB31_ASSASSIN_ID : {
+                    JobChar = new J31_Assassin();
+                }
+                break;
+                default: {
+
+                }
+                break;
+            }
+        } else {
+            switch(JId){
+                case Constanta.JOB32_DEFENDER_ID : {
+                    JobChar = new J32_Defender();
+                }
+                break;
+                case Constanta.JOB32_PALADIN_ID : {
+                    JobChar = new J32_Paladin();
+                }
+                break;
+                case Constanta.JOB32_BARD_ID : {
+                    JobChar = new J32_Bard();
+                }
+                break;
+                case Constanta.JOB32_TIME_MAGE_ID : {
+                    JobChar = new J32_TimeMage();
+                }
+                break;
+                case Constanta.JOB32_SAGE_ID : {
+                    JobChar = new J32_Sage();
+                }
+                break;
+                case Constanta.JOB32_DARK_STALKER_ID : {
+                    JobChar = new J32_DarkStalker();
+                }
+                break;
+                default: {
+
+                }
+                break;
+            }
+        }
+        ClearAllBuff();
     }
 
     public void Upgrade(){
