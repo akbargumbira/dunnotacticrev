@@ -16,6 +16,7 @@ import View.PlayMode.Play2;
 import View.PlayMode.SelectPlayer;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,16 +45,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         newgameButton.setText("New Game");
         newgameButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 newgameButtonMousePressed(evt);
-            }
-        });
-        newgameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newgameButtonActionPerformed(evt);
             }
         });
 
@@ -115,7 +111,6 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newgameButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newgameButtonMousePressed
-        // TODO add your handling code here:
         this.setVisible(false);
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
@@ -138,10 +133,6 @@ public class MainMenu extends javax.swing.JFrame {
         GraphicsDevice[] devices = env.getScreenDevices();
         buildmap = new BuildMap(this,devices[0]);
     }//GEN-LAST:event_buildmapButtonMouseClicked
-
-    private void newgameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newgameButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newgameButtonActionPerformed
 
     /**
     * @param args the command line arguments
