@@ -20,6 +20,8 @@ public class Sp32_SaintCross extends Special {
         SPCost = 30;
         BaseAcc=80;
         RangeSpecial = 2;
+        AreaType = true;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

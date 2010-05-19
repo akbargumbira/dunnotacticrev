@@ -20,6 +20,8 @@ public class Sp2_HellFire extends Special {
         SPCost = 30;
         BaseAcc=90;
         RangeSpecial = 5;
+        AreaType = false;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

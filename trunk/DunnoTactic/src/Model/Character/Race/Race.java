@@ -39,7 +39,7 @@ public class Race {
         return FactorBuilding;
     }
 
-    public void UpgrageRace(){
+    public void UpgradeRace(){
         double FactorUpgrade;
         switch(RaceLevel){
             case 1 : {
@@ -65,5 +65,42 @@ public class Race {
         for(int i=0;i<Constanta.NUMBER_ATRIBUT;++i){
             BaseAtribut[i]=BaseAtribut[i]+(int)((double)BaseAtribut[i]*FactorUpgrade);
         }
+    }
+
+    @Override
+    public String toString() {
+        String s = new String();
+        s += "Factor : \n";
+        s += "HP : ";
+        s += Integer.toString(BaseAtribut[Constanta.HP_ID]);
+        s += "\n";
+        s += "SP : ";
+        s += Integer.toString(BaseAtribut[Constanta.SP_ID]);
+        s += "\n";
+        s += "Attack : ";
+        s += Integer.toString(BaseAtribut[Constanta.ATTACK_ID]);
+        s += "\n";
+        s += "Magic Attack : ";
+        s += Integer.toString(BaseAtribut[Constanta.MATTACK_ID]);
+        s += "\n";
+        s += "Defense : ";
+        s += Integer.toString(BaseAtribut[Constanta.DEF_ID]);
+        s += "\n";
+        s += "Magic Defense : ";
+        s += Integer.toString(BaseAtribut[Constanta.MDEF_ID]);
+        s += "\n";
+        s += "Accuracy : ";
+        s += Integer.toString(BaseAtribut[Constanta.ACC_ID]);
+        s += "\n";
+        s += "Evasion : ";
+        s += Integer.toString(BaseAtribut[Constanta.EVA_ID]);
+        s += "\n";
+        s += "Range Move : ";
+        s += Integer.toString(BaseAtribut[Constanta.RANGE_MOVE_ID]);
+        s += "\n";
+        s += "Range Attack : ";
+        s += Integer.toString(BaseAtribut[Constanta.RANGE_ATTACK_ID]);
+        s += "\n";
+        return s;
     }
 }

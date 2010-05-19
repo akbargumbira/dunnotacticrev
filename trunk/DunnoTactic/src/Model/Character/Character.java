@@ -188,6 +188,8 @@ public class Character {
         for(int i =0;i<5;++i){
             if(KarakterAtribut.GetSpecialAvail(i)!=0){
                 SetSpecial(i, KarakterAtribut.GetSpecialAvail(i));
+            } else {
+                SpecialList[i]=null;
             }
         }
     }

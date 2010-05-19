@@ -16,8 +16,10 @@ public class Sp32_AbundanceLife extends Special {
         SpecialName="AbundanceLife";
         SpecialID=ConstantaSp.SP_DEFENDER_ABUNDANCE_LIFE_ID;
         SPCost = 30;
-        BaseAcc=90;
-        RangeSpecial = 100;
+        BaseAcc=100;
+        RangeSpecial = 0;
+        AreaType = false;
+        TargetEnemy = false;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

@@ -19,6 +19,8 @@ public class Sp31_ShadowBind extends Special {
         SPCost = 30;
         BaseAcc=90;
         RangeSpecial = 1;
+        AreaType = false;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){
@@ -39,10 +41,10 @@ public class Sp31_ShadowBind extends Special {
                     temp.SetCurrentAtribut(Constanta.HP_ID, HP);
                 }
                 randFactor = r.nextInt(100);
-                if(randFactor<25){
+                if(randFactor<20){
                     temp.SetBuff(Constanta.BUFF_STATUS_DISABLE_ID);
                     temp.SetBuff(Constanta.BUFF_STATUS_IMMOBILIZE_ID);
-                } else if(randFactor<60){
+                } else if(randFactor<55){
                     temp.SetBuff(Constanta.BUFF_STATUS_DISABLE_ID);
                 } else {
                     temp.SetBuff(Constanta.BUFF_STATUS_IMMOBILIZE_ID);

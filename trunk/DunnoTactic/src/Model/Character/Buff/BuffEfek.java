@@ -33,4 +33,41 @@ public class BuffEfek {
     public int GetDurationBuff(){
         return DurationBuff;
     }
+
+    @Override
+    public String toString() {
+        String s = new String();
+        s += "Factor : \n";
+        s += "HP : ";
+        s += Double.toString(FactorBuff[Constanta.HP_ID]);
+        s += "\n";
+        s += "SP : ";
+        s += Double.toString(FactorBuff[Constanta.SP_ID]);
+        s += "\n";
+        s += "Attack : ";
+        s += Double.toString(FactorBuff[Constanta.ATTACK_ID]);
+        s += "\n";
+        s += "Magic Attack : ";
+        s += Double.toString(FactorBuff[Constanta.MATTACK_ID]);
+        s += "\n";
+        s += "Defense : ";
+        s += Double.toString(FactorBuff[Constanta.DEF_ID]);
+        s += "\n";
+        s += "Magic Defense : ";
+        s += Double.toString(FactorBuff[Constanta.MDEF_ID]);
+        s += "\n";
+        s += "Accuracy : ";
+        s += Double.toString(FactorBuff[Constanta.ACC_ID]);
+        s += "\n";
+        s += "Evasion : ";
+        s += Double.toString(FactorBuff[Constanta.EVA_ID]);
+        s += "\n";
+        s += "Range Move : ";
+        s += Double.toString(FactorBuff[Constanta.RANGE_MOVE_ID]);
+        s += "\n";
+        s += "Range Attack : ";
+        s += Double.toString(FactorBuff[Constanta.RANGE_ATTACK_ID]);
+        s += "\n";
+        return s;
+    }
 }

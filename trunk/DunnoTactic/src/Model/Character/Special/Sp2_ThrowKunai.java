@@ -19,6 +19,8 @@ public class Sp2_ThrowKunai extends Special {
         SPCost = 10;
         BaseAcc=90;
         RangeSpecial = 5;
+        AreaType = false;
+        TargetEnemy = true;
     }
 
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){

@@ -19,6 +19,8 @@ public class Sp2_BloodCloting extends Special {
         SPCost = 30;
         BaseAcc=100;
         RangeSpecial = 0;
+        AreaType = false;
+        TargetEnemy = false;
     }
     
     public void ExecuteSpecial(CharAtribut KarakterAtribut, Vector<CharAtribut> TargetAtribut){
