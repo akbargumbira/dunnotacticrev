@@ -17,8 +17,8 @@ abstract public class Special {
     protected int SPCost;
     protected int BaseAcc;
     protected int RangeSpecial;
-    protected boolean AreaType;
-    protected boolean TargetEnemy;
+    protected boolean AreaType = false;
+    protected boolean TargetEnemy = false;
     
     public Special(){
         

@@ -19,6 +19,7 @@ import Model.Game;
 import Model.Map.Map;
 import Support.Converter;
 import Support.ImageSupport;
+import Support.Path;
 import View.MainMenu;
 import java.awt.Color;
 import java.awt.Component;
@@ -62,6 +63,9 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         ShowWindow();
         InitMap();
         setFocusable(true);
+
+        /* show player turn & it's gold */
+        playerTurnLabel.setText("Player 1 Turn. Your Gold is "+game.getGold(1)+".");
     }
 
 
@@ -116,6 +120,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         infoPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         infoTextarea = new javax.swing.JTextArea();
+        playerTurnLabel = new javax.swing.JLabel();
 
         playerComboBox.setFont(new java.awt.Font("Tahoma", 0, 18));
         playerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -216,7 +221,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         scrollPane.setViewportView(mapLayerPane);
 
-        scrollPane.setBounds(20, 40, 850, 600);
+        scrollPane.setBounds(20, 40, 850, 220);
         layerpane.add(scrollPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -464,6 +469,13 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         infoPanel.setBounds(1020, 250, 200, 200);
         layerpane.add(infoPanel, new Integer(1));
 
+        playerTurnLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        playerTurnLabel.setForeground(new java.awt.Color(255, 255, 255));
+        playerTurnLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        playerTurnLabel.setText("Player Turn 1. Your Gold 1234");
+        playerTurnLabel.setBounds(350, 340, 220, 30);
+        layerpane.add(playerTurnLabel, new Integer(1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -600,15 +612,15 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
     private void endTurnButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_endTurnButtonMousePressed
         int n= game.getPlayerturn();
-        n%=4;
+        n%=game.getMap().GetNumPlayer();
         ++n;
         game.setPlayerturn(n);
-        infoTextArea.setText("Player "+Integer.toString(n));
+        playerTurnLabel.setText("Player "+n+" Turn. Your Gold is "+game.getGold(n)+".");
 }//GEN-LAST:event_endTurnButtonMousePressed
 
     private void summonCharacterButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summonCharacterButtonMousePressed
         /* check if barrack is selected */
-        Point p = selectedbuilding .getLocation();
+        Point p = selectedBuildingLabel .getLocation();
         Point pGrid = Converter.PointToGrid(p);
         int x = pGrid.x;
         int y = pGrid.y;
@@ -633,7 +645,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 }//GEN-LAST:event_summonCharacterButtonMousePressed
 
     private void upgradejobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upgradejobButtonActionPerformed
-        JLabel l=selectedchar;
+        JLabel l=selectedcharLabel;
         Point p = l.getLocation();
         Point pGrid = Converter.PointToGrid(p);
         int x = pGrid.x;
@@ -648,29 +660,33 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 }//GEN-LAST:event_upgradejobButtonActionPerformed
 
     private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
-        Model.Character.Character c;
-        JOptionPane.showConfirmDialog(this, "Haha");
-        Point p = Converter.PointToGrid(selectedchar.getX(), selectedchar.getY());
-        c = game.getCharacters().get(p.x, p.y);
-        game.getCharactermap()[p.x][p.y] = 0;
-        p.y++;
-        c.Move(p.x, p.y);
-        game.getCharactermap()[p.x][p.y] = c.getID();
-        p = Converter.GridToPoint(p);
-        Thread t = new Thread(new Runnable() {
-            public void run() {
-                Point p = selectedchar.getLocation();
-                for (int i=1;i<=50;++i) {
-                    selectedchar.setLocation(p.x, p.y+i);
-                    try{
-                        Thread.sleep(20);
-                    } catch (InterruptedException e){
 
-                    }
-                }
-            }
-        });
-        t.start();
+        int[][] mapmove;
+        Path p = new Path();
+        Model.Character.Character c = selectedChar;
+        p.SetAreaMove(5, c.GetAtribut().GetRaceID(), , mapmove, MapBuilding, MapPlayer, mapmove);
+//        Model.Character.Character c;
+//        Point p = Converter.PointToGrid(selectedcharLabel.getX(), selectedcharLabel.getY());
+//        c = game.getCharacters().get(p.x, p.y);
+//        game.getCharactermap()[p.x][p.y] = 0;
+//        p.y++;
+//        c.Move(p.x, p.y);
+//        game.getCharactermap()[p.x][p.y] = c.getID();
+//        p = Converter.GridToPoint(p);
+//        Thread t = new Thread(new Runnable() {
+//            public void run() {
+//                Point p = selectedcharLabel.getLocation();
+//                for (int i=1;i<=50;++i) {
+//                    selectedcharLabel.setLocation(p.x, p.y+i);
+//                    try{
+//                        Thread.sleep(20);
+//                    } catch (InterruptedException e){
+//
+//                    }
+//                }
+//            }
+//        });
+//        t.start();
     }//GEN-LAST:event_moveButtonActionPerformed
 
     private void listButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listButtonActionPerformed
@@ -695,6 +711,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             l = (JLabel) c;
             selectedterrain = l;
             l.setBorder(new FieldBorder(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK));
+            infoTextarea.setText("terrain");
         } else {
             return;
         }
@@ -718,11 +735,14 @@ public class Play extends javax.swing.JFrame implements MouseListener{
                     int y = l.getY();
                     Point p = Converter.PointToGrid(x, y);
                     Model.Character.Character c = game.getCharacters().get(p.x, p.y);
+                    infoTextarea.setText(c.toString());
+                    selectedterrain.setBorder(null);
                     if (c.getPlayer() == game.getPlayerturn()) {
                         characterPanel.setVisible(true);
                         if (game.getMap().GetBuildings().IsBlackSmithIn(game.getPlayerturn()))
                             upgradecharacterPanel.setVisible(true);
-                        selectedchar = (JLabel)e.getSource();
+                        selectedcharLabel = (JLabel)e.getSource();
+                        selectedChar = c;
                     }
                 }
             });
@@ -730,6 +750,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         if (p == buildingPanel) {
             label.addMouseListener(new MouseAdapter() {
+                @Override
                 public void mousePressed(MouseEvent e) {
                     disableAllActionPanel();
                     summonCharacterButton.setVisible(false);
@@ -738,12 +759,12 @@ public class Play extends javax.swing.JFrame implements MouseListener{
                     int y = l.getY();
                     Point p = Converter.PointToGrid(x, y);
                     Building b = game.getMap().GetBuildings().get(p.x, p.y);
-                    String s = infoTextArea.getText();
-                    s += b.toString();
-                    infoTextArea.setText(s);
-                    if (b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX)==game.getPlayerturn()) {
+                    infoTextarea.setText(b.toString());
+                    selectedterrain.setBorder(null);
+                    if (b.getBuilding_BaseAtribut(Building.BUILDING_PLAYER_IDX)==game.getPlayerturn()) {
                         buildingactionPanel.setVisible(true);
-                        selectedbuilding = (JLabel)e.getSource();
+                        selectedBuildingLabel = (JLabel)e.getSource();
+                        selectedBuilding = b;
 
                         if (b instanceof Barrack) {
                             summonCharacterButton.setVisible(true);
@@ -942,6 +963,13 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         y = scrollPane.getY() + scrollPane.getHeight() - height;
         infoPanel.setBounds(x, y, width, height);
 
+        /* playerTurnLabel */
+        width = playerTurnLabel.getWidth();
+        height = playerTurnLabel.getHeight();
+        x = scrollPane.getX() + (scrollPane.getWidth()/2) - (playerTurnLabel.getWidth()/2);
+        y = scrollPane.getY() - playerTurnLabel.getHeight();
+        playerTurnLabel.setBounds(x, y, width, height);
+
 //        /* border Label */
 //        borderLabel = new JLabel();
 //        borderPanel.add(borderLabel);
@@ -997,6 +1025,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JButton moveButton;
     private javax.swing.JComboBox playerComboBox;
     private javax.swing.JPanel playerPanel;
+    private javax.swing.JLabel playerTurnLabel;
     private javax.swing.JButton saveButton;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JButton specialButton;
@@ -1017,7 +1046,9 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private Map map;
     private Game game;
     private JLabel selectedterrain;
-    private JLabel selectedchar;
-    private JLabel selectedbuilding;
+    private JLabel selectedcharLabel;
+    private JLabel selectedBuildingLabel;
     private JLabel borderLabel;
+    private Model.Character.Character selectedChar;
+    private Building selectedBuilding;
 }

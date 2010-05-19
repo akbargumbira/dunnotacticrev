@@ -17,8 +17,10 @@ import java.util.Vector;
 public class Game
 {
 
+    public static final int INIT_GOLD = 400;
     private Map map;
     private Vector<Integer> vrace;
+    private int[] gold;
     private int[][] charactermap;
     private CharacterContainer characters;
     private int playerturn = 1;
@@ -27,6 +29,13 @@ public class Game
     {
         this.map = map;
         this.vrace = vrace;
+
+        /* inisiate gold */
+        gold = new int[map.GetNumPlayer()];
+        for (int i=0;i<gold.length;++i) {
+            gold[i] = INIT_GOLD;
+        }
+
         charactermap = new int[map.GetWidth()][map.GetHeight()];
         characters = new CharacterContainer();
         InitCharacter();
@@ -116,6 +125,10 @@ public class Game
      */
     public void setPlayerturn(int playerturn) {
         this.playerturn = playerturn;
+    }
+
+    public int getGold(int player) {
+        return gold[player-1];
     }
     
 }
