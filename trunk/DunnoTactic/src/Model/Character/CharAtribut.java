@@ -11,7 +11,8 @@ import java.io.Serializable;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class CharAtribut implements Serializable{
     private int[] CurrentAtribut = new int[Constanta.NUMBER_ATRIBUT];

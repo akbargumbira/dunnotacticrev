@@ -18,7 +18,8 @@ import java.util.Vector;
 
 /**
  *
- * @author user
+ * @author  Rezan Achmad
+ *          13508104
  */
 public class Map implements Serializable{
     public final static int RUMPUT = 0;

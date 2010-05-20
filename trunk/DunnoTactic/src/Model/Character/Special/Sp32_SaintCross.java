@@ -11,7 +11,8 @@ import java.util.Random;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Sp32_SaintCross extends Special {
     public Sp32_SaintCross(){

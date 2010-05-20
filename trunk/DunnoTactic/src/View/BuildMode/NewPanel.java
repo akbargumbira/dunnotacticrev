@@ -16,7 +16,8 @@ import javax.swing.SpinnerNumberModel;
 
 /**
  *
- * @author user
+ * @author  Rezan Achmad
+ *          13508104
  */
 public class NewPanel extends javax.swing.JPanel {
 

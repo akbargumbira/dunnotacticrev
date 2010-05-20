@@ -7,7 +7,8 @@ package Model.Map;
 
 /**
  *
- * @author user
+ * @author  Rezan Achmad
+ *          13508104
  */
 public class MapDriver {
     public static void main(String[] args) {

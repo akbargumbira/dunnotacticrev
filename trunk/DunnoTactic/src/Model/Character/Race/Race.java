@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 /**
  *
- * @author user
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Race implements Serializable{
     protected  int RaceID;

@@ -18,7 +18,8 @@ import javax.swing.DefaultListModel;
 
 /**
  *
- * @author user
+ * @author  Rezan Achmad
+ *          13508104
  */
 public class LoadMapPanel extends javax.swing.JPanel {
 

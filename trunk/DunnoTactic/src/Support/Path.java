@@ -10,7 +10,8 @@ import java.awt.Point;
 
 /**
  *
- * @author ifan
+ * @author  Irwan Faturahman
+ *          13508100
  */
 public class Path {
 
@@ -78,37 +79,39 @@ public class Path {
 
     private int MinAround(int x, int y, int[][] Matriks){
         int Minimum = 0;
-        if (x==0 && y==0) {
-            Minimum = Min2(Matriks[x][y+1],Matriks[x+1][y]);
-        } else if(x==0) {
-            Minimum = Min2(Min2(Matriks[x][y-1],Matriks[x][y+1]), Matriks[x+1][y]);
-        } else if(y==0) {
-            Minimum = Min2(Matriks[x][y+1], Min2(Matriks[x-1][y],Matriks[x+1][y]));
-        } else if(x==Matriks.length-1 && y==Matriks[0].length-1) {
-            Minimum = Min2(Matriks[x-1][y],Matriks[x][y-1]);
-        } else if(x==Matriks.length-1) {
-            Minimum = Min2(Min2(Matriks[x][y+1],Matriks[x][y-1]),Matriks[x-1][y]);
-        } else if(y==Matriks[0].length-1) {
-            Minimum = Min2(Min2(Matriks[x-1][y],Matriks[x+1][y]),Matriks[x][y-1]);
-        } else {
-            Minimum = Min2(Min2(Matriks[x][y-1],Matriks[x][y+1]), Min2(Matriks[x-1][y],Matriks[x+1][y]));
-        }
-
 //        if (x==0 && y==0) {
 //            Minimum = Min2(Matriks[x][y+1],Matriks[x+1][y]);
-//        } else if(x==0 && y==Matriks[0].length-1) {
-//            Minimum = Min2(Matriks[x][y-1],Matriks[x+1][y]);
-//        } else if(y==0 && x==Matriks.length-1) {
-//            Minimum = Min2(Matriks[x][y+1], Matriks[x-1][y]);
 //        } else if(x==Matriks.length-1 && y==Matriks[0].length-1) {
 //            Minimum = Min2(Matriks[x-1][y],Matriks[x][y-1]);
+//        } else if(x==Matriks.length-1) {
+//            Minimum = Min2(Min2(Matriks[x][y+1],Matriks[x][y-1]),Matriks[x-1][y]);
 //        } else if(x==0) {
 //            Minimum = Min2(Min2(Matriks[x][y-1],Matriks[x][y+1]), Matriks[x+1][y]);
 //        } else if(y==0) {
 //            Minimum = Min2(Matriks[x][y+1], Min2(Matriks[x-1][y],Matriks[x+1][y]));
-//        } else if (x==Matriks.length-1){
-//            Minimum = Min2(Min2(Matriks[x][y+1],Matriks[x][y-1]),Matriks[x-1][y]);
+//        } else if(y==Matriks[0].length-1) {
+//            Minimum = Min2(Min2(Matriks[x-1][y],Matriks[x+1][y]),Matriks[x][y-1]);
+//        } else {
+//            Minimum = Min2(Min2(Matriks[x][y-1],Matriks[x][y+1]), Min2(Matriks[x-1][y],Matriks[x+1][y]));
 //        }
+
+        if (x==0 && y==0) {
+            Minimum = Min2(Matriks[x][y+1],Matriks[x+1][y]);
+        } else if(x==0 && y==Matriks[0].length-1) {
+            Minimum = Min2(Matriks[x][y-1],Matriks[x+1][y]);
+        } else if(y==0 && x==Matriks.length-1) {
+            Minimum = Min2(Matriks[x][y+1], Matriks[x-1][y]);
+        } else if(x==Matriks.length-1 && y==Matriks[0].length-1) {
+            Minimum = Min2(Matriks[x-1][y],Matriks[x][y-1]);
+        } else if(x==0) {
+            Minimum = Min2(Min2(Matriks[x][y-1],Matriks[x][y+1]), Matriks[x+1][y]);
+        } else if(y==0) {
+            Minimum = Min2(Matriks[x][y+1], Min2(Matriks[x-1][y],Matriks[x+1][y]));
+        } else if (x==Matriks.length-1){
+            Minimum = Min2(Min2(Matriks[x][y+1],Matriks[x][y-1]),Matriks[x-1][y]);
+        } else {
+            Minimum = Min2(Min2(Matriks[x][y-1],Matriks[x][y+1]), Min2(Matriks[x-1][y],Matriks[x+1][y]));
+        }
         return Minimum;
     }
 

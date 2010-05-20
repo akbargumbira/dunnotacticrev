@@ -10,7 +10,8 @@ import Model.Character.Special.ConstantaSp;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class J2_Mage extends Job {
     public J2_Mage(){

@@ -7,7 +7,8 @@ package Model.Building;
 
 /**
  *
- * @author user
+ * @author  Akbar Gumbira
+ *          13508106
  */
 public class Blacksmith extends Building
 {

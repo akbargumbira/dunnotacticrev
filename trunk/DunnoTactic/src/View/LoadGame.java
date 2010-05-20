@@ -22,7 +22,8 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author user
+ * @author  Rezan Achmad
+ *          13508104
  */
 public class LoadGame extends javax.swing.JPanel {
 

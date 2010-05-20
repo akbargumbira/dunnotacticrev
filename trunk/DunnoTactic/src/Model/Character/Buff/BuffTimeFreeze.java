@@ -7,7 +7,8 @@ package Model.Character.Buff;
 import Model.Character.Constanta;
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class BuffTimeFreeze extends BuffEfek {
     public BuffTimeFreeze(){

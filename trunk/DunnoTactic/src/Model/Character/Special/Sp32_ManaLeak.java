@@ -10,7 +10,8 @@ import java.util.Vector;
 import java.util.Random;
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Sp32_ManaLeak extends Special {
     public Sp32_ManaLeak(){

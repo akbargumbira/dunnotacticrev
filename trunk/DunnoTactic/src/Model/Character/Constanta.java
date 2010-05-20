@@ -7,7 +7,8 @@ package Model.Character;
 
 /**
  *
- * @author user
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Constanta {
     public static final int NUMBER_ATRIBUT = 10;

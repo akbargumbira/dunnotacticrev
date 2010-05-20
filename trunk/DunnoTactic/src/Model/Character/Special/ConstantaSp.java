@@ -7,7 +7,8 @@ package Model.Character.Special;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class ConstantaSp {
     public static final int SP_KNIGHT_BLOOD_CLOTING_ID=1;

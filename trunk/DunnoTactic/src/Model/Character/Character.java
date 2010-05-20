@@ -13,7 +13,8 @@ import java.awt.Point;
 import java.io.Serializable;
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Character implements Serializable{
     private boolean enable;

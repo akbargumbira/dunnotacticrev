@@ -8,7 +8,8 @@ import Model.Character.Constanta;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class BuffDownMental extends BuffEfek {
     public BuffDownMental(){

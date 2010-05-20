@@ -10,7 +10,8 @@ import java.util.Vector;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 abstract public class Special implements Serializable{
     protected String SpecialName;

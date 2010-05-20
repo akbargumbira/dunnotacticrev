@@ -11,7 +11,8 @@ import java.util.Random;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Sp31_SwordFury extends Special {
     public Sp31_SwordFury(){

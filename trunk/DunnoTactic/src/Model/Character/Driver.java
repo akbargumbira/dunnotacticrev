@@ -8,7 +8,8 @@ import Model.Character.Special.ConstantaSp;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Driver {
     private static Character Karakter;

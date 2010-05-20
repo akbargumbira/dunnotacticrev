@@ -9,7 +9,8 @@ import Model.Character.Constanta;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class BuffNothing extends BuffEfek {
     public BuffNothing(){

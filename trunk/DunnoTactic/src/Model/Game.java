@@ -13,7 +13,8 @@ import java.util.Vector;
 
 /**
  *
- * @author ifan
+ * @author  Rezan Achmad
+ *          13508104
  */
 public class Game implements Serializable
 {

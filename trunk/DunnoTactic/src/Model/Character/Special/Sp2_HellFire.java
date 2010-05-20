@@ -11,7 +11,8 @@ import java.util.Vector;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Sp2_HellFire extends Special {
     public Sp2_HellFire(){

@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class BuffEfek implements Serializable{
     protected double[] FactorBuff = new double[Constanta.NUMBER_ATRIBUT];

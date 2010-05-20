@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Buff implements Serializable{
     private int BuffID;
