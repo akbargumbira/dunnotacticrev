@@ -363,6 +363,8 @@ public class Character implements Serializable{
         s += "Race : ";
         s += Integer.toString(GetAtribut().GetRaceID());
         s += "\n";
+
+        s += KarakterAtribut.toString();
         return s;
     }
 

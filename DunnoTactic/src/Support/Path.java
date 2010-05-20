@@ -139,18 +139,26 @@ public class Path {
         return pass;
     }
 
-    public void SetAreaAttack(Point Init, int range, int[][] MapArea) {
+    public int[][] SetAreaAttack(Point Init, int range,int MapWidth, int MapHeight) {
+        int[][] MapArea=new int[MapWidth][MapHeight];
         int i;
         int j;
         int factor;
 
-        for(i=Init.x-range;i<=Init.x+range;++i) {
-            factor=range-Math.abs(Init.x-i);
-            for(j=Init.y-factor;j<=Init.y+factor;++j) {
+        for(i=0;i<MapWidth;++i){
+            for(j=0;j<MapHeight;++j){
+                MapArea[i][j]=99;
+            }
+        }
+
+        for(i=Init.x-range+1;i<=Init.x+range+1;++i) {
+            factor=range-Math.abs(Init.x-i+1);
+            for(j=Init.y-factor+1;j<=Init.y+factor+1;++j) {
                 if(i>0 && j>0 && i<=MapArea.length && j<=MapArea[0].length) {
                     MapArea[i-1][j-1]=Math.abs(Init.x-i)+Math.abs(Init.y-j);
                 }
             }
         }
+        return MapArea;
     }
 }

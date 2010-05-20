@@ -119,6 +119,23 @@ abstract public class Building implements Serializable
        }
     }
 
+    public int getUpgradeCost(){
+        if (Building_BaseAtribut[BUILDING_LEVEL_IDX]==1)
+       {
+            return 150;
+       }
+       else if (Building_BaseAtribut[BUILDING_LEVEL_IDX]==2)
+       {
+           return 300;
+       }
+       else if (Building_BaseAtribut[BUILDING_LEVEL_IDX]==3)
+       {
+           return 450;
+       }
+
+        return 0;
+    }
+
     @Override
     public String toString() {
         String s = new String();
