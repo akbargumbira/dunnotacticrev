@@ -131,4 +131,8 @@ public class Game implements Serializable
     public int getGold(int player) {
         return gold[player-1];
     }
+
+    public void setGold(int player, int gold) {
+        this.gold[player-1] = gold;
+    }
 }

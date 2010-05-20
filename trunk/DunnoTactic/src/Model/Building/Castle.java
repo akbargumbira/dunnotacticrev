@@ -22,6 +22,7 @@ public class Castle extends Building
         Building_BaseAtribut[BUILDING_BUILD_TIME_IDX] = 0;
         Building_BaseAtribut[BUILDING_GOLD_PER_TURN_IDX] = 0;
         Building_BaseAtribut[BUILDING_LEVEL_IDX] = 1;
+        PerfectBuilding();
     }
 
     public void PerfectBuilding()

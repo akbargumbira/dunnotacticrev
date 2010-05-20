@@ -17,6 +17,7 @@ import Model.Building.Building;
 import Model.Building.BuildingContainer;
 import Model.Building.Castle;
 import Model.Character.CharacterContainer;
+import Model.Character.Special.Special;
 import Model.Game;
 import Model.Map.Map;
 import Support.Converter;
@@ -35,6 +36,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -647,6 +649,10 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             return;
 
         /* Check Money -> can't build if no enaugh money */
+        if (game.getGold(game.getPlayerturn()) < Building.BLACKSMITH_COST) {
+            JOptionPane.showMessageDialog(this, "Uang Anda Tidak Cukup.");
+            return;
+        }
 
         /* Check terrain -> can't build on water and mud */
         Point p = selectedterrain.getLocation();
@@ -665,6 +671,9 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         if (c!=null)
             return;
 
+        int turn = game.getPlayerturn();
+        game.setGold(turn, game.getGold(turn)-Building.BLACKSMITH_COST);
+        updateTurnInformation();
         game.getMap().SetBuilding(Map.BLACKSMITH, game.getPlayerturn(), pGrid.x, pGrid.y, 0, 0);
         InitMap();
 }//GEN-LAST:event_blackSmithButtonMousePressed
@@ -675,6 +684,10 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             return;
 
         /* Check Money -> can't build if no enaugh money */
+        if (game.getGold(game.getPlayerturn()) < Building.BARRACK_COST) {
+            JOptionPane.showMessageDialog(this, "Uang Anda Tidak Cukup.");
+            return;
+        }
 
         /* Check terrain -> can't build on water and mud */
         Point p = selectedterrain.getLocation();
@@ -693,6 +706,9 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         if (c!=null)
             return;
 
+        int turn = game.getPlayerturn();
+        game.setGold(turn, game.getGold(turn)-Building.BARRACK_COST);
+        updateTurnInformation();
         game.getMap().SetBuilding(Map.BARRACK, game.getPlayerturn(), pGrid.x, pGrid.y, 0, 0);
         InitMap();
 }//GEN-LAST:event_barrackButtonMousePressed
@@ -702,8 +718,23 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         n%=game.getMap().GetNumPlayer();
         ++n;
         game.setPlayerturn(n);
+        updateGold(n);
         playerTurnLabel.setText("Player "+n+" Turn. Your Gold is "+game.getGold(n)+".");
 }//GEN-LAST:event_endTurnButtonMousePressed
+
+    private void updateGold(int player){
+        BuildingContainer bc = game.getMap().GetBuildings();
+        Building b;
+        int gold = 0;
+        for (int i=0;i<bc.size();++i) {
+            b = bc.get(i);
+            if (b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX)==player) {
+                gold += b.getBuilding_BaseAtribut(b.BUILDING_GOLD_PER_TURN_IDX);
+                System.out.println(gold);
+            }
+        }
+        game.setGold(player, game.getGold(player)+gold);
+    }
 
     private void summonCharacterButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summonCharacterButtonMousePressed
         /* check if barrack is selected */
@@ -827,6 +858,10 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 //        t.start();
     }//GEN-LAST:event_moveButtonActionPerformed
 
+    private void updateTurnInformation() {
+        playerTurnLabel.setText("Player "+game.getPlayerturn()+" Turn. Your Gold is "+game.getGold(game.getPlayerturn())+".");
+    }
+
     private void createAreaColor(int[][] mapArea) {
         Point p;
         JLabel l;
@@ -932,6 +967,17 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
     private void specialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_specialButtonActionPerformed
         boolean visible = listSpecialPanel.isVisible();
+        if (!visible) {
+            int i=0;
+            Special s = selectedChar.GetSpecial(i);
+            DefaultListModel listmodel = new DefaultListModel();
+            while (s!=null) {
+                listmodel.addElement(s.GetSpecialName());
+                ++i;
+                s = selectedChar.GetSpecial(i);
+            }
+            listSpecial.setModel(listmodel);
+        }
         listSpecialPanel.setVisible(!visible);
     }//GEN-LAST:event_specialButtonActionPerformed
 
@@ -1215,6 +1261,10 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         y = characterPanel.getY() - height;
         listSpecialPanel.setBounds(x, y, width, height);
         listSpecialPanel.setVisible(false);
+
+        /* barrack and blacksmith Button */
+        barrackButton.setToolTipText("Cost : "+Building.BARRACK_COST);
+        blackSmithButton.setToolTipText("Cost : "+Building.BLACKSMITH_COST);
 
         disableAllActionPanel();
     }
