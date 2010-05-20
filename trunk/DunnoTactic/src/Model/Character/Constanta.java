@@ -59,9 +59,9 @@ public class Constanta {
     public static final int PRICE_UPGRADE_STATUS_3 = 200;
     public static final int PRICE_UPGRADE_STATUS_4 = 300;
 
-    public static final int BUFF_ACTION_DISABLE_ID = 0;
-    public static final int BUFF_ACTION_IMMOBILIZE_ID = 1;
-    public static final int BUFF_ACTION_SILENCE_ID = 2;
+    public static final int ACTION_DISABLE_ID = 0;
+    public static final int ACTION_IMMOBILIZE_ID = 1;
+    public static final int ACTION_SILENCE_ID = 2;
 
     public static final int BUFF_STATUS_POISON_ID = 10;
     public static final int BUFF_STATUS_SILENCE_ID = 11;

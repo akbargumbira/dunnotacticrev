@@ -15,8 +15,7 @@ import Model.Character.Buff.Buff;
 public class CharAtribut {
     private int[] CurrentAtribut = new int[Constanta.NUMBER_ATRIBUT];
     private int[] DefaultAtribut = new int[Constanta.NUMBER_ATRIBUT];
-    private boolean[] GuardStatus = new boolean[2];
-    private int[] StatusAction = new int[3];
+    private boolean[] StatusAction = new boolean[3];
     private int[] BuffListID = new int[3];
     private int[] BuffStatusDuration = new int[3];
     private int BuffCounter;
@@ -50,6 +49,9 @@ public class CharAtribut {
             }
             break;
         }
+        StatusAction[0]=false;
+        StatusAction[1]=false;
+        StatusAction[2]=false;
         JobChar = new J1_Novice();
         SetFirstDefaultAtribut();
         CalculateCurrentAtribut();
@@ -87,6 +89,18 @@ public class CharAtribut {
         return JobChar.GetSpecialAvail(i);
     }
 
+    public boolean IsImmobilize(){
+        return StatusAction[Constanta.ACTION_IMMOBILIZE_ID];
+    }
+
+    public boolean IsDisable(){
+        return StatusAction[Constanta.ACTION_DISABLE_ID];
+    }
+
+    public boolean IsSilence(){
+        return StatusAction[Constanta.ACTION_SILENCE_ID];
+    }
+
     public void SetBuff(int ID){
         boolean unset = true;
         for(int i=0;i<BuffCounter;++i){
@@ -105,10 +119,38 @@ public class CharAtribut {
             BuffStatusDuration[BuffCounter]=BuffChar[BuffCounter].GetDuration();
             ++BuffCounter;
         }
-        CalculateCurrentAtribut();   
+        UpdateStatusActionBuffed();
+        CalculateCurrentAtributBuffed();
     }
 
-    public void SetCurrentAtribut(int AtribID, int Val){
+    public void UpdateStatusActionBuffed(){
+        boolean StatusSilence = false;
+        boolean StatusDisable = false;
+        boolean StatusImmobilize = false;
+        for(int i=0;i<BuffCounter;++i){
+            if(BuffChar[i].GetStatusActionBuffChar(Constanta.ACTION_DISABLE_ID)==true){
+                StatusAction[Constanta.ACTION_DISABLE_ID]=true;
+                StatusDisable=true;
+            } else
+            if(BuffChar[i].GetStatusActionBuffChar(Constanta.ACTION_IMMOBILIZE_ID)==true){
+                StatusAction[Constanta.ACTION_IMMOBILIZE_ID]=true;
+                StatusImmobilize=true;
+            } else if(BuffChar[i].GetStatusActionBuffChar(Constanta.ACTION_SILENCE_ID)==true){
+                StatusAction[Constanta.ACTION_SILENCE_ID]=true;
+                StatusSilence=true;
+            }   
+        }
+        if(StatusImmobilize==false){
+            StatusAction[Constanta.ACTION_IMMOBILIZE_ID]=false;
+        }
+        if(StatusDisable==false){
+            StatusAction[Constanta.ACTION_DISABLE_ID]=false;
+        }
+        if(StatusImmobilize==false){
+            StatusAction[Constanta.ACTION_IMMOBILIZE_ID]=false;
+        }
+    }
+        public void SetCurrentAtribut(int AtribID, int Val){
         CurrentAtribut[AtribID]=Val;
     }
 
@@ -129,6 +171,18 @@ public class CharAtribut {
         int TotalBuff=0;
         int AtribID;
         for(AtribID=0;AtribID<Constanta.NUMBER_ATRIBUT;++AtribID){
+            for(int i=0;i<3;++i){
+            TotalBuff = TotalBuff + (int)(BuffChar[i].GetFactorBuffChar(AtribID)*(double)DefaultAtribut[AtribID]);
+        }
+        CurrentAtribut[AtribID]=DefaultAtribut[AtribID]+TotalBuff;
+        TotalBuff=0;
+        }
+    }
+
+    public void CalculateCurrentAtributBuffed(){
+        int TotalBuff=0;
+        int AtribID;
+        for(AtribID=2;AtribID<Constanta.NUMBER_ATRIBUT;++AtribID){
             for(int i=0;i<3;++i){
             TotalBuff = TotalBuff + (int)(BuffChar[i].GetFactorBuffChar(AtribID)*(double)DefaultAtribut[AtribID]);
         }
@@ -261,7 +315,8 @@ public class CharAtribut {
                 }
             }
         }
-        CalculateCurrentAtribut();
+        UpdateStatusActionBuffed();
+        CalculateCurrentAtributBuffed();
     }
 
     public int GetRangeMove(){
@@ -271,7 +326,6 @@ public class CharAtribut {
     @Override
     public String toString() {
         String s = new String();
-        s += "Current Atribut :\n";
         s += "HP : ";
         s += Integer.toString(CurrentAtribut[Constanta.HP_ID]);
         s += "\n";
@@ -302,6 +356,15 @@ public class CharAtribut {
         s += "Range Attack : ";
         s += Integer.toString(CurrentAtribut[Constanta.RANGE_ATTACK_ID]);
         s += "\n";
+        if(IsSilence()==true){
+            s += "SILENCED\n";
+        }
+        if(IsDisable()==true){
+            s += "DISABLED\n";
+        }
+        if(IsImmobilize()==true){
+            s += "IMMOBILIZED\n";
+        }
         return s;
     }
 

@@ -23,6 +23,10 @@ public class Buff {
         return BuffEfekChar.GetFactorBuff(AtribID);
     }
 
+    public boolean GetStatusActionBuffChar(int ID){
+        return BuffEfekChar.GetStatusActionBuff(ID);
+    }
+
     public int GetBuffID(){
         return BuffID;
     }
@@ -130,5 +134,42 @@ public class Buff {
                 break;
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        String s = new String();
+        s += "Factor : \n";
+        s += "HP : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.HP_ID));
+        s += "\n";
+        s += "SP : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.SP_ID));
+        s += "\n";
+        s += "Attack : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.ATTACK_ID));
+        s += "\n";
+        s += "Magic Attack : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.MATTACK_ID));
+        s += "\n";
+        s += "Defense : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.DEF_ID));
+        s += "\n";
+        s += "Magic Defense : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.MDEF_ID));
+        s += "\n";
+        s += "Accuracy : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.ACC_ID));
+        s += "\n";
+        s += "Evasion : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.EVA_ID));
+        s += "\n";
+        s += "Range Move : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.RANGE_MOVE_ID));
+        s += "\n";
+        s += "Range Attack : ";
+        s += Double.toString(BuffEfekChar.GetFactorBuff(Constanta.RANGE_ATTACK_ID));
+        s += "\n";
+        return s;
     }
 }

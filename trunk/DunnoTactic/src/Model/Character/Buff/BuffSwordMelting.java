@@ -22,9 +22,9 @@ public class BuffSwordMelting extends BuffEfek {
         FactorBuff[Constanta.RANGE_MOVE_ID]=0;
         FactorBuff[Constanta.RANGE_ATTACK_ID]=0;
 
-        StatusActionBuff[Constanta.BUFF_ACTION_DISABLE_ID]=false;
-        StatusActionBuff[Constanta.BUFF_ACTION_IMMOBILIZE_ID]=false;
-        StatusActionBuff[Constanta.BUFF_ACTION_SILENCE_ID]=false;
+        StatusActionBuff[Constanta.ACTION_DISABLE_ID]=false;
+        StatusActionBuff[Constanta.ACTION_IMMOBILIZE_ID]=false;
+        StatusActionBuff[Constanta.ACTION_SILENCE_ID]=false;
 
         DurationBuff=3;
     }

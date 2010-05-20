@@ -13,7 +13,7 @@ import Model.Character.Constanta;
  */
 public class Human extends Race {
     public Human(){
-        BaseAtribut[Constanta.HP_ID]=2500;
+        BaseAtribut[Constanta.HP_ID]=2700;
         BaseAtribut[Constanta.SP_ID]=200;
         BaseAtribut[Constanta.ATTACK_ID]=450;
         BaseAtribut[Constanta.MATTACK_ID]=380;
