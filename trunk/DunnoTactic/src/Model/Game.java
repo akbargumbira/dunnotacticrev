@@ -8,13 +8,14 @@ import Model.Building.Building;
 import Model.Character.Character;
 import Model.Character.CharacterContainer;
 import Model.Map.Map;
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  *
  * @author ifan
  */
-public class Game
+public class Game implements Serializable
 {
 
     public static final int INIT_GOLD = 400;
@@ -96,7 +97,7 @@ public class Game
      * @param charactermap the charactermap to set
      */
     public void setCharactermap(int[][] charactermap) {
-        this.charactermap = charactermap;
+        this.setCharactermap(charactermap);
     }
 
     /**
@@ -130,5 +131,4 @@ public class Game
     public int getGold(int player) {
         return gold[player-1];
     }
-    
 }

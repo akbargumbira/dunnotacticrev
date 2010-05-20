@@ -10,11 +10,12 @@ import Model.Character.Special.*;
 import java.util.Vector;
 import Model.Building.Building;
 import java.awt.Point;
+import java.io.Serializable;
 /**
  *
  * @author ifan
  */
-public class Character {
+public class Character implements Serializable{
     private boolean enable;
     private boolean death;
     private int EnableCounter;

@@ -6,12 +6,13 @@
 package Model.Character.Race;
 
 import Model.Character.Constanta;
+import java.io.Serializable;
 
 /**
  *
  * @author user
  */
-public class Race {
+public class Race implements Serializable{
     protected  int RaceID;
     protected  int[] BaseAtribut = new int[Constanta.NUMBER_ATRIBUT];
     protected int RaceLevel;

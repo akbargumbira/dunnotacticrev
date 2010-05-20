@@ -6,12 +6,13 @@
 package Model.Character.Buff;
 
 import Model.Character.Constanta;
+import java.io.Serializable;
 
 /**
  *
  * @author ifan
  */
-public class Buff {
+public class Buff implements Serializable{
     private int BuffID;
     private BuffEfek BuffEfekChar;
 

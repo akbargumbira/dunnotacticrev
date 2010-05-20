@@ -14,10 +14,13 @@ package View.PlayMode;
 import Model.Building.Barrack;
 import Model.Building.Blacksmith;
 import Model.Building.Building;
+import Model.Building.BuildingContainer;
 import Model.Building.Castle;
+import Model.Character.CharacterContainer;
 import Model.Game;
 import Model.Map.Map;
 import Support.Converter;
+import Support.IOObject;
 import Support.ImageSupport;
 import Support.Path;
 import View.MainMenu;
@@ -25,17 +28,12 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.Point;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
 import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -66,6 +64,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         /* show player turn & it's gold */
         playerTurnLabel.setText("Player 1 Turn. Your Gold is "+game.getGold(1)+".");
+        //System.out.println(game.getMap());
     }
 
 
@@ -86,6 +85,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         buildingPanel = new javax.swing.JPanel();
         warnaPanel = new javax.swing.JPanel();
         karakterPanel = new javax.swing.JPanel();
+        selectedPanel = new javax.swing.JPanel();
         menuPanel = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
@@ -219,6 +219,27 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         karakterPanel.setBounds(420, 80, -1, -1);
         mapLayerPane.add(karakterPanel, new Integer(3));
 
+        selectedPanel.setOpaque(false);
+        selectedPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                selectedPanelMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout selectedPanelLayout = new javax.swing.GroupLayout(selectedPanel);
+        selectedPanel.setLayout(selectedPanelLayout);
+        selectedPanelLayout.setHorizontalGroup(
+            selectedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        selectedPanelLayout.setVerticalGroup(
+            selectedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        selectedPanel.setBounds(580, 80, 100, 100);
+        mapLayerPane.add(selectedPanel, new Integer(7));
+
         scrollPane.setViewportView(mapLayerPane);
 
         scrollPane.setBounds(20, 40, 850, 220);
@@ -231,6 +252,11 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         saveButton.setFont(new java.awt.Font("Tahoma", 0, 12));
         saveButton.setText("Save Game");
         saveButton.setFocusable(false);
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
         menuPanel.add(saveButton);
         saveButton.setBounds(5, 15, 100, 25);
 
@@ -260,7 +286,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         listCharacterPanel.add(jScrollPane1);
         jScrollPane1.setBounds(20, 40, 168, 120);
 
-        listCharacterPanel.setBounds(740, 20, 200, 0);
+        listCharacterPanel.setBounds(740, 20, 200, -1);
         layerpane.add(listCharacterPanel, new Integer(1));
 
         characterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Character Action", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -395,7 +421,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jPanel2.add(jScrollPane2);
         jScrollPane2.setBounds(6, 31, 166, 180);
 
-        jPanel2.setBounds(100, 340, 0, 0);
+        jPanel2.setBounds(100, 340, -1, -1);
         layerpane.add(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         buildPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Build", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -469,7 +495,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         infoPanel.setBounds(1020, 250, 200, 200);
         layerpane.add(infoPanel, new Integer(1));
 
-        playerTurnLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        playerTurnLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         playerTurnLabel.setForeground(new java.awt.Color(255, 255, 255));
         playerTurnLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         playerTurnLabel.setText("Player Turn 1. Your Gold 1234");
@@ -660,11 +686,59 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 }//GEN-LAST:event_upgradejobButtonActionPerformed
 
     private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
-
-        int[][] mapmove;
+        int width = game.getMap().GetWidth();
+        int height = game.getMap().GetHeight();
+        MapArea = new int[width][height];
+        boolean[][] MapBuilding;
+        boolean[][] MapPlayer;
         Path p = new Path();
         Model.Character.Character c = selectedChar;
-        p.SetAreaMove(5, c.GetAtribut().GetRaceID(), , mapmove, MapBuilding, MapPlayer, mapmove);
+
+        /* init mapBuilding (contain true & false)*/
+        MapBuilding = new boolean[width][height];
+        for (int i=0;i<width;++i) {
+            for (int j=0;j<height;++j) {
+                MapBuilding[i][j] = true;
+            }
+        }
+        
+        BuildingContainer bc = game.getMap().GetBuildings();
+        Building b;
+        for (int i=0;i<bc.size();++i) {
+            b = bc.get(i);
+            if (b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX)!=c.getPlayer()) {
+                MapBuilding[b.getBuilding_BaseAtribut(b.BUILDING_X_IDX)][b.getBuilding_BaseAtribut(b.BUILDING_Y_IDX)] = false;
+            }
+        }
+
+        /* init mapPlayer (contain true & false )*/
+        MapPlayer = new boolean[width][height];
+        for (int i=0;i<width;++i) {
+            for (int j=0;j<height;++j) {
+                MapPlayer[i][j] = true;
+            }
+        }
+        CharacterContainer cc = game.getCharacters();
+        Model.Character.Character c1;
+        for (int i=0;i<cc.size();++i) {
+            c1 = cc.get(i);
+            if (c1.getPlayer()!=c.getPlayer()) {
+                MapPlayer[c1.getX()][c1.getY()]=false;
+            }
+        }
+        
+        MapArea = p.SetAreaMove(c.GetAtribut().GetRangeMove(), c.GetAtribut().GetRaceID(), c.getLocation(), game.getMap().getTerrain(), MapBuilding, MapPlayer);
+//        String s = new String();
+//        for(int i=0;i<width;++i){
+//            for (int j=0;j<height;++j){
+//                s += MapArea[i][j]+" ";
+//            }
+//            s += "\n";
+//        }
+//        System.out.print(s);
+        createAreaColor(MapArea);
+        move = true;
+        
 //        Model.Character.Character c;
 //        Point p = Converter.PointToGrid(selectedcharLabel.getX(), selectedcharLabel.getY());
 //        c = game.getCharacters().get(p.x, p.y);
@@ -688,6 +762,28 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 //        });
 //        t.start();
     }//GEN-LAST:event_moveButtonActionPerformed
+
+    private void createAreaColor(int[][] mapArea) {
+        Point p;
+        JLabel l;
+        for (int i=0;i<mapArea.length;++i) {
+            for (int j=0;j<mapArea[0].length;++j) {
+                if (mapArea[i][j]<99) {
+                    p = Converter.GridToPoint(i, j);
+                    l = new JLabel();
+                    warnaPanel.add(l);
+                    l.setBounds(p.x, p.y, ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT);
+                    l.setBorder(new FieldBorder(Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE));
+                }
+            }
+        }
+        warnaPanel.repaint();
+    }
+
+    private void clearAreaColor(){
+        warnaPanel.removeAll();
+        warnaPanel.repaint();
+    }
 
     private void listButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listButtonActionPerformed
         list = !list;
@@ -717,6 +813,59 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         }
     }//GEN-LAST:event_terrainPanelMousePressed
 
+    private void selectedPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectedPanelMousePressed
+        int x = evt.getX();
+        int y = evt.getY();
+        Point p = Converter.PointToGrid(x, y);
+        Point pPoint  = Converter.GridToPoint(p);
+        selectedLabel.setLocation(pPoint.x, pPoint.y);
+
+        if (move) {
+            int n = JOptionPane.showConfirmDialog(null, "Are You Sure?", null, JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.NO_OPTION)
+                return;
+
+            /* check if selectd grid is in area move */
+            if (MapArea[p.x][p.y]==99) {
+                JOptionPane.showMessageDialog(this, "Move diluar Area");
+                return;
+            }
+            selectedChar.Move(p.x, p.y);
+            System.out.println(selectedChar.getLocation());
+            selectedcharLabel.setLocation(pPoint.x, pPoint.y);
+
+            move = false;
+            selectedcharLabel = null;
+            selectedChar = null;
+            clearAreaColor();
+        }
+
+        Model.Character.Character c = game.getCharacters().get(p.x, p.y);
+        if (c!=null) {
+            selectedChar = c;
+            selectedcharLabel = (JLabel)karakterPanel.getComponentAt(pPoint.x, pPoint.y);
+            selectedcharLabel.getMouseListeners()[0].mousePressed(evt);
+            return;
+        }
+
+        Building b = game.getMap().GetBuildings().get(p.x, p.y);
+        if (b!=null) {
+            selectedBuilding = b;
+            selectedBuildingLabel = (JLabel)buildingPanel.getComponentAt(pPoint.x, pPoint.y);
+            selectedBuildingLabel.getMouseListeners()[0].mousePressed(evt);
+            return;
+        }
+
+        /* terrain */
+        selectedterrain = (JLabel)terrainPanel.getComponentAt(x, y);
+        disableAllActionPanel();
+    }//GEN-LAST:event_selectedPanelMousePressed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        String s = JOptionPane.showInputDialog(this, "Nama File : ", "Save Game", JOptionPane.QUESTION_MESSAGE);
+        IOObject.Save(game, s);
+    }//GEN-LAST:event_saveButtonActionPerformed
+
     public void createContent(int x, int y, int width, int height, String iconName, JPanel p) {
         Component c =  p.getComponentAt(x, y);
         if (c!=null) {
@@ -730,19 +879,19 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             label.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     disableAllActionPanel();
-                    JLabel l = (JLabel)e.getSource();
+                    JLabel l = selectedcharLabel;
                     int x = l.getX();
                     int y = l.getY();
                     Point p = Converter.PointToGrid(x, y);
                     Model.Character.Character c = game.getCharacters().get(p.x, p.y);
                     infoTextarea.setText(c.toString());
-                    selectedterrain.setBorder(null);
                     if (c.getPlayer() == game.getPlayerturn()) {
                         characterPanel.setVisible(true);
                         if (game.getMap().GetBuildings().IsBlackSmithIn(game.getPlayerturn()))
                             upgradecharacterPanel.setVisible(true);
-                        selectedcharLabel = (JLabel)e.getSource();
                         selectedChar = c;
+
+                        moveButton.setEnabled(true);
                     }
                 }
             });
@@ -754,16 +903,14 @@ public class Play extends javax.swing.JFrame implements MouseListener{
                 public void mousePressed(MouseEvent e) {
                     disableAllActionPanel();
                     summonCharacterButton.setVisible(false);
-                    JLabel l = (JLabel)e.getSource();
+                    JLabel l = selectedBuildingLabel;
                     int x = l.getX();
                     int y = l.getY();
                     Point p = Converter.PointToGrid(x, y);
                     Building b = game.getMap().GetBuildings().get(p.x, p.y);
                     infoTextarea.setText(b.toString());
-                    selectedterrain.setBorder(null);
                     if (b.getBuilding_BaseAtribut(Building.BUILDING_PLAYER_IDX)==game.getPlayerturn()) {
                         buildingactionPanel.setVisible(true);
-                        selectedBuildingLabel = (JLabel)e.getSource();
                         selectedBuilding = b;
 
                         if (b instanceof Barrack) {
@@ -829,6 +976,8 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         terrainPanel.setBounds(500, 500, d.width, d.height);
         buildingPanel.setBounds(500, 500, d.width, d.height);
         karakterPanel.setBounds(500, 500, d.width, d.height);
+        warnaPanel.setBounds(500, 500, d.width, d.height);
+        selectedPanel.setBounds(500, 500, d.width, d.height);
         d.setSize(d.width+1000, d.height+1000);
         mapLayerPane.setPreferredSize(d);
 //        mapLayerPane.repaint();
@@ -970,11 +1119,11 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         y = scrollPane.getY() - playerTurnLabel.getHeight();
         playerTurnLabel.setBounds(x, y, width, height);
 
-//        /* border Label */
-//        borderLabel = new JLabel();
-//        borderPanel.add(borderLabel);
-//        borderLabel.setBounds(0, 0, ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT);
-//        borderLabel.setBorder(new FieldBorder(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK));
+        /* selectedLabel */
+        selectedLabel = new JLabel();
+        selectedPanel.add(selectedLabel);
+        selectedLabel.setBounds(0, 0, ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT);
+        selectedLabel.setBorder(new FieldBorder(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK));
         
         disableAllActionPanel();
     }
@@ -1028,6 +1177,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JLabel playerTurnLabel;
     private javax.swing.JButton saveButton;
     private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JPanel selectedPanel;
     private javax.swing.JButton specialButton;
     private javax.swing.JButton summonCharacterButton;
     private javax.swing.JButton surrenderButton;
@@ -1049,6 +1199,9 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private JLabel selectedcharLabel;
     private JLabel selectedBuildingLabel;
     private JLabel borderLabel;
+    private JLabel selectedLabel;
     private Model.Character.Character selectedChar;
     private Building selectedBuilding;
+    private boolean move = false;
+    private int[][] MapArea;
 }

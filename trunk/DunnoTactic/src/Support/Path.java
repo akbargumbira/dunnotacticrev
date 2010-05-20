@@ -14,7 +14,8 @@ import java.awt.Point;
  */
 public class Path {
 
-    public void SetAreaMove(int RangeMove, int RaceID, Point Init ,int[][] MapTerrain, boolean[][] MapBuilding, boolean[][] MapPlayer, int[][] MapArea){
+    public int[][] SetAreaMove(int RangeMove, int RaceID, Point Init ,int[][] MapTerrain, boolean[][] MapBuilding, boolean[][] MapPlayer){
+        int[][] MapArea=new int[MapTerrain.length][MapTerrain[0].length];
         int factorX;
         int factorY;
         int x;
@@ -23,8 +24,13 @@ public class Path {
         int i;
         int j;
         int looping;
+        for(i=0;i<MapArea.length;++i){
+            for(j=0;j<MapArea[0].length;++j){
+                MapArea[i][j]=99;
+            }
+        }
 
-        if(MapTerrain[Init.x][Init.y]==1 && RaceID!=Constanta.RACE_FAIRY_ID) {
+        if(MapTerrain[Init.x][Init.y]==Map.LUMPUR && RaceID!=Constanta.RACE_FAIRY_ID) {
                 MapArea[Init.x][Init.y]=1;
         } else {
                 MapArea[Init.x][Init.y]=0;
@@ -35,16 +41,16 @@ public class Path {
                 factorY=-i;
                 for(factorX=0;factorX<i;++factorX) {
                     // kuadran 1
-                    x = Init.x+factorX-1;
-                    y = Init.y+factorY-1;
+                    x = Init.x+factorX;
+                    y = Init.y+factorY;
                     if(x>=0 && y>=0 && x<MapTerrain.length && y<MapTerrain[0].length) {
-                        GetDistanceMove(RangeMove, RaceID, MapTerrain[x][y], MapPlayer[x][y], MinAround(x, y, MapArea));
+                        MapArea[x][y]=GetDistanceMove(RangeMove, RaceID, MapTerrain[x][y], MapPlayer[x][y], MinAround(x, y, MapArea));
                     }
                     // kuadran 3
-                    x = Init.x-factorX-1;
-                    y = Init.y-factorY-1;
+                    x = Init.x-factorX;
+                    y = Init.y-factorY;
                     if(x>=0 && y>=0 && x<MapTerrain.length && y<MapTerrain[0].length) {
-                        GetDistanceMove(RangeMove, RaceID, MapTerrain[x][y], MapPlayer[x][y], MinAround(x, y, MapArea));
+                        MapArea[x][y]=GetDistanceMove(RangeMove, RaceID, MapTerrain[x][y], MapPlayer[x][y], MinAround(x, y, MapArea));
                     }
                     ++factorY;
                 }
@@ -52,38 +58,39 @@ public class Path {
                 factorX=i;
                 for(factorY=0;factorY<i;++factorY) {
                     // kuadran 4
-                    x = Init.x+factorX-1;
-                    y = Init.y+factorY-1;
+                    x = Init.x+factorX;
+                    y = Init.y+factorY;
                     if(x>=0 && y>=0 && x<MapTerrain.length && y<MapTerrain[0].length) {
-                        GetDistanceMove(RangeMove, RaceID, MapTerrain[x][y], MapPlayer[x][y], MinAround(x, y, MapArea));
+                        MapArea[x][y]=GetDistanceMove(RangeMove, RaceID, MapTerrain[x][y], MapPlayer[x][y], MinAround(x, y, MapArea));
                     }
                     // kuadran 2
-                    x = Init.x-factorX-1;
-                    y = Init.y-factorY-1;
+                    x = Init.x-factorX;
+                    y = Init.y-factorY;
                     if(x>=0 && y>=0 && x<MapTerrain.length && y<MapTerrain[0].length) {
-                        GetDistanceMove(RangeMove, RaceID, MapTerrain[x][y], MapPlayer[x][y], MinAround(x, y, MapArea));
+                        MapArea[x][y]=GetDistanceMove(RangeMove, RaceID, MapTerrain[x][y], MapPlayer[x][y], MinAround(x, y, MapArea));
                     }
                     --factorX;
                 }
             }
         }
+        return MapArea;
     }
 
     private int MinAround(int x, int y, int[][] Matriks){
         int Minimum;
-        if (x-1<0 && y-1<0) {
+        if (x<=0 && y<=0) {
             Minimum = Min2(Matriks[x][y+1],Matriks[x+1][y]);
         } else
-        if(x-1<0) {
+        if(x<=0) {
             Minimum = Min2(Min2(Matriks[x][y-1],Matriks[x][y+1]), Matriks[x+1][y]);
         } else
-        if(y-1<0) {
+        if(y<=0) {
             Minimum = Min2(Matriks[x][y+1], Min2(Matriks[x-1][y],Matriks[x+1][y]));
-        } else if(x>=Matriks.length && y>=Matriks[0].length) {
+        } else if(x==Matriks.length-1 && y==Matriks[0].length-1) {
             Minimum = Min2(Matriks[x-1][y],Matriks[x][y-1]);
-        } else if(x>=Matriks.length) {
+        } else if(x==Matriks.length-1) {
             Minimum = Min2(Min2(Matriks[x][y+1],Matriks[x][y-1]),Matriks[x-1][y]);
-        } else if(y>=Matriks[0].length) {
+        } else if(y==Matriks[0].length-1) {
             Minimum = Min2(Min2(Matriks[x-1][y],Matriks[x+1][y]),Matriks[x][y-1]);
         }
         else {
@@ -102,8 +109,8 @@ public class Path {
     
     private int GetDistanceMove(int RangeMove, int RaceID, int TerrainID, boolean PassAblePlayer, int MinAroundVal) {
         int val;
-        if(PassAbleTerrain(TerrainID, RaceID) && PassAblePlayer==true && MinAroundVal < RangeMove) {
-            if(TerrainID==1) {
+        if(PassAbleTerrain(TerrainID, RaceID) && PassAblePlayer && MinAroundVal < RangeMove) {
+            if(TerrainID==Map.LUMPUR) {
                 if(MinAroundVal==RangeMove-1) {
                     val=99;
                 } else {

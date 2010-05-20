@@ -11,12 +11,12 @@
 
 package View;
 
+import Model.Game;
 import View.BuildMode.BuildMap;
 import View.PlayMode.Play;
 import View.PlayMode.SelectPlayer;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +27,10 @@ public class MainMenu extends javax.swing.JFrame {
     /** Creates new form MainMenu */
     public MainMenu() {
         initComponents();
+        /* Load game panel */
+        load = new LoadGame(this);
+        jPanel1.add(load, 0);
+        load.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -42,69 +46,63 @@ public class MainMenu extends javax.swing.JFrame {
         newgameButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         buildmapButton = new javax.swing.JButton();
+        loadGameButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel1.setLayout(null);
+
+        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         newgameButton.setText("New Game");
         newgameButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 newgameButtonMousePressed(evt);
             }
         });
+        jPanel1.add(newgameButton);
+        newgameButton.setBounds(150, 40, 120, 25);
+        newgameButton.getAccessibleContext().setAccessibleName("newgameButton");
 
-        exitButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        exitButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         exitButton.setText("Exit");
         exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exitButtonMouseClicked(evt);
             }
         });
+        jPanel1.add(exitButton);
+        exitButton.setBounds(150, 115, 120, 25);
+        exitButton.getAccessibleContext().setAccessibleName("exitButton");
 
-        buildmapButton.setFont(new java.awt.Font("Tahoma", 0, 18));
+        buildmapButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         buildmapButton.setText("Build Map");
         buildmapButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buildmapButtonMouseClicked(evt);
             }
         });
+        jPanel1.add(buildmapButton);
+        buildmapButton.setBounds(150, 90, 120, 25);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(exitButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(buildmapButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(newgameButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(165, 165, 165))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(newgameButton)
-                .addGap(18, 18, 18)
-                .addComponent(buildmapButton)
-                .addGap(18, 18, 18)
-                .addComponent(exitButton)
-                .addContainerGap(130, Short.MAX_VALUE))
-        );
-
-        newgameButton.getAccessibleContext().setAccessibleName("newgameButton");
-        exitButton.getAccessibleContext().setAccessibleName("exitButton");
+        loadGameButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        loadGameButton.setText("Load Game");
+        loadGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadGameButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(loadGameButton);
+        loadGameButton.setBounds(150, 65, 120, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();
@@ -134,6 +132,17 @@ public class MainMenu extends javax.swing.JFrame {
         buildmap = new BuildMap(this,devices[0]);
     }//GEN-LAST:event_buildmapButtonMouseClicked
 
+    private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
+        int x,y,width,height;
+        load.initListFile();
+        width = load.getPreferredSize().width;
+        height = load.getPreferredSize().height;
+        x = (jPanel1.getWidth()-width)/2;
+        y = 20;
+        load.setBounds(x, y, width, height);
+        load.setVisible(true);
+    }//GEN-LAST:event_loadGameButtonActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -149,9 +158,26 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton buildmapButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loadGameButton;
     private javax.swing.JButton newgameButton;
     // End of variables declaration//GEN-END:variables
     private Play play;
     private BuildMap buildmap;
     private MainMenu me=this;
+    private LoadGame load;
+    private Game game;
+
+    /**
+     * @return the game
+     */
+    public Game getGame() {
+        return game;
+    }
+
+    /**
+     * @param game the game to set
+     */
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }

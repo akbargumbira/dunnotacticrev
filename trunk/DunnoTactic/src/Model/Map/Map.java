@@ -140,7 +140,7 @@ public class Map implements Serializable{
     }
 
     public int GetTerrain(int x, int y) {
-        return terrain[x][y];
+        return getTerrain()[x][y];
     }
 
     public Building GetBuilding(int x, int y) {
@@ -243,7 +243,7 @@ public class Map implements Serializable{
                 s += ",";
                 s += Integer.toString(j);
                 s += " : ";
-                s += Integer.toString(terrain[i][j]);
+                s += Integer.toString(getTerrain()[i][j]);
                 s += "\n";
             }
         }
@@ -262,6 +262,13 @@ public class Map implements Serializable{
 
         s += building_container.toString();
         return s;
+    }
+
+    /**
+     * @return the terrain
+     */
+    public int[][] getTerrain() {
+        return terrain;
     }
         
 }
