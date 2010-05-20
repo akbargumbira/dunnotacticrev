@@ -26,9 +26,9 @@ public class J32_Sage extends Job {
         JobID=Constanta.JOB32_DEFENDER_ID;
         JobClass=3;
         AttackType=Constanta.ATTACK_ATT_TYPE_ID;
-        SpecialAvail[0]=ConstantaSp.SP_KNIGHT_BLOOD_CLOTING_ID;
-        SpecialAvail[1]=ConstantaSp.SP_ARCH_KNIGHT_SWORD_FURY_ID;
-        SpecialAvail[2]=ConstantaSp.SP_ARCH_KNIGHT_SHOCKWAVE_ID;
+        SpecialAvail[0]=ConstantaSp.SP_HEALER_HEALING_PRAY_ID;
+        SpecialAvail[1]=ConstantaSp.SP_SAGE_MANA_LEAK_ID;
+        SpecialAvail[2]=ConstantaSp.SP_SAGE_PSYCHOKINETIC_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
     }

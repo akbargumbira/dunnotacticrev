@@ -13,7 +13,7 @@ import Model.Character.Constanta;
  */
 public class Elf extends Race {
     public Elf(){
-        BaseAtribut[Constanta.HP_ID]=2000;
+        BaseAtribut[Constanta.HP_ID]=2500;
         BaseAtribut[Constanta.SP_ID]=220;
         BaseAtribut[Constanta.ATTACK_ID]=380;
         BaseAtribut[Constanta.MATTACK_ID]=400;

@@ -85,11 +85,11 @@ public class Character {
             if(RandBuffEfek<25){
                 KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_TIME_FREEZE_ID);
             } else if(RandBuffEfek<45){
-                KarakterAtribut.SetBuff(Constanta.BUFF_ACTION_DISABLE_ID);
+                KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_DISABLE_ID);
             } else if(RandBuffEfek<60){
-                KarakterAtribut.SetBuff(Constanta.BUFF_ACTION_SILENCE_ID);
+                KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_SILENCE_ID);
             } else if(RandBuffEfek<75){
-                KarakterAtribut.SetBuff(Constanta.BUFF_ACTION_IMMOBILIZE_ID);
+                KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_IMMOBILIZE_ID);
             } else if(RandBuffEfek<90){
                 KarakterAtribut.SetBuff(Constanta.BUFF_STATUS_POISON_ID);
             } else {
@@ -290,6 +290,61 @@ public class Character {
                 }
                 break;
             }
+        } else {
+            switch(SpecialID){
+                case ConstantaSp.SP_DEFENDER_ABUNDANCE_LIFE_ID : {
+                    SpecialList[Indeks] = new Sp32_AbundanceLife();
+                }
+                break;
+                case ConstantaSp.SP_DEFENDER_BARRIER_ID : {
+                    SpecialList[Indeks] = new Sp32_Barrier();
+                }
+                break;
+                case ConstantaSp.SP_PALADIN_SWORD_REFLECT_ID : {
+                    SpecialList[Indeks] = new Sp32_SwordReflect();
+                }
+                break;
+                case ConstantaSp.SP_PALADIN_SAINT_CROSS_ID: {
+                    SpecialList[Indeks] = new Sp32_SaintCross();
+                }
+                break;
+                case ConstantaSp.SP_BARD_SONG_OF_FREEDOM_ID : {
+                    SpecialList[Indeks] = new Sp32_SongOfFreedom();
+                }
+                break;
+                case ConstantaSp.SP_BARD_DOWN_MENTAL_ID : {
+                    SpecialList[Indeks] = new Sp32_DownMental();
+                }
+                break;
+                case ConstantaSp.SP_TIME_MAGE_TIME_WARP_ID : {
+                    SpecialList[Indeks] = new Sp32_TimeWarp();
+                }
+                break;
+                case ConstantaSp.SP_TIME_MAGE_TIME_SWAP_ID : {
+                    SpecialList[Indeks] = new Sp32_TimeSwap();
+                }
+                break;
+                case ConstantaSp.SP_SAGE_MANA_LEAK_ID : {
+                    SpecialList[Indeks] = new Sp32_ManaLeak();
+                }
+                break;
+                case ConstantaSp.SP_SAGE_PSYCHOKINETIC_ID : {
+                    SpecialList[Indeks] = new Sp32_Psychokinetic();
+                }
+                break;
+                case ConstantaSp.SP_DARK_STALKER_OBLIVION_ID : {
+                    SpecialList[Indeks] = new Sp32_Oblivion();
+                }
+                break;
+                case ConstantaSp.SP_DARK_STALKER_CURSED_BLOOD_ID : {
+                    SpecialList[Indeks] = new Sp32_CursedBlood();
+                }
+                break;
+                default : {
+
+                }
+                break;
+            }
         }
     }
 
@@ -370,5 +425,13 @@ public class Character {
 
     public Point getLocation(){
         return new Point(X,Y);
+    }
+
+    public boolean GetEnable(){
+        return enable;
+    }
+
+    public void SetEnable(boolean status){
+        enable = status;
     }
 }

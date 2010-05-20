@@ -5,6 +5,7 @@
 
 package Model.Character;
 import java.util.Vector;
+import Model.Character.Special.ConstantaSp;
 
 /**
  *
@@ -18,67 +19,25 @@ public class Driver {
         Karakter = new Character(Constanta.RACE_HUMAN_ID, 1);
         Karakter2 = new Character(Constanta.RACE_FAIRY_ID, 1);
         Target = new CharacterContainer();
-        Target.add(Karakter);
         Target.add(Karakter2);
-        System.out.println("Default:");
-        PrintAtributDefault();
-        Karakter.JobChange(53);
-        System.out.println("Current:");
-        PrintAtributCurrent();
-        Karakter.SpecialFunction(Karakter, Target, 56);
-        System.out.println("Karakter1:");
-        System.out.println("Default:");
-        PrintAtributDefault();
-        System.out.println("Current:");
-        PrintAtributCurrent();
-        System.out.println("Karakter2:");
-        System.out.println("Default:");
-        PrintAtributDefault2();
-        System.out.println("Current:");
-        PrintAtributCurrent2();
-//        Karakter.ReduceBuffDuration();
-//        Karakter.ReduceBuffDuration();
-//        Karakter.ReduceBuffDuration();
-//        Karakter.ReduceBuffDuration();
-//        System.out.println("Current:");
-//        PrintAtributCurrent();
-////        Karakter.SpecialFunction(Karakter, Target,6);
-////        System.out.println("Current after blood:");
-////        PrintAtributCurrent();
-////        System.out.println("Position:");
-////        PrintPosition();
-////        Karakter.Move(20, 20);
-////        PrintPosition();
-    }
-
-    public static void PrintAtributDefault(){
-        for(int i=0;i<Constanta.NUMBER_ATRIBUT;++i){
-            System.out.println(Karakter.GetAtribut().GetDefault(i));
-        }
-    }
-    public static void PrintAtributCurrent(){
-        for(int i=0;i<Constanta.NUMBER_ATRIBUT;++i){
-            System.out.println(Karakter.GetAtribut().GetCurrent(i));
-        }
-    }
-    public static void PrintPosition(){
-        System.out.println(Karakter.getX());
-        System.out.println(Karakter.getY());
-    }
-
-    public static void PrintAtributDefault2(){
-        for(int i=0;i<Constanta.NUMBER_ATRIBUT;++i){
-            System.out.println(Karakter2.GetAtribut().GetDefault(i));
-        }
-    }
-    
-    public static void PrintAtributCurrent2(){
-        for(int i=0;i<Constanta.NUMBER_ATRIBUT;++i){
-            System.out.println(Karakter2.GetAtribut().GetCurrent(i));
-        }
-    }
-    public static void PrintPosition2(){
-        System.out.println(Karakter.getX());
-        System.out.println(Karakter.getY());
+        System.out.println("Karakter 1:");
+        System.out.println(Karakter.GetAtribut().toString());
+        System.out.println("Karakter 2:");
+        System.out.println(Karakter2.GetAtribut().toString());
+        System.out.println("Karakter 1 upgrade job dark stalker, 2 ke mage");
+        Karakter.JobChange(Constanta.JOB32_DARK_STALKER_ID);
+        Karakter2.JobChange(Constanta.JOB2_MAGE_ID);
+        System.out.println("Karakter 1:");
+        System.out.println(Karakter.GetAtribut().toString());
+        System.out.println("Karakter 2:");
+        System.out.println(Karakter2.GetAtribut().toString());
+        System.out.println("Karakter 2 attack karakter 1");
+        Karakter2.AttackPlayer(Karakter2, Karakter);
+        System.out.println("Karakter 1:");
+        System.out.println(Karakter.GetAtribut().toString());
+        System.out.println("Karakter 1 special oblivion");
+        Karakter.SpecialFunction(Karakter, Target, ConstantaSp.SP_DARK_STALKER_OBLIVION_ID);
+        System.out.println("Karakter 2:");
+        System.out.println(Karakter2.GetAtribut().toString());
     }
 }

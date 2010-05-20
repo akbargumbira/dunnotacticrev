@@ -446,7 +446,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
             ++i;
         }
         if(i<=mapLogic.GetNumPlayer()){
-            JOptionPane.showConfirmDialog(this, "Castil untuk player belum diset semua.");
+            JOptionPane.showConfirmDialog(this, "Castil untuk player belum diset semua. Save gagal");
         } else {
             save.setVisible(true);
         }

@@ -22,9 +22,9 @@ public class BuffTimeFreeze extends BuffEfek {
         FactorBuff[Constanta.RANGE_MOVE_ID]=0;
         FactorBuff[Constanta.RANGE_ATTACK_ID]=0;
 
-        StatusActionBuff[Constanta.BUFF_ACTION_DISABLE_ID]=true;
-        StatusActionBuff[Constanta.BUFF_ACTION_IMMOBILIZE_ID]=true;
-        StatusActionBuff[Constanta.BUFF_ACTION_SILENCE_ID]=true;
+        StatusActionBuff[Constanta.ACTION_DISABLE_ID]=true;
+        StatusActionBuff[Constanta.ACTION_IMMOBILIZE_ID]=true;
+        StatusActionBuff[Constanta.ACTION_SILENCE_ID]=true;
 
         DurationBuff=2;
     }

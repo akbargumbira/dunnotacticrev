@@ -27,8 +27,8 @@ public class J32_Defender extends Job {
         JobClass=3;
         AttackType=Constanta.ATTACK_ATT_TYPE_ID;
         SpecialAvail[0]=ConstantaSp.SP_KNIGHT_BLOOD_CLOTING_ID;
-        SpecialAvail[1]=ConstantaSp.SP_ARCH_KNIGHT_SWORD_FURY_ID;
-        SpecialAvail[2]=ConstantaSp.SP_ARCH_KNIGHT_SHOCKWAVE_ID;
+        SpecialAvail[1]=ConstantaSp.SP_DEFENDER_ABUNDANCE_LIFE_ID;
+        SpecialAvail[2]=ConstantaSp.SP_DEFENDER_BARRIER_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
     }
