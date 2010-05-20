@@ -35,6 +35,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -64,7 +65,6 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         /* show player turn & it's gold */
         playerTurnLabel.setText("Player 1 Turn. Your Gold is "+game.getGold(1)+".");
-        //System.out.println(game.getMap());
     }
 
 
@@ -121,6 +121,14 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jScrollPane4 = new javax.swing.JScrollPane();
         infoTextarea = new javax.swing.JTextArea();
         playerTurnLabel = new javax.swing.JLabel();
+        listJobPanel = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listJob = new javax.swing.JList();
+        selectJobButton = new javax.swing.JButton();
+        listSpecialPanel = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        listSpecial = new javax.swing.JList();
+        selectSpecialButton = new javax.swing.JButton();
 
         playerComboBox.setFont(new java.awt.Font("Tahoma", 0, 18));
         playerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -237,7 +245,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        selectedPanel.setBounds(580, 80, 100, 100);
+        selectedPanel.setBounds(580, 80, -1, -1);
         mapLayerPane.add(selectedPanel, new Integer(7));
 
         scrollPane.setViewportView(mapLayerPane);
@@ -286,7 +294,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         listCharacterPanel.add(jScrollPane1);
         jScrollPane1.setBounds(20, 40, 168, 120);
 
-        listCharacterPanel.setBounds(740, 20, 200, -1);
+        listCharacterPanel.setBounds(740, 20, 200, 0);
         layerpane.add(listCharacterPanel, new Integer(1));
 
         characterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Character Action", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -314,28 +322,39 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         characterPanel.add(moveButton);
         moveButton.setBounds(5, 40, 100, 25);
 
-        specialButton.setFont(new java.awt.Font("Tahoma", 0, 12));
+        specialButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         specialButton.setText("Special");
+        specialButton.setToolTipText("Special 1 lho");
         specialButton.setAlignmentY(0.0F);
         specialButton.setFocusable(false);
+        specialButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                specialButtonActionPerformed(evt);
+            }
+        });
         characterPanel.add(specialButton);
         specialButton.setBounds(105, 15, 100, 25);
 
-        waitButton.setFont(new java.awt.Font("Tahoma", 0, 12));
+        waitButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         waitButton.setText("Wait");
         waitButton.setAlignmentY(0.0F);
         waitButton.setFocusable(false);
         characterPanel.add(waitButton);
         waitButton.setBounds(105, 40, 100, 25);
 
-        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 12));
+        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cancelButton.setText("Cancel");
         cancelButton.setAlignmentY(0.0F);
         cancelButton.setFocusable(false);
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         characterPanel.add(cancelButton);
         cancelButton.setBounds(205, 15, 100, 25);
 
-        characterPanel.setBounds(690, 340, 310, 70);
+        characterPanel.setBounds(590, 370, 310, 70);
         layerpane.add(characterPanel, new Integer(1));
 
         upgradecharacterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Upgrade Character", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -421,7 +440,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jPanel2.add(jScrollPane2);
         jScrollPane2.setBounds(6, 31, 166, 180);
 
-        jPanel2.setBounds(100, 340, -1, -1);
+        jPanel2.setBounds(100, 340, 0, 0);
         layerpane.add(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         buildPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Build", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -501,6 +520,48 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         playerTurnLabel.setText("Player Turn 1. Your Gold 1234");
         playerTurnLabel.setBounds(350, 340, 220, 30);
         layerpane.add(playerTurnLabel, new Integer(1));
+
+        listJobPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List Job", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        listJobPanel.setOpaque(false);
+        listJobPanel.setLayout(null);
+
+        listJob.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(listJob);
+
+        listJobPanel.add(jScrollPane5);
+        jScrollPane5.setBounds(10, 20, 130, 120);
+
+        selectJobButton.setText("Select Job");
+        listJobPanel.add(selectJobButton);
+        selectJobButton.setBounds(10, 145, 130, 25);
+
+        listJobPanel.setBounds(540, 460, 150, 180);
+        layerpane.add(listJobPanel, new Integer(1));
+
+        listSpecialPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List Special", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        listSpecialPanel.setOpaque(false);
+        listSpecialPanel.setLayout(null);
+
+        listSpecial.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane6.setViewportView(listSpecial);
+
+        listSpecialPanel.add(jScrollPane6);
+        jScrollPane6.setBounds(10, 20, 130, 120);
+
+        selectSpecialButton.setText("Select Special");
+        listSpecialPanel.add(selectSpecialButton);
+        selectSpecialButton.setBounds(10, 145, 130, 25);
+
+        listSpecialPanel.setBounds(350, 430, 150, 180);
+        layerpane.add(listSpecialPanel, new Integer(1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -671,6 +732,9 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 }//GEN-LAST:event_summonCharacterButtonMousePressed
 
     private void upgradejobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upgradejobButtonActionPerformed
+        boolean visible = listJobPanel.isVisible();
+        listJobPanel.setVisible(!visible);
+        
         JLabel l=selectedcharLabel;
         Point p = l.getLocation();
         Point pGrid = Converter.PointToGrid(p);
@@ -863,8 +927,18 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         String s = JOptionPane.showInputDialog(this, "Nama File : ", "Save Game", JOptionPane.QUESTION_MESSAGE);
-        IOObject.Save(game, s);
+        IOObject.Save(game, s+".game");
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void specialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_specialButtonActionPerformed
+        boolean visible = listSpecialPanel.isVisible();
+        listSpecialPanel.setVisible(!visible);
+    }//GEN-LAST:event_specialButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        move = false;
+        clearAreaColor();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     public void createContent(int x, int y, int width, int height, String iconName, JPanel p) {
         Component c =  p.getComponentAt(x, y);
@@ -1124,7 +1198,24 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         selectedPanel.add(selectedLabel);
         selectedLabel.setBounds(0, 0, ImageSupport.IMAGE_WIDTH, ImageSupport.IMAGE_HEIGHT);
         selectedLabel.setBorder(new FieldBorder(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK));
-        
+
+
+        /* set bounds list job */
+        width = listJobPanel.getWidth();
+        height = listJobPanel.getHeight();
+        x = upgradecharacterPanel.getX();
+        y = upgradecharacterPanel.getY() - height;
+        listJobPanel.setBounds(x, y, width, height);
+        listJobPanel.setVisible(false);
+
+        /* set bounds list special */
+        width = listSpecialPanel.getWidth();
+        height = listSpecialPanel.getHeight();
+        x = characterPanel.getX() + specialButton.getX();
+        y = characterPanel.getY() - height;
+        listSpecialPanel.setBounds(x, y, width, height);
+        listSpecialPanel.setVisible(false);
+
         disableAllActionPanel();
     }
 
@@ -1163,10 +1254,16 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JPanel karakterPanel;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JButton listButton;
     private javax.swing.JPanel listCharacterPanel;
+    private javax.swing.JList listJob;
+    private javax.swing.JPanel listJobPanel;
+    private javax.swing.JList listSpecial;
+    private javax.swing.JPanel listSpecialPanel;
     private javax.swing.JTextArea listTextArea;
     private javax.swing.JTextArea listcharacterTextArea;
     private javax.swing.JLayeredPane mapLayerPane;
@@ -1177,6 +1274,8 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JLabel playerTurnLabel;
     private javax.swing.JButton saveButton;
     private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JButton selectJobButton;
+    private javax.swing.JButton selectSpecialButton;
     private javax.swing.JPanel selectedPanel;
     private javax.swing.JButton specialButton;
     private javax.swing.JButton summonCharacterButton;
