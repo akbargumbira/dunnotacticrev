@@ -659,15 +659,20 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         isFullScreen = device.isFullScreenSupported();
         setUndecorated(isFullScreen);
         setResizable(!isFullScreen);
-        if (isFullScreen) {
-            /* Full-screen mode */
-            device.setFullScreenWindow(this);
-            validate();
-        } else {
-            /* Windowed mode */
-            pack();
-            setVisible(true);
-        }
+//        if (isFullScreen) {
+//            /* Full-screen mode */
+//            device.setFullScreenWindow(this);
+//            validate();
+//        } else {
+//            /* Windowed mode */
+//            pack();
+//            setVisible(true);
+//        }
+        width = device.getDisplayMode().getWidth();
+        height = device.getDisplayMode().getHeight();
+        setBounds(0, 0, width, height);
+        setVisible(true);
+
         pane.setBackground(Color.BLACK);
         scroll.setBackground(Color.BLACK);
         mainLayerPane.setBackground(Color.BLACK);
