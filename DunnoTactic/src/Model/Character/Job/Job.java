@@ -6,12 +6,13 @@
 package Model.Character.Job;
 
 import Model.Character.Constanta;
+import java.io.Serializable;
 
 /**
  *
  * @author user
  */
-public class Job {
+public class Job implements Serializable{
     protected int AttackType;
     protected  int JobID;
     protected  int JobClass;

@@ -6,12 +6,13 @@
 package Model.Character.Buff;
 
 import Model.Character.Constanta;
+import java.io.Serializable;
 
 /**
  *
  * @author ifan
  */
-public class BuffEfek {
+public class BuffEfek implements Serializable{
     protected double[] FactorBuff = new double[Constanta.NUMBER_ATRIBUT];
     protected boolean[] StatusActionBuff = new boolean[3];
     protected int DurationBuff;

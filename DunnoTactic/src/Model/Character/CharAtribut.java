@@ -7,12 +7,13 @@ package Model.Character;
 import Model.Character.Race.*;
 import Model.Character.Job.*;
 import Model.Character.Buff.Buff;
+import java.io.Serializable;
 
 /**
  *
  * @author ifan
  */
-public class CharAtribut {
+public class CharAtribut implements Serializable{
     private int[] CurrentAtribut = new int[Constanta.NUMBER_ATRIBUT];
     private int[] DefaultAtribut = new int[Constanta.NUMBER_ATRIBUT];
     private boolean[] StatusAction = new boolean[3];

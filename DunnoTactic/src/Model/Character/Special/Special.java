@@ -5,13 +5,14 @@
 
 package Model.Character.Special;
 import Model.Character.CharAtribut;
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  *
  * @author ifan
  */
-abstract public class Special {
+abstract public class Special implements Serializable{
     protected String SpecialName;
     protected int SpecialID;
     protected int SPCost;

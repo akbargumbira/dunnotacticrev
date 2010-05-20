@@ -5,13 +5,14 @@
 
 package Model.Character;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  *
  * @author ifan
  */
-public class CharacterContainer extends Vector<Character> {
+public class CharacterContainer extends Vector<Character> implements Serializable {
 
     public CharacterContainer() {
         super();
