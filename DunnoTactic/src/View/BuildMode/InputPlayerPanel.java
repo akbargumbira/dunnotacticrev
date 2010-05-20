@@ -15,7 +15,8 @@ import javax.swing.SpinnerNumberModel;
 
 /**
  *
- * @author user
+ * @author  Rezan Achmad
+ *          13508104
  */
 public class InputPlayerPanel extends javax.swing.JPanel {
 

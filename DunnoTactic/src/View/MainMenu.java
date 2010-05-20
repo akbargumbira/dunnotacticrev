@@ -20,7 +20,8 @@ import java.awt.GraphicsEnvironment;
 
 /**
  *
- * @author user
+ * @author  Rezan Achmad
+ *          13508104
  */
 public class MainMenu extends javax.swing.JFrame {
 

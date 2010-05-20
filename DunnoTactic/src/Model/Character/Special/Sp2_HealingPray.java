@@ -10,7 +10,8 @@ import java.util.Random;
 import java.util.Vector;
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Sp2_HealingPray extends Special {
     public Sp2_HealingPray(){

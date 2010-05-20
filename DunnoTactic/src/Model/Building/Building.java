@@ -9,7 +9,8 @@ import java.io.Serializable;
 
 /**
  *
- * @author user
+ * @author  Akbar Gumbira
+ *          13508106
  */
 
 abstract public class Building implements Serializable

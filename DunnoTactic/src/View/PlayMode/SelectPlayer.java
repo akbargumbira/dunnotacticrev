@@ -4,6 +4,8 @@
  */
 
 /*
+ * @author  Rezan Achmad
+ *          13508104
  * SelectPlayer.java
  *
  * Created on May 15, 2010, 8:13:13 PM

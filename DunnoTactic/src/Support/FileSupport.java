@@ -11,7 +11,8 @@ import java.io.IOException;
 
 /**
  *
- * @author user
+ * @author  Akbar Gumbira
+ *          13508106
  */
 public class FileSupport {
     public static String[] GetListFile(String directory, String ext) {

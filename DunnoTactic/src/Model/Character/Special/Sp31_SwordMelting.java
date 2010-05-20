@@ -10,7 +10,8 @@ import java.util.Vector;
 
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Sp31_SwordMelting extends Special {
     public Sp31_SwordMelting(){

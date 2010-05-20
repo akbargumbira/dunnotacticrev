@@ -9,7 +9,8 @@ import java.awt.Point;
 
 /**
  *
- * @author user
+ * @author  Irwan Faturahman
+ *          13508100
  */
 public class Converter {
     public static Point PointToGrid(int x, int y) {

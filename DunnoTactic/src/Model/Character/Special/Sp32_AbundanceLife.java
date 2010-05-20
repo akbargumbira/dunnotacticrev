@@ -9,7 +9,8 @@ import Model.Character.Constanta;
 import java.util.Vector;
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class Sp32_AbundanceLife extends Special {
     public Sp32_AbundanceLife(){

@@ -10,7 +10,8 @@ import javax.sound.midi.SysexMessage;
 
 /**
  *
- * @author user
+ * @author  Akbar Gumbira
+ *          13508106
  */
 public class BuildingContainer extends Vector<Building> {
 

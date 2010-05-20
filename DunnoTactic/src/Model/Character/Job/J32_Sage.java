@@ -8,7 +8,8 @@ import Model.Character.Constanta;
 import Model.Character.Special.ConstantaSp;
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class J32_Sage extends Job {
     public J32_Sage(){

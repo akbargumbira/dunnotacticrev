@@ -8,7 +8,8 @@ import Model.Character.Constanta;
 import Model.Character.Special.ConstantaSp;
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class J31_ArchKnight extends Job {
     public J31_ArchKnight(){

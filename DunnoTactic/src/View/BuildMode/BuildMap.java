@@ -3,7 +3,8 @@
  * and open the template in the editor.
  */
 
-/*
+/* @author  Rezan Achmad
+ *          13508104
  * BuildMap.java
  *
  * Created on May 8, 2010, 7:24:43 AM

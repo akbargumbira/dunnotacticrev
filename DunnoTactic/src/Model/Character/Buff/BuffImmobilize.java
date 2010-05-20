@@ -8,7 +8,8 @@ package Model.Character.Buff;
 import Model.Character.Constanta;
 /**
  *
- * @author ifan
+ * @author  Mukhammad Ifanto
+ *          13508110
  */
 public class BuffImmobilize extends BuffEfek {
     public BuffImmobilize(){

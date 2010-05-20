@@ -15,7 +15,8 @@ import Support.IOObject;
 
 /**
  *
- * @author user
+ * @author  Rezan Achmad
+ *          13508104
  */
 public class SaveMapPanel extends javax.swing.JPanel {
 

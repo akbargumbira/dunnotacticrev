@@ -13,7 +13,8 @@ import java.io.ObjectOutputStream;
 
 /**
  *
- * @author user
+ * @author  Akbar Gumbira
+ *          13508106
  */
 public class IOObject {
 public static void Save(Object o, String filenamesave)
