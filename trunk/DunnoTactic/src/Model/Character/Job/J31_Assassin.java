@@ -31,5 +31,7 @@ public class J31_Assassin extends Job {
         SpecialAvail[2]=ConstantaSp.SP_ASSASSIN_SHADOW_BIND_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
     }
 }

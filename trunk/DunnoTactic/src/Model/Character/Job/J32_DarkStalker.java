@@ -31,5 +31,7 @@ public class J32_DarkStalker extends Job {
         SpecialAvail[2]=ConstantaSp.SP_DARK_STALKER_CURSED_BLOOD_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
     }
 }

@@ -31,5 +31,7 @@ public class J31_ArchMage extends Job {
         SpecialAvail[2]=ConstantaSp.SP_ARCH_MAGE_IFRIT_RAGE_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
     }
 }

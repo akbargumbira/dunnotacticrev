@@ -31,5 +31,7 @@ public class J32_Bard extends Job {
         SpecialAvail[2]=ConstantaSp.SP_BARD_DOWN_MENTAL_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
     }
 }
