@@ -37,10 +37,10 @@ public class Map implements Serializable{
     public final static int BLACKSMITH = 3;
 
     private final static String[] contentString = {
-        "Rumput",
-        "Lumpur",
-        "Air",
-        "Pohon",
+        "rumput",
+        "lumpur",
+        "air",
+        "pohon",
         "castle1",
         "castle2",
         "castle3",
