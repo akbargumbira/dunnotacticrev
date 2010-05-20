@@ -17,6 +17,7 @@ import Model.Building.Building;
 import Model.Building.BuildingContainer;
 import Model.Building.Castle;
 import Model.Character.CharacterContainer;
+import Model.Character.Constanta;
 import Model.Character.Special.Special;
 import Model.Game;
 import Model.Map.Map;
@@ -131,6 +132,8 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jScrollPane6 = new javax.swing.JScrollPane();
         listSpecial = new javax.swing.JList();
         selectSpecialButton = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        bugArea = new javax.swing.JTextArea();
 
         playerComboBox.setFont(new java.awt.Font("Tahoma", 0, 18));
         playerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -178,7 +181,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        terrainPanel.setBounds(30, 80, -1, -1);
+        terrainPanel.setBounds(30, 80, 100, 100);
         mapLayerPane.add(terrainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         buildingPanel.setOpaque(false);
@@ -194,7 +197,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        buildingPanel.setBounds(280, 80, -1, -1);
+        buildingPanel.setBounds(280, 80, 100, 100);
         mapLayerPane.add(buildingPanel, new Integer(2));
 
         warnaPanel.setOpaque(false);
@@ -210,7 +213,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        warnaPanel.setBounds(150, 80, -1, -1);
+        warnaPanel.setBounds(150, 80, 100, 100);
         mapLayerPane.add(warnaPanel, new Integer(1));
 
         karakterPanel.setOpaque(false);
@@ -226,7 +229,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        karakterPanel.setBounds(420, 80, -1, -1);
+        karakterPanel.setBounds(420, 80, 100, 100);
         mapLayerPane.add(karakterPanel, new Integer(3));
 
         selectedPanel.setOpaque(false);
@@ -247,12 +250,12 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        selectedPanel.setBounds(580, 80, -1, -1);
+        selectedPanel.setBounds(580, 80, 100, 100);
         mapLayerPane.add(selectedPanel, new Integer(7));
 
         scrollPane.setViewportView(mapLayerPane);
 
-        scrollPane.setBounds(20, 40, 850, 220);
+        scrollPane.setBounds(20, 120, 520, 140);
         layerpane.add(scrollPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -309,6 +312,11 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         attackButton.setText("Attack");
         attackButton.setAlignmentY(0.0F);
         attackButton.setFocusable(false);
+        attackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                attackButtonActionPerformed(evt);
+            }
+        });
         characterPanel.add(attackButton);
         attackButton.setBounds(5, 15, 100, 25);
 
@@ -324,7 +332,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         characterPanel.add(moveButton);
         moveButton.setBounds(5, 40, 100, 25);
 
-        specialButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        specialButton.setFont(new java.awt.Font("Tahoma", 0, 12));
         specialButton.setText("Special");
         specialButton.setToolTipText("Special 1 lho");
         specialButton.setAlignmentY(0.0F);
@@ -337,14 +345,14 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         characterPanel.add(specialButton);
         specialButton.setBounds(105, 15, 100, 25);
 
-        waitButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        waitButton.setFont(new java.awt.Font("Tahoma", 0, 12));
         waitButton.setText("Wait");
         waitButton.setAlignmentY(0.0F);
         waitButton.setFocusable(false);
         characterPanel.add(waitButton);
         waitButton.setBounds(105, 40, 100, 25);
 
-        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 12));
         cancelButton.setText("Cancel");
         cancelButton.setAlignmentY(0.0F);
         cancelButton.setFocusable(false);
@@ -377,6 +385,11 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         upgradestatusButton.setFont(new java.awt.Font("Tahoma", 0, 12));
         upgradestatusButton.setText("Upgrade Status");
         upgradestatusButton.setFocusable(false);
+        upgradestatusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                upgradestatusButtonActionPerformed(evt);
+            }
+        });
         upgradecharacterPanel.add(upgradestatusButton);
         upgradestatusButton.setBounds(5, 40, 150, 25);
 
@@ -401,6 +414,11 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         upgradeBuldingButton.setFont(new java.awt.Font("Tahoma", 0, 12));
         upgradeBuldingButton.setText("Upgrade Building");
         upgradeBuldingButton.setFocusable(false);
+        upgradeBuldingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                upgradeBuldingButtonActionPerformed(evt);
+            }
+        });
         buildingactionPanel.add(upgradeBuldingButton);
         upgradeBuldingButton.setBounds(5, 40, 150, 25);
 
@@ -511,9 +529,9 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jScrollPane4.setViewportView(infoTextarea);
 
         infoPanel.add(jScrollPane4);
-        jScrollPane4.setBounds(10, 20, 180, 170);
+        jScrollPane4.setBounds(10, 20, 180, 250);
 
-        infoPanel.setBounds(1020, 250, 200, 200);
+        infoPanel.setBounds(70, 290, 200, 280);
         layerpane.add(infoPanel, new Integer(1));
 
         playerTurnLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -564,6 +582,13 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         listSpecialPanel.setBounds(350, 430, 150, 180);
         layerpane.add(listSpecialPanel, new Integer(1));
+
+        bugArea.setColumns(20);
+        bugArea.setRows(5);
+        jScrollPane7.setViewportView(bugArea);
+
+        jScrollPane7.setBounds(310, 70, 210, 130);
+        layerpane.add(jScrollPane7, new Integer(1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -715,14 +740,14 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
     private void endTurnButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_endTurnButtonMousePressed
         int n= game.getPlayerturn();
+        updateGold(n);
         n%=game.getMap().GetNumPlayer();
         ++n;
         game.setPlayerturn(n);
-        updateGold(n);
         playerTurnLabel.setText("Player "+n+" Turn. Your Gold is "+game.getGold(n)+".");
 }//GEN-LAST:event_endTurnButtonMousePressed
 
-    private void updateGold(int player){
+    private void updateGold(int player) {
         BuildingContainer bc = game.getMap().GetBuildings();
         Building b;
         int gold = 0;
@@ -730,7 +755,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             b = bc.get(i);
             if (b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX)==player) {
                 gold += b.getBuilding_BaseAtribut(b.BUILDING_GOLD_PER_TURN_IDX);
-                System.out.println(gold);
+                bugArea.setText("tambah gold player :"+player+" gold : "+gold);
             }
         }
         game.setGold(player, game.getGold(player)+gold);
@@ -912,6 +937,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         }
     }//GEN-LAST:event_terrainPanelMousePressed
 
+    @SuppressWarnings("static-access")
     private void selectedPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectedPanelMousePressed
         int x = evt.getX();
         int y = evt.getY();
@@ -930,13 +956,103 @@ public class Play extends javax.swing.JFrame implements MouseListener{
                 return;
             }
             selectedChar.Move(p.x, p.y);
-            System.out.println(selectedChar.getLocation());
             selectedcharLabel.setLocation(pPoint.x, pPoint.y);
 
             move = false;
             selectedcharLabel = null;
             selectedChar = null;
             clearAreaColor();
+            disableAllActionPanel();
+            return;
+        }
+
+        /* Attack */
+        if(attack){
+            int nAttack = JOptionPane.showConfirmDialog(null, "Are You Sure?", null, JOptionPane.YES_NO_OPTION);
+            if (nAttack == JOptionPane.NO_OPTION){
+                return;
+            } else
+            if (MapArea[p.x][p.y]==99) {
+                JOptionPane.showMessageDialog(this, "Attack di luar jangkauan.");
+                return;
+            }
+            BuildingContainer BuildCont = game.getMap().GetBuildings();
+            CharacterContainer CharCont = game.getCharacters();
+            Model.Character.Character Char = CharCont.get(p.x, p.y);
+            Building Build = BuildCont.get(p.x, p.y);
+            if(Char !=null){
+                // serang karakter
+                if(selectedChar.getPlayer()==Char.getPlayer()){
+                    JOptionPane.showMessageDialog(this, "Tidak bisa menyerang teman.");
+                    return;
+                } else {
+                    selectedChar.AttackPlayer(selectedChar, Char);
+                    JOptionPane.showMessageDialog(this, "Target karakter telah diserang.");
+
+                    /* check jika karakter yang diserang telah mati */
+                    if (Char.GetAtribut().GetCurrent(Constanta.HP_ID) < 1) {
+                        /* hapus karakter pada maplogic karakter */
+                        game.getCharactermap()[p.x][p.y] = 0;
+
+                        /* hapus karakter pada map */
+                        Component c = karakterPanel.getComponentAt(evt.getX(), evt.getY());
+                        karakterPanel.remove(c);
+                        karakterPanel.repaint();
+
+                        /* hapus karakter dari kontainer */
+                        game.getCharacters().remove(Char);
+
+                        /* beri informasi */
+                        // JOptionPane.showMessageDialog(this, "Karakter yang Anda serang telah mati.");
+                    }
+                }
+            } else if(Build!=null){
+                // serang building
+                if(selectedChar.getPlayer()==Build.getBuilding_BaseAtribut(Build.BUILDING_PLAYER_IDX)){
+                    JOptionPane.showMessageDialog(this, "Tidak bisa menyerang bangunan sendiri.");
+                    return;
+                } else {
+                    selectedChar.AttackBuilding(selectedChar, Build);
+                    JOptionPane.showMessageDialog(this, "Target telah diserang.");
+
+                    /* check jika bangunan yang diserang telah hancur */
+                    if (Build.getBuilding_BaseAtribut(Build.BUILDING_HP_IDX)<1) {
+                        /* hapus building dari maplogic */
+                    }
+                }
+            } else {
+                // serang lainnya
+                if(map.GetTerrain(p.x, p.y)==map.POHON){
+                    selectedChar.AttackTree(p.x, p.y);
+                    map.SetTerrain(p.x, p.y, map.RUMPUT);
+
+                    /* Change icon label to rumput */
+                    Component c = terrainPanel.getComponentAt(evt.getX(), evt.getY());
+                    if (c==null) {
+                        JOptionPane.showMessageDialog(this, "Pesan bug : Component tidak ditemukan.");
+                        return;
+                    }
+
+                    if (!(c instanceof JLabel)) {
+                        JOptionPane.showMessageDialog(this, "Pesan bug : Component Bukan label.");
+                        return;
+                    }
+
+                    JLabel l = (JLabel)c;
+                    String s = Map.GetString(map.GetTerrain(p.x, p.y));
+                    l.setIcon(ImageSupport.createImageIcon(s+".png", null));
+                    JOptionPane.showMessageDialog(this, "Pohon berhasil di tebang.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tidak ada target.");
+                    return;
+                }
+            }
+            attack = false;
+            selectedcharLabel = null;
+            selectedChar = null;
+            clearAreaColor();
+            disableAllActionPanel();
+            return;
         }
 
         Model.Character.Character c = game.getCharacters().get(p.x, p.y);
@@ -983,8 +1099,113 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         move = false;
+        attack = false;
         clearAreaColor();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void upgradestatusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upgradestatusButtonActionPerformed
+        /* Check selectedcharacter */
+        if (selectedChar==null) {
+            JOptionPane.showMessageDialog(this, "Tidak ada karakter yang dipilih.");
+            return;
+        }
+
+        /* check karakter level */
+        int level = selectedChar.GetAtribut().GetRaceLevel();
+        if (level>=4) {
+            JOptionPane.showMessageDialog(this, "Karakter telah berada pada level maksimal.");
+            return;
+        }
+
+        /* get upgrade cost */
+        int cost = 0;
+        if (level == 1) {
+            cost = Model.Character.Constanta.PRICE_UPGRADE_STATUS_2;
+        } else if (level == 2){
+            cost = Model.Character.Constanta.PRICE_UPGRADE_STATUS_3;
+        } else if (level == 3) {
+            cost = Model.Character.Constanta.PRICE_UPGRADE_STATUS_4;
+        }
+
+        /* show information */
+        int ans = JOptionPane.showConfirmDialog(this, "Upgrade membutuhkan uang sebesar "+cost, "Upgrade Cost", JOptionPane.YES_NO_OPTION);
+        if (ans == JOptionPane.NO_OPTION)
+            return;
+
+       /* check money */
+        int player = game.getPlayerturn();
+        if (game.getGold(player)<cost) {
+            JOptionPane.showMessageDialog(this, "Uang Tidak Cukup");
+            return;
+        }
+
+        /* upgrade karakter atrribut */
+        selectedChar.UpgradeCharAtribut();
+
+        /* decrease gold */
+        game.setGold(player, game.getGold(player)-cost);
+
+        /* update player turn info */
+        updateTurnInformation();
+
+        /* show success message */
+        ++level;
+        JOptionPane.showMessageDialog(this, "Karakter berhasil diupgrade ke level"+level);
+    }//GEN-LAST:event_upgradestatusButtonActionPerformed
+
+    private void upgradeBuldingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upgradeBuldingButtonActionPerformed
+        /* check selected building */
+        if (selectedBuilding==null) {
+            JOptionPane.showMessageDialog(this, "Tidak ada bangunan yang dipilih.");
+            return;
+        }
+
+        /* check building level */
+        int level = selectedBuilding.getBuilding_BaseAtribut(Building.BUILDING_LEVEL_IDX);
+        if (level==4) {
+            JOptionPane.showMessageDialog(this, "Level bangunan telah maksimum.");
+            return;
+        }
+
+        /* get upgrade cost */
+        int cost = selectedBuilding.getUpgradeCost();
+
+        /* show information */
+        int ans = JOptionPane.showConfirmDialog(this, "Upgrade membutuhkan uang sebesar "+cost, "Upgrade Cost", JOptionPane.YES_NO_OPTION);
+        if (ans == JOptionPane.NO_OPTION)
+            return;
+
+       /* check money */
+        int player = game.getPlayerturn();
+        if (game.getGold(player)<cost) {
+            JOptionPane.showMessageDialog(this, "Uang Tidak Cukup");
+            return;
+        }
+
+        /* upgrade karakter atrribut */
+        selectedBuilding.UpgradeBuilding();
+
+        /* decrease gold */
+        game.setGold(player, game.getGold(player)-cost);
+
+        /* update player turn info */
+        updateTurnInformation();
+
+        /* show success message */
+        ++level;
+        JOptionPane.showMessageDialog(this, "Bangunan berhasil diupgrade ke level"+level);
+    }//GEN-LAST:event_upgradeBuldingButtonActionPerformed
+
+    private void attackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attackButtonActionPerformed
+        int width = game.getMap().GetWidth();
+        int height = game.getMap().GetHeight();
+        MapArea = new int[width][height];
+        Path p = new Path();
+        Model.Character.Character c = selectedChar;
+        MapArea = p.SetAreaAttack(c.getLocation(), c.GetAtribut().GetCurrent(Constanta.RANGE_ATTACK_ID), width, height);
+        createAreaColor(MapArea);
+        attack = true;
+    }//GEN-LAST:event_attackButtonActionPerformed
 
     public void createContent(int x, int y, int width, int height, String iconName, JPanel p) {
         Component c =  p.getComponentAt(x, y);
@@ -1289,6 +1510,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JButton attackButton;
     private javax.swing.JButton barrackButton;
     private javax.swing.JButton blackSmithButton;
+    private javax.swing.JTextArea bugArea;
     private javax.swing.JPanel buildPanel;
     private javax.swing.JPanel buildingPanel;
     private javax.swing.JPanel buildingactionPanel;
@@ -1306,6 +1528,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel karakterPanel;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JButton listButton;
@@ -1352,5 +1575,6 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private Model.Character.Character selectedChar;
     private Building selectedBuilding;
     private boolean move = false;
+    private boolean attack = false;
     private int[][] MapArea;
 }
