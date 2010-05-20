@@ -4,7 +4,6 @@
  */
 
 package Model.Character;
-import java.util.Vector;
 import Model.Character.Special.ConstantaSp;
 
 /**
