@@ -30,8 +30,8 @@ abstract public class Building implements Serializable
     public static final int BUILDING_X_IDX =7;
     public static final int BUILDING_Y_IDX =8;
 
-    public static final int BLACKSMITH_COST = 800;
-    public static final int BARRACK_COST = 600;
+    public static final int BLACKSMITH_COST = 600;
+    public static final int BARRACK_COST = 400;
     protected static int BUILDING_NEXT_ID = 1;
 
     protected int[] Building_BaseAtribut = new int[NUMBER_BUILDING_ATRIBUT];

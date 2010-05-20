@@ -435,4 +435,8 @@ public class Character implements Serializable{
     public void SetEnable(boolean status){
         enable = status;
     }
+
+    public Special GetSpecial(int Indeks){
+        return SpecialList[Indeks];
+    }
 }
