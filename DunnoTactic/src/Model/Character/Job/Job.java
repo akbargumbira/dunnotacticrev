@@ -19,7 +19,7 @@ public class Job implements Serializable{
     protected  int JobClass;
     protected  double[] FactorJob = new double[Constanta.NUMBER_ATRIBUT];
     protected int[] SpecialAvail = new int[5];
-    protected Vector<Integer> NextJob;
+    protected Vector<Integer> NextJob = new Vector<Integer>();
 
     public Job(){
         for (int i = 0;i<10;++i) {
@@ -97,6 +97,7 @@ public class Job implements Serializable{
                 break;
                 case Constanta.JOB2_WARRIOR_ID : {
                     name = "WARRIOR";
+                    break;
                 }
                 case Constanta.JOB2_ARCHER_ID :{
                     name = "ARCHER";
@@ -127,6 +128,7 @@ public class Job implements Serializable{
                 break;
                 case Constanta.JOB31_BLADE_MASTER_ID : {
                     name = "BLADE MASTER";
+                    break;
                 }
                 case Constanta.JOB31_RANGER_ID :{
                     name = "RANGER";
@@ -157,6 +159,7 @@ public class Job implements Serializable{
                 break;
                 case Constanta.JOB32_PALADIN_ID : {
                     name = "PALADIN";
+                    break;
                 }
                 case Constanta.JOB32_BARD_ID :{
                     name = "BARD";

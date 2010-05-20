@@ -28,9 +28,12 @@ public class Character implements Serializable{
     private int X;
     private int Y;
     private int ID;
+    private boolean move = false;
+    private boolean attack = false;
 
     public Character(int RaceID, int player){
         KarakterAtribut = new CharAtribut(RaceID);
+        enable = true;
         this.player = player;
         ID = NEXT_ID++;
     }
@@ -43,8 +46,9 @@ public class Character implements Serializable{
         X = targetX;
         Y = targetY;
         ++EnableCounter;
+        move = true;
         if(EnableCounter==2){
-            enable=false;
+            setEnable(false);
         }
     }
 
@@ -74,6 +78,7 @@ public class Character implements Serializable{
             break;
         }
         TargetBuilding.getDamage(damage);
+        attack = true;
     }
             
     public void AttackTree(int targetX, int targetY){
@@ -108,8 +113,9 @@ public class Character implements Serializable{
         }
         ++EnableCounter;
         if(EnableCounter==2){
-            enable=false;
+            setEnable(false);
         }
+        attack = true;
     }    
 
     public void AttackPlayer(Character Attacker, Character Target){
@@ -144,8 +150,9 @@ public class Character implements Serializable{
         }
         ++EnableCounter;
         if(EnableCounter==2){
-            enable=false;
+            setEnable(false);
         }
+        attack = true;
     }
 
     public void ReceiveAttack(CharAtribut AtributKarakter, int damage){
@@ -157,9 +164,9 @@ public class Character implements Serializable{
         AtributKarakter.SetCurrentAtribut(Constanta.HP_ID, HP);
         if(HP<=0){
             AtributKarakter.SetCurrentAtribut(Constanta.HP_ID, 0);
-            death=true;
+            setDeath(true);
         }
-        enable = false;
+        setEnable(false);
     }
 
     public void SpecialFunction(Character Caster,Vector<Character> Target,int SpecialID){
@@ -173,7 +180,7 @@ public class Character implements Serializable{
             ++i;
         }
         SpecialList[i].ExecuteSpecial(KarakterAtribut, TargetAtribut);
-        enable = false;
+        setEnable(false);
     }
 
     public void EmergencyFunction(){
@@ -181,8 +188,7 @@ public class Character implements Serializable{
     }
 
     public void WaitFunction(){
-        KarakterAtribut.ReduceBuffDuration();
-        enable = false;
+        setEnable(false);
     }
 
     public void UpgradeCharAtribut(){
@@ -431,14 +437,74 @@ public class Character implements Serializable{
     }
 
     public boolean GetEnable(){
-        return enable;
+        return isEnable();
     }
 
     public void SetEnable(boolean status){
-        enable = status;
+        setEnable(status);
     }
 
     public Special GetSpecial(int Indeks){
         return SpecialList[Indeks];
+    }
+
+    public Vector<Integer> getNextJob() {
+        return GetAtribut().getJobChar().GetNextJobAvail();
+    }
+
+    /**
+     * @return the enable
+     */
+    public boolean isEnable() {
+        return enable;
+    }
+
+    /**
+     * @param enable the enable to set
+     */
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    /**
+     * @return the death
+     */
+    public boolean isDeath() {
+        return death;
+    }
+
+    /**
+     * @param death the death to set
+     */
+    public void setDeath(boolean death) {
+        this.death = death;
+    }
+
+    /**
+     * @return the move
+     */
+    public boolean isMove() {
+        return move;
+    }
+
+    /**
+     * @param move the move to set
+     */
+    public void setMove(boolean move) {
+        this.move = move;
+    }
+
+    /**
+     * @return the attack
+     */
+    public boolean isAttack() {
+        return attack;
+    }
+
+    /**
+     * @param attack the attack to set
+     */
+    public void setAttack(boolean attack) {
+        this.attack = attack;
     }
 }

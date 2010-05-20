@@ -52,8 +52,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 12));
         newgameButton.setText("New Game");
+        newgameButton.setFocusable(false);
         newgameButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 newgameButtonMousePressed(evt);
@@ -65,6 +66,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         exitButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         exitButton.setText("Exit");
+        exitButton.setFocusable(false);
         exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exitButtonMouseClicked(evt);
@@ -74,8 +76,9 @@ public class MainMenu extends javax.swing.JFrame {
         exitButton.setBounds(150, 115, 120, 25);
         exitButton.getAccessibleContext().setAccessibleName("exitButton");
 
-        buildmapButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        buildmapButton.setFont(new java.awt.Font("Tahoma", 0, 12));
         buildmapButton.setText("Build Map");
+        buildmapButton.setFocusable(false);
         buildmapButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buildmapButtonMouseClicked(evt);
@@ -84,8 +87,9 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.add(buildmapButton);
         buildmapButton.setBounds(150, 90, 120, 25);
 
-        loadGameButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        loadGameButton.setFont(new java.awt.Font("Tahoma", 0, 12));
         loadGameButton.setText("Load Game");
+        loadGameButton.setFocusable(false);
         loadGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadGameButtonActionPerformed(evt);

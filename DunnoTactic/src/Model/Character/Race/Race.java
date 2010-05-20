@@ -40,6 +40,28 @@ public class Race implements Serializable{
         return FactorBuilding;
     }
 
+    public static String getRaceName(int id) {
+        String s = new String();
+        switch (id) {
+            case Constanta.RACE_HUMAN_ID : {
+                s = "HUMAN";
+                break;
+            }
+
+            case Constanta.RACE_ELF_ID : {
+                s = "ELF";
+                break;
+            }
+
+            case Constanta.RACE_FAIRY_ID : {
+                s = "FAIRY";
+                break;
+            }
+        }
+
+        return s;
+    }
+
     public void UpgradeRace(){
         double FactorUpgrade;
         switch(RaceLevel){

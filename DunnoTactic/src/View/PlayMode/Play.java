@@ -18,6 +18,8 @@ import Model.Building.BuildingContainer;
 import Model.Building.Castle;
 import Model.Character.CharacterContainer;
 import Model.Character.Constanta;
+import Model.Character.Job.Job;
+import Model.Character.Race.Race;
 import Model.Character.Special.Special;
 import Model.Game;
 import Model.Map.Map;
@@ -54,20 +56,23 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     /** 
      * Creates new form Play
      */
-    public Play(MainMenu parent, GraphicsDevice device, Map map, Vector<Integer> vrace) {
+    public Play(MainMenu parent, GraphicsDevice device, Map map, Vector<Integer> vrace, Game game) {
         super(device.getDefaultConfiguration());
         JPanel j = new JPanel();
         this.device = device;
         this.parent = parent; /* Pointed parent Window */
         this.map = map; /* init map */
-        this.game = new Game(map, vrace);
+        this.game = game;
         initComponents();
         ShowWindow();
         InitMap();
         setFocusable(true);
 
         /* show player turn & it's gold */
-        playerTurnLabel.setText("Player 1 Turn. Your Gold is "+game.getGold(1)+".");
+        playerTurnLabel.setText("Player "+game.getPlayerturn()+" Turn. Your Gold is "+game.getGold(game.getPlayerturn())+".");
+
+        /* inisiate list character */
+        fillListCharacter();
     }
 
 
@@ -120,6 +125,9 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         ListCharacterPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         listTextArea = new javax.swing.JTextArea();
+        listCharacterLabel = new javax.swing.JLabel();
+        nextButton = new javax.swing.JButton();
+        prevButton = new javax.swing.JButton();
         infoPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         infoTextarea = new javax.swing.JTextArea();
@@ -349,6 +357,11 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         waitButton.setText("Wait");
         waitButton.setAlignmentY(0.0F);
         waitButton.setFocusable(false);
+        waitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waitButtonActionPerformed(evt);
+            }
+        });
         characterPanel.add(waitButton);
         waitButton.setBounds(105, 40, 100, 25);
 
@@ -514,9 +527,34 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jScrollPane3.setViewportView(listTextArea);
 
         ListCharacterPanel.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 20, 180, 170);
+        jScrollPane3.setBounds(10, 50, 180, 220);
 
-        ListCharacterPanel.setBounds(1020, 20, 200, 200);
+        listCharacterLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        listCharacterLabel.setForeground(new java.awt.Color(255, 255, 255));
+        listCharacterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        listCharacterLabel.setText("Player");
+        ListCharacterPanel.add(listCharacterLabel);
+        listCharacterLabel.setBounds(65, 25, 70, 14);
+
+        nextButton.setText(">");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+        ListCharacterPanel.add(nextButton);
+        nextButton.setBounds(140, 20, 50, 25);
+
+        prevButton.setText("<");
+        prevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prevButtonActionPerformed(evt);
+            }
+        });
+        ListCharacterPanel.add(prevButton);
+        prevButton.setBounds(10, 20, 50, 25);
+
+        ListCharacterPanel.setBounds(1020, 20, 200, 280);
         layerpane.add(ListCharacterPanel, new Integer(1));
 
         infoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -556,6 +594,11 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jScrollPane5.setBounds(10, 20, 130, 120);
 
         selectJobButton.setText("Select Job");
+        selectJobButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectJobButtonActionPerformed(evt);
+            }
+        });
         listJobPanel.add(selectJobButton);
         selectJobButton.setBounds(10, 145, 130, 25);
 
@@ -577,6 +620,11 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jScrollPane6.setBounds(10, 20, 130, 120);
 
         selectSpecialButton.setText("Select Special");
+        selectSpecialButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectSpecialButtonActionPerformed(evt);
+            }
+        });
         listSpecialPanel.add(selectSpecialButton);
         selectSpecialButton.setBounds(10, 145, 130, 25);
 
@@ -734,7 +782,18 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         int turn = game.getPlayerturn();
         game.setGold(turn, game.getGold(turn)-Building.BARRACK_COST);
         updateTurnInformation();
-        game.getMap().SetBuilding(Map.BARRACK, game.getPlayerturn(), pGrid.x, pGrid.y, 0, 0);
+
+        /* get character */
+        CharacterContainer cc =game.getCharacters();
+        for (int i=0;i<cc.size();++i) {
+            c = cc.get(i);
+            if (c.getPlayer()==turn)
+                break;
+        }
+
+        /* build */
+        double[] factor = c.GetAtribut().getRaceChar().GetFactorBuilding();
+        game.getMap().SetBuilding(Map.BARRACK, game.getPlayerturn(), pGrid.x, pGrid.y, factor[1], factor[0]);
         InitMap();
 }//GEN-LAST:event_barrackButtonMousePressed
 
@@ -744,6 +803,30 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         n%=game.getMap().GetNumPlayer();
         ++n;
         game.setPlayerturn(n);
+
+        /* decrease building time */
+        BuildingContainer bc = game.getMap().GetBuildings();
+        Building b;
+        for (int i=0;i<bc.size();++i) {
+            b = bc.get(i);
+            if (b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX)==n) {
+                b.DecreaseBuildingBuildTime();
+            }
+        }
+
+        /* decrease buff & enable all character */
+        CharacterContainer cc = game.getCharacters();
+        Model.Character.Character c;
+        for (int i=0;i<cc.size();++i) {
+            c = cc.get(i);
+            if (c.getPlayer()==n) {
+                c.ReduceBuffDuration();
+                c.setEnable(true);
+                c.setAttack(false);
+                c.setMove(false);
+            }
+        }
+        
         playerTurnLabel.setText("Player "+n+" Turn. Your Gold is "+game.getGold(n)+".");
 }//GEN-LAST:event_endTurnButtonMousePressed
 
@@ -774,8 +857,25 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         /* Character is on building? -> can't summon if there is character on barrack */
         Model.Character.Character c= game.getCharacters().get(x, y);
-        if (c!=null)
+        if (c!=null) {
+            JOptionPane.showMessageDialog(this, "Masih ada karakter diatas barrack.");
             return;
+        }
+
+        /* get cost summon */
+        int cost = Constanta.PRICE_SUMMON_NOVICE;
+
+        /* show information */
+        int ans = JOptionPane.showConfirmDialog(this, "Harga "+cost+". Akan melakukan summon?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (ans==JOptionPane.NO_OPTION) {
+                return;
+            }
+
+        /* check money */
+            if (game.getGold(game.getPlayerturn()) < cost ) {
+                JOptionPane.showMessageDialog(this, "Uang tidak cukup.");
+                return;
+            }
 
         int player = game.getPlayerturn();
         int RaceID = game.getVrace().get(player-1);
@@ -783,6 +883,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         c.setLocation(x, y);
         game.getCharactermap()[x][y] = c.getID();
         game.getCharacters().add(c);
+        c.setEnable(false);
 
         InitMap();
 }//GEN-LAST:event_summonCharacterButtonMousePressed
@@ -797,12 +898,25 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         int x = pGrid.x;
         int y = pGrid.y;
         String s;
-
         Model.Character.Character c = game.getCharacters().get(x, y);
-        c.JobChange(2);
-        s = Integer.toString(c.GetAtribut().GetRaceID());
-        s += Integer.toString(2);
-        l.setIcon(ImageSupport.createImageIcon(s+".png", null));
+
+        Vector<Integer> vlistjob = c.getNextJob();
+        DefaultListModel listmodel = new DefaultListModel();
+        Integer jobid = null;
+        s = new String();
+        for (int i=0;i<vlistjob.size();++i) {
+            jobid = vlistjob.get(i);
+            listmodel.addElement(Job.GetJobNameByID(jobid));
+            s += Job.GetJobNameByID(jobid);
+            s += "\n";
+        }
+        bugArea.setText(s);
+        listJob.setModel(listmodel);
+        
+//        c.JobChange(2);
+//        s = Integer.toString(c.GetAtribut().GetRaceID());
+//        s += Integer.toString(2);
+//        l.setIcon(ImageSupport.createImageIcon(s+".png", null));
 }//GEN-LAST:event_upgradejobButtonActionPerformed
 
     private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
@@ -956,13 +1070,15 @@ public class Play extends javax.swing.JFrame implements MouseListener{
                 return;
             }
             selectedChar.Move(p.x, p.y);
+
+            /* *************** Animasi ************* */
+                        
+
             selectedcharLabel.setLocation(pPoint.x, pPoint.y);
 
             move = false;
-            selectedcharLabel = null;
-            selectedChar = null;
             clearAreaColor();
-            disableAllActionPanel();
+            updateEnableCharacterButton();
             return;
         }
 
@@ -1017,7 +1133,14 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
                     /* check jika bangunan yang diserang telah hancur */
                     if (Build.getBuilding_BaseAtribut(Build.BUILDING_HP_IDX)<1) {
-                        /* hapus building dari maplogic */
+                        /* hapus building dari maplogic dan kontainer */
+                        game.getMap().eraseBuilding(p.x, p.y);
+
+                        /* hapus building dari buildingpanel */
+                        Component c = buildingPanel.getComponentAt(evt.getX(), evt.getY());
+                        buildingPanel.remove(c);
+                        buildingPanel.repaint();
+
                     }
                 }
             } else {
@@ -1048,10 +1171,8 @@ public class Play extends javax.swing.JFrame implements MouseListener{
                 }
             }
             attack = false;
-            selectedcharLabel = null;
-            selectedChar = null;
             clearAreaColor();
-            disableAllActionPanel();
+            updateEnableCharacterButton();
             return;
         }
 
@@ -1073,6 +1194,8 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         /* terrain */
         selectedterrain = (JLabel)terrainPanel.getComponentAt(x, y);
+        String s = Map.GetString(game.getMap().GetTerrain(p.x, p.y));
+        infoTextarea.setText(s);
         disableAllActionPanel();
     }//GEN-LAST:event_selectedPanelMousePressed
 
@@ -1207,6 +1330,105 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         attack = true;
     }//GEN-LAST:event_attackButtonActionPerformed
 
+    private void selectJobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectJobButtonActionPerformed
+        int i = listJob.getSelectedIndex();
+
+        /* get upgrade cost */
+        int cost = 0 ;
+        int level = selectedChar.GetAtribut().GetJobClass();
+        if (level == 1) {
+            cost = Constanta.PRICE_UPGRADE_JOB2;
+        } else if (level == 2) {
+            cost = Constanta.PRICE_UPGRADE_JOB3;
+        }
+        
+        if (i>=0) {
+            /* show information */
+            int ans = JOptionPane.showConfirmDialog(this, "Harga "+cost+". Akan melakukan upgrade?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (ans==JOptionPane.NO_OPTION) {
+                return;
+            }
+
+            /* check money */
+            if (game.getGold(game.getPlayerturn()) < cost ) {
+                JOptionPane.showMessageDialog(this, "Uang tidak cukup.");
+                return;
+            }
+            int nextjob = selectedChar.getNextJob().get(i);
+            String s;
+            selectedChar.JobChange(nextjob);
+            s = Integer.toString(selectedChar.GetAtribut().GetRaceID());
+            s += Integer.toString(nextjob);
+            selectedcharLabel.setIcon(ImageSupport.createImageIcon(s+".png", null));
+            listJobPanel.setVisible(false);
+        }
+    }//GEN-LAST:event_selectJobButtonActionPerformed
+
+    private void waitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waitButtonActionPerformed
+        if (selectedChar!=null) {
+            selectedChar.WaitFunction();
+            updateEnableCharacterButton();
+            disableAllActionPanel();
+        }
+    }//GEN-LAST:event_waitButtonActionPerformed
+
+    private void selectSpecialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSpecialButtonActionPerformed
+        
+    }//GEN-LAST:event_selectSpecialButtonActionPerformed
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        if (listcharacterPlayer<game.getMap().GetNumPlayer()) {
+            ++listcharacterPlayer;
+            fillListCharacter();
+        }
+    }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void fillListCharacter() {
+        String s = new String();
+        int n = listcharacterPlayer;
+        CharacterContainer cc = game.getCharacters();
+        Model.Character.Character c;
+        for (int i=0;i<cc.size();++i) {
+            c = cc.get(i);
+            if (c.getPlayer()==n) {
+                /* ID */
+                s += "ID : ";
+                s += c.getID();
+                s += "\n";
+
+                /* JOB */
+                s += "Job : ";
+                s += Job.GetJobNameByID(c.GetAtribut().GetJobID());
+                s += "\n";
+
+                /* RACE */
+                s += "Race : ";
+                s += Race.getRaceName(c.GetAtribut().GetRaceID());
+                s += "\n";
+
+                /* HP */
+                s += "HP : ";
+                s += c.GetAtribut().GetCurrent(Constanta.HP_ID);
+                s += "\n";
+
+                /* SP */
+                s += "SP : ";
+                s += c.GetAtribut().GetCurrent(Constanta.SP_ID);
+                s += "\n\n";
+            }
+        }
+
+        listTextArea.setText(s);
+        listCharacterLabel.setText("Player "+n);
+    }
+
+    private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
+        if (listcharacterPlayer>1) {
+            --listcharacterPlayer;
+            fillListCharacter();
+        }
+    }//GEN-LAST:event_prevButtonActionPerformed
+
     public void createContent(int x, int y, int width, int height, String iconName, JPanel p) {
         Component c =  p.getComponentAt(x, y);
         if (c!=null) {
@@ -1226,13 +1448,12 @@ public class Play extends javax.swing.JFrame implements MouseListener{
                     Point p = Converter.PointToGrid(x, y);
                     Model.Character.Character c = game.getCharacters().get(p.x, p.y);
                     infoTextarea.setText(c.toString());
-                    if (c.getPlayer() == game.getPlayerturn()) {
+                    if (c.getPlayer() == game.getPlayerturn() && c.GetEnable()) {
                         characterPanel.setVisible(true);
                         if (game.getMap().GetBuildings().IsBlackSmithIn(game.getPlayerturn()))
                             upgradecharacterPanel.setVisible(true);
                         selectedChar = c;
-
-                        moveButton.setEnabled(true);
+                        updateEnableCharacterButton();
                     }
                 }
             });
@@ -1252,15 +1473,43 @@ public class Play extends javax.swing.JFrame implements MouseListener{
                     infoTextarea.setText(b.toString());
                     if (b.getBuilding_BaseAtribut(Building.BUILDING_PLAYER_IDX)==game.getPlayerturn()) {
                         buildingactionPanel.setVisible(true);
+                        upgradeBuldingButton.setVisible(true);
                         selectedBuilding = b;
 
                         if (b instanceof Barrack) {
                             summonCharacterButton.setVisible(true);
                         }
+
+                        if (b.getBuilding_BaseAtribut(b.BUILDING_BUILD_TIME_IDX)>0) {
+                            summonCharacterButton.setVisible(false);
+                            upgradeBuldingButton.setVisible(false);
+                        }
                     }
                 }
 
             });
+        }
+    }
+
+    private void updateEnableCharacterButton() {
+        moveButton.setEnabled(true);
+        attackButton.setEnabled(true);
+        specialButton.setEnabled(true);
+        cancelButton.setEnabled(true);
+
+        if (selectedChar!=null) {
+            if (selectedChar.isMove()) {
+                moveButton.setEnabled(false);
+            }
+
+            if (selectedChar.isAttack()) {
+                moveButton.setEnabled(false);
+                attackButton.setEnabled(false);
+                specialButton.setEnabled(false);
+                cancelButton.setEnabled(false);
+            }
+
+            characterPanel.repaint();
         }
     }
 
@@ -1494,6 +1743,8 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         characterPanel.setVisible(false);
         upgradecharacterPanel.setVisible(false);
         buildingactionPanel.setVisible(false);
+        listJobPanel.setVisible(false);
+        listSpecialPanel.setVisible(false);
     }
 
     public void mouseClicked(MouseEvent e) {}
@@ -1532,6 +1783,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JPanel karakterPanel;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JButton listButton;
+    private javax.swing.JLabel listCharacterLabel;
     private javax.swing.JPanel listCharacterPanel;
     private javax.swing.JList listJob;
     private javax.swing.JPanel listJobPanel;
@@ -1542,9 +1794,11 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JLayeredPane mapLayerPane;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton moveButton;
+    private javax.swing.JButton nextButton;
     private javax.swing.JComboBox playerComboBox;
     private javax.swing.JPanel playerPanel;
     private javax.swing.JLabel playerTurnLabel;
+    private javax.swing.JButton prevButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JButton selectJobButton;
@@ -1577,4 +1831,5 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private boolean move = false;
     private boolean attack = false;
     private int[][] MapArea;
+    private int listcharacterPlayer = 1;
 }
