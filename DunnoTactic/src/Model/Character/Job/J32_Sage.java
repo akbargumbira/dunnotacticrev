@@ -31,5 +31,7 @@ public class J32_Sage extends Job {
         SpecialAvail[2]=ConstantaSp.SP_SAGE_PSYCHOKINETIC_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
     }
 }

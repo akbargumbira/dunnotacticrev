@@ -31,5 +31,7 @@ public class J31_Bishop extends Job {
         SpecialAvail[2]=ConstantaSp.SP_BISHOP_PHOENIX_TEAR_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
     }
 }

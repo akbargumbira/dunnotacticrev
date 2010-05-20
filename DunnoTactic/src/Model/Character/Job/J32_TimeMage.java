@@ -31,5 +31,7 @@ public class J32_TimeMage extends Job {
         SpecialAvail[2]=ConstantaSp.SP_TIME_MAGE_TIME_SWAP_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
     }
 }

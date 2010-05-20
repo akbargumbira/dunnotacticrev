@@ -33,5 +33,9 @@ public class J2_Ninja extends Job {
         SpecialAvail[2]=0;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
+        NextJob.add(Constanta.JOB31_ASSASSIN_ID);
+        NextJob.add(Constanta.JOB32_DARK_STALKER_ID);
     }
 }

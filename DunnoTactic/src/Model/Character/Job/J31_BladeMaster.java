@@ -31,5 +31,7 @@ public class J31_BladeMaster extends Job {
         SpecialAvail[2]=ConstantaSp.SP_BLADEMASTER_SWORD_MELTING_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
     }
 }

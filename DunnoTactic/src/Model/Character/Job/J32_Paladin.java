@@ -31,5 +31,7 @@ public class J32_Paladin extends Job {
         SpecialAvail[2]=ConstantaSp.SP_PALADIN_SWORD_REFLECT_ID;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
     }
 }

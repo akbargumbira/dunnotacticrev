@@ -32,5 +32,13 @@ public class J1_Novice extends Job {
         SpecialAvail[2]=0;
         SpecialAvail[3]=0;
         SpecialAvail[4]=0;
+
+        NextJob.removeAllElements();
+        NextJob.add(Constanta.JOB2_KNIGHT_ID);
+        NextJob.add(Constanta.JOB2_WARRIOR_ID);
+        NextJob.add(Constanta.JOB2_ARCHER_ID);
+        NextJob.add(Constanta.JOB2_MAGE_ID);
+        NextJob.add(Constanta.JOB2_HEALER_ID);
+        NextJob.add(Constanta.JOB2_NINJA_ID);
     }
 }
