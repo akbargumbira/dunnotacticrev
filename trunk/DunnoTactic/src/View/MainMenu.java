@@ -52,7 +52,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 12));
+        newgameButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         newgameButton.setText("New Game");
         newgameButton.setFocusable(false);
         newgameButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -61,7 +61,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(newgameButton);
-        newgameButton.setBounds(150, 40, 120, 25);
+        newgameButton.setBounds(530, 380, 120, 25);
         newgameButton.getAccessibleContext().setAccessibleName("newgameButton");
 
         exitButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -73,7 +73,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(exitButton);
-        exitButton.setBounds(150, 115, 120, 25);
+        exitButton.setBounds(530, 455, 120, 25);
         exitButton.getAccessibleContext().setAccessibleName("exitButton");
 
         buildmapButton.setFont(new java.awt.Font("Tahoma", 0, 12));
@@ -85,9 +85,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(buildmapButton);
-        buildmapButton.setBounds(150, 90, 120, 25);
+        buildmapButton.setBounds(530, 430, 120, 25);
 
-        loadGameButton.setFont(new java.awt.Font("Tahoma", 0, 12));
+        loadGameButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         loadGameButton.setText("Load Game");
         loadGameButton.setFocusable(false);
         loadGameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -96,17 +96,17 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(loadGameButton);
-        loadGameButton.setBounds(150, 65, 120, 25);
+        loadGameButton.setBounds(530, 405, 120, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         pack();

@@ -140,8 +140,6 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jScrollPane6 = new javax.swing.JScrollPane();
         listSpecial = new javax.swing.JList();
         selectSpecialButton = new javax.swing.JButton();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        bugArea = new javax.swing.JTextArea();
 
         playerComboBox.setFont(new java.awt.Font("Tahoma", 0, 18));
         playerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -153,6 +151,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dunno");
+        setAlwaysOnTop(true);
         setResizable(false);
         setUndecorated(true);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -189,7 +188,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        terrainPanel.setBounds(30, 80, 100, 100);
+        terrainPanel.setBounds(30, 80, -1, -1);
         mapLayerPane.add(terrainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         buildingPanel.setOpaque(false);
@@ -205,7 +204,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        buildingPanel.setBounds(280, 80, 100, 100);
+        buildingPanel.setBounds(280, 80, -1, -1);
         mapLayerPane.add(buildingPanel, new Integer(2));
 
         warnaPanel.setOpaque(false);
@@ -221,7 +220,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        warnaPanel.setBounds(150, 80, 100, 100);
+        warnaPanel.setBounds(150, 80, -1, -1);
         mapLayerPane.add(warnaPanel, new Integer(1));
 
         karakterPanel.setOpaque(false);
@@ -237,7 +236,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        karakterPanel.setBounds(420, 80, 100, 100);
+        karakterPanel.setBounds(420, 80, -1, -1);
         mapLayerPane.add(karakterPanel, new Integer(3));
 
         selectedPanel.setOpaque(false);
@@ -258,7 +257,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        selectedPanel.setBounds(580, 80, 100, 100);
+        selectedPanel.setBounds(580, 80, -1, -1);
         mapLayerPane.add(selectedPanel, new Integer(7));
 
         scrollPane.setViewportView(mapLayerPane);
@@ -307,7 +306,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         listCharacterPanel.add(jScrollPane1);
         jScrollPane1.setBounds(20, 40, 168, 120);
 
-        listCharacterPanel.setBounds(740, 20, 200, 0);
+        listCharacterPanel.setBounds(740, 20, 200, -1);
         layerpane.add(listCharacterPanel, new Integer(1));
 
         characterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Character Action", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -473,7 +472,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         jPanel2.add(jScrollPane2);
         jScrollPane2.setBounds(6, 31, 166, 180);
 
-        jPanel2.setBounds(100, 340, 0, 0);
+        jPanel2.setBounds(100, 340, -1, -1);
         layerpane.add(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         buildPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Build", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -529,7 +528,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
         ListCharacterPanel.add(jScrollPane3);
         jScrollPane3.setBounds(10, 50, 180, 220);
 
-        listCharacterLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        listCharacterLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
         listCharacterLabel.setForeground(new java.awt.Color(255, 255, 255));
         listCharacterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         listCharacterLabel.setText("Player");
@@ -630,13 +629,6 @@ public class Play extends javax.swing.JFrame implements MouseListener{
 
         listSpecialPanel.setBounds(350, 430, 150, 180);
         layerpane.add(listSpecialPanel, new Integer(1));
-
-        bugArea.setColumns(20);
-        bugArea.setRows(5);
-        jScrollPane7.setViewportView(bugArea);
-
-        jScrollPane7.setBounds(310, 70, 210, 130);
-        layerpane.add(jScrollPane7, new Integer(1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -838,7 +830,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             b = bc.get(i);
             if (b.getBuilding_BaseAtribut(b.BUILDING_PLAYER_IDX)==player) {
                 gold += b.getBuilding_BaseAtribut(b.BUILDING_GOLD_PER_TURN_IDX);
-                bugArea.setText("tambah gold player :"+player+" gold : "+gold);
+                //bugArea.setText("tambah gold player :"+player+" gold : "+gold);
             }
         }
         game.setGold(player, game.getGold(player)+gold);
@@ -910,7 +902,7 @@ public class Play extends javax.swing.JFrame implements MouseListener{
             s += Job.GetJobNameByID(jobid);
             s += "\n";
         }
-        bugArea.setText(s);
+        //bugArea.setText(s);
         listJob.setModel(listmodel);
         
 //        c.JobChange(2);
@@ -1761,7 +1753,6 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JButton attackButton;
     private javax.swing.JButton barrackButton;
     private javax.swing.JButton blackSmithButton;
-    private javax.swing.JTextArea bugArea;
     private javax.swing.JPanel buildPanel;
     private javax.swing.JPanel buildingPanel;
     private javax.swing.JPanel buildingactionPanel;
@@ -1779,7 +1770,6 @@ public class Play extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel karakterPanel;
     private javax.swing.JLayeredPane layerpane;
     private javax.swing.JButton listButton;
