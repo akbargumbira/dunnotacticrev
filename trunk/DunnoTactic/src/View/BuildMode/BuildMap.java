@@ -174,7 +174,7 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
             }
         });
 
-        airButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Water.png"))); // NOI18N
+        airButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/air.png"))); // NOI18N
         airButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         airButton.setMaximumSize(new java.awt.Dimension(60, 60));
         airButton.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -188,14 +188,14 @@ public class BuildMap extends javax.swing.JFrame implements MouseListener, Mouse
         pohonButton.setOpaque(false);
         pohonButton.setPreferredSize(new java.awt.Dimension(60, 60));
 
-        lumpurButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Lumpur1.png"))); // NOI18N
+        lumpurButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/lumpur.png"))); // NOI18N
         lumpurButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         lumpurButton.setMaximumSize(new java.awt.Dimension(60, 60));
         lumpurButton.setMinimumSize(new java.awt.Dimension(60, 60));
         lumpurButton.setOpaque(false);
         lumpurButton.setPreferredSize(new java.awt.Dimension(60, 60));
 
-        rumputButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Rumput1.png"))); // NOI18N
+        rumputButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rumput.png"))); // NOI18N
         rumputButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
         rumputButton.setMaximumSize(new java.awt.Dimension(60, 60));
         rumputButton.setMinimumSize(new java.awt.Dimension(60, 60));

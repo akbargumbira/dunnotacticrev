@@ -59,11 +59,11 @@ public class CharAtribut implements Serializable{
     }
 
     public int GetRaceID(){
-        return RaceChar.GetRaceID();
+        return getRaceChar().GetRaceID();
     }
 
     public int GetJobID(){
-        return JobChar.GetJobID();
+        return getJobChar().GetJobID();
     }
     
     public int GetDefault(int AtribID){
@@ -75,19 +75,19 @@ public class CharAtribut implements Serializable{
     }
 
     public int GetAttackType(){
-        return JobChar.GetAttackType();
+        return getJobChar().GetAttackType();
     }
 
     public int GetJobClass(){
-        return JobChar.GetJobClass();
+        return getJobChar().GetJobClass();
     }
 
     public int GetRaceLevel(){
-        return RaceChar.GetRaceLevel();
+        return getRaceChar().GetRaceLevel();
     }
 
     public int GetSpecialAvail(int i){
-        return JobChar.GetSpecialAvail(i);
+        return getJobChar().GetSpecialAvail(i);
     }
 
     public boolean IsImmobilize(){
@@ -157,7 +157,7 @@ public class CharAtribut implements Serializable{
 
     public void SetFirstDefaultAtribut(){
         for(int i=0;i<Constanta.NUMBER_ATRIBUT;++i){
-            DefaultAtribut[i]=RaceChar.GetBaseAtribut(i)+(int)((double)RaceChar.GetBaseAtribut(i)*JobChar.GetFactorJob(i));
+            DefaultAtribut[i]=getRaceChar().GetBaseAtribut(i)+(int)((double)getRaceChar().GetBaseAtribut(i)*getJobChar().GetFactorJob(i));
         }
     }
 
@@ -193,7 +193,7 @@ public class CharAtribut implements Serializable{
     }
 
     public double[] GetFactorBuildingByRace(){
-        return RaceChar.GetFactorBuilding();
+        return getRaceChar().GetFactorBuilding();
     }
 
     public void UpgradeJob(int JId){
@@ -301,7 +301,7 @@ public class CharAtribut implements Serializable{
     }
 
     public void Upgrade(){
-        RaceChar.UpgradeRace();
+        getRaceChar().UpgradeRace();
         ClearAllBuff();
         SetFirstDefaultAtribut();
         CalculateCurrentAtribut();
@@ -367,6 +367,27 @@ public class CharAtribut implements Serializable{
             s += "IMMOBILIZED\n";
         }
         return s;
+    }
+
+    /**
+     * @return the JobChar
+     */
+    public Job getJobChar() {
+        return JobChar;
+    }
+
+    /**
+     * @return the RaceChar
+     */
+    public Race getRaceChar() {
+        return RaceChar;
+    }
+
+    /**
+     * @param RaceChar the RaceChar to set
+     */
+    public void setRaceChar(Race RaceChar) {
+        this.RaceChar = RaceChar;
     }
 
 

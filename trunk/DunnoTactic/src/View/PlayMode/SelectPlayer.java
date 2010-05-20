@@ -11,6 +11,7 @@
 
 package View.PlayMode;
 
+import Model.Game;
 import Model.Map.Map;
 import Support.FileSupport;
 import Support.IOObject;
@@ -319,7 +320,9 @@ public class SelectPlayer extends javax.swing.JFrame {
            n = player4ComboBox.getSelectedIndex()+1;
             vrace.add(n);
        }
-       Play f = new Play((MainMenu)parent, devices[0], map, vrace);
+       Game game = new Game(map, vrace);
+       game.setPlayerturn(1);
+       Play f = new Play((MainMenu)parent, devices[0], map, vrace, game);
        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 

@@ -66,7 +66,12 @@ abstract public class Building implements Serializable
 
     public void DecreaseBuildingBuildTime()
     {
-        Building_BaseAtribut[BUILDING_BUILD_TIME_IDX] = Building_BaseAtribut[BUILDING_BUILD_TIME_IDX]-1;
+        if (Building_BaseAtribut[BUILDING_BUILD_TIME_IDX]>-1) {
+            Building_BaseAtribut[BUILDING_BUILD_TIME_IDX] = Building_BaseAtribut[BUILDING_BUILD_TIME_IDX]-1;
+            if (Building_BaseAtribut[BUILDING_BUILD_TIME_IDX]==0) {
+                PerfectBuilding();
+            }
+        }
     }
 
     // Masa membangun udah selesai, bangunan sempurna

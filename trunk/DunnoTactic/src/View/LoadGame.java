@@ -12,10 +12,8 @@
 package View;
 
 import Model.Game;
-import Model.Map.Map;
 import Support.FileSupport;
 import Support.IOObject;
-import View.BuildMode.BuildMap;
 import View.PlayMode.Play;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -123,7 +121,7 @@ public class LoadGame extends javax.swing.JPanel {
         /* call play window */
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice[] devices = env.getScreenDevices();
-        Play p = new Play(par, devices[0], game.getMap(), game.getVrace());
+        Play p = new Play(par, devices[0], game.getMap(), game.getVrace(), game);
 }//GEN-LAST:event_selectButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

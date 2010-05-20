@@ -36,10 +36,10 @@ public class Map implements Serializable{
     public final static int BLACKSMITH = 3;
 
     private final static String[] contentString = {
-        "Rumput1",
-        "Lumpur1",
-        "Water",
-        "pohon",
+        "Rumput",
+        "Lumpur",
+        "Air",
+        "Pohon",
         "castle1",
         "castle2",
         "castle3",
@@ -231,6 +231,12 @@ public class Map implements Serializable{
             p = listpoint.get(i);
             terrain[p.x][p.y] = RUMPUT;
         }
+    }
+
+    public void eraseBuilding(int x, int y) {
+        building[x][y] = 0;
+        Building b = building_container.get(x, y);
+        building_container.remove(b);
     }
 
     @Override
